@@ -9,7 +9,7 @@ END=\033[0m
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 #CFLAGS += -fsanitize=address
-NAME = Cub3D
+NAME = cub3D
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
 
@@ -17,7 +17,7 @@ DIR_S = srcs
 DIR_I = incs
 DIR_O = obj
 
-INCS = -I $(DIR_I) -I libft/$(DIR_I) -IMLX42/include
+INCS = -I $(DIR_I) -IMLX42/include #-I libft/$(DIR_I) 
 
 SRCS = main.c
 
@@ -37,6 +37,12 @@ else
 	endif
 endif
 
+ifdef DEBUG
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+else
+CFLAGS = -Wall -Werror -Wextra
+endif
+
 all: ${NAME}
 
 ${MLX}:
@@ -44,9 +50,9 @@ ${MLX}:
 	@make -C MLX42/build -j4
 
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
-	@make -s -C libft
+# @make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
+	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${MLX} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
 
 ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
@@ -54,9 +60,11 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
+debug: fclean
+	@make DEBUG=1
 
 clean:
-	@make clean -s -C libft 
+# @make clean -s -C libft 
 	@echo "${RED}Removing MLX42${END}"
 	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
