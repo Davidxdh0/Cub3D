@@ -1,0 +1,15 @@
+map parsen
+conceptueel snappen - cos/tang/sin
+
+tekenen eerst horizontaal midden welke muur en waar op de muur. muur links 0, rechts 1;
+
+per pixel
+    welke muur en waar, horizontaal en verticaal
+    uit de texture van die coordinaten de kleur pakken.
+    grond/plafond.
+
+
+
+
+
+gcc -Iinclude test.c -o test -L/Users/dyeboa/.brew/lib -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
