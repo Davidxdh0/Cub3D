@@ -1,14 +1,14 @@
 
-NO /Users/dyeboa/Documents/Cub3d/maps/default.cub
-SO ./maps/default.cub
-WE ./maps/default.cub
-EA ./maps/default.cub
-
 F 220,100,0
 C 225,30,0
 
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
 
-11
+
+1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001
 1001000000000000000000001
