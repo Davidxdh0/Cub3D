@@ -19,6 +19,7 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		parser(argv[1], &c_map);
+        print_map(c_map);
         validateMap(c_map);
 	}
 	return (1);

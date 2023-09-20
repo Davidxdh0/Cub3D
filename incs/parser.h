@@ -44,7 +44,7 @@ void	init_map(t_map *map);
 void	check_width_height(char *file, t_map *map);
 char*	getFirstWord(char* line);
 int		countTypes(char *word);
-void	print_map(t_map *map);
+void	print_map(t_map map);
 void	fill_map(t_map *map);
 void	allocate_map(t_map *map);
 

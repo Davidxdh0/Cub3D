@@ -151,7 +151,7 @@ void	parser(char *file, t_map *c_map)
 	init_map(c_map);
 	check_width_height(file, c_map);
 	allocate_map(c_map);
-	fill_map(c_map);
+//	fill_map(c_map);
 //    print_map(c_map);
 	fd = open_file(file, 0);
 	line = get_next_line(fd);

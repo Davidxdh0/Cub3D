@@ -121,18 +121,18 @@ void	fill_map(t_map *map)
 	}
 }
 
-void	print_map(t_map *map)
+void	print_map(t_map map)
 {
 	size_t y;
 	size_t x;
 
 	y = 0;
-	while (y < map->y_max)
+	while (y < map.y_max)
 	{
 		x = 0;
-		while (x < map->x_max)
+		while (x < map.x_max)
 		{
-			printf("-%c-", map->map[y][x]);
+			printf("-%c-", map.map[y][x]);
 			x++;
 		}
 		printf("\n");
