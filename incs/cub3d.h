@@ -6,12 +6,18 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/20 12:49:08 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/21 11:30:30 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42_Int.h"
 
 typedef struct s_vector
 {

@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"TEST.C": "cpp"
+	},
+	"cmake.sourceDirectory": "/workspaces/codespaces-blank/cubed/MLX42",
+	"C_Cpp.errorSquiggles": "disabled"
+}
