@@ -38,135 +38,135 @@ int worldMap[MAP_WIDTH][MAP_HEIGHT] = \
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-int	calc_height(t_vector delta, t_vector side, int wall)
-{
-	int			line_height;
-	double		wall_dist;
+// int	calc_height(t_vector delta, t_vector side, int wall)
+// {
+// 	int			line_height;
+// 	double		wall_dist;
 
-	if (wall == 0)
-		wall_dist = side.x - delta.x;
-	else
-		wall_dist = side.y - delta.y;
-	line_height = (int)(HEIGHT / wall_dist);
-	printf("line_height = %d\n", line_height);
-	return (line_height);
-}
+// 	if (wall == 0)
+// 		wall_dist = side.x - delta.x;
+// 	else
+// 		wall_dist = side.y - delta.y;
+// 	line_height = (int)(HEIGHT / wall_dist);
+// 	printf("line_height = %d\n", line_height);
+// 	return (line_height);
+// }
 
-int	dda(t_vector delta, t_vector step, t_vector side_dist, t_gen *gen)
-{
-	int			side;
-	t_vector	map_pos;
-	int			hit;
+// int	dda(t_vector delta, t_vector step, t_vector side_dist, t_gen *gen)
+// {
+// 	int			side;
+// 	t_vector	map_pos;
+// 	int			hit;
 
-	hit = 0;
-	map_pos.x = (int)gen->player.pos.x;
-	map_pos.y = (int)gen->player.pos.y;
-	while (hit == 0)
-	{
-		if (side_dist.x < side_dist.y)
-		{
-			side_dist.x += delta.x;
-			map_pos.x += step.x;
-			side = 0;
-		}
-		else
-		{
-			side_dist.y += delta.y;
-			map_pos.y += step.y;
-			side = 1;
-		}
-		if (worldMap[(int)map_pos.x][(int)map_pos.y] > 0)
-			hit = 1;
-	}
-	return (calc_height(delta, side_dist, side));
-}
+// 	hit = 0;
+// 	map_pos.x = (int)gen->player.pos.x;
+// 	map_pos.y = (int)gen->player.pos.y;
+// 	while (hit == 0)
+// 	{
+// 		if (side_dist.x < side_dist.y)
+// 		{
+// 			side_dist.x += delta.x;
+// 			map_pos.x += step.x;
+// 			side = 0;
+// 		}
+// 		else
+// 		{
+// 			side_dist.y += delta.y;
+// 			map_pos.y += step.y;
+// 			side = 1;
+// 		}
+// 		if (worldMap[(int)map_pos.x][(int)map_pos.y] > 0)
+// 			hit = 1;
+// 	}
+// 	return (calc_height(delta, side_dist, side));
+// }
 
-int	calc_side(t_vector ray, t_vector delta, t_vector map_pos, t_gen *gen)
-{
-	t_vector	step;
-	t_vector	side_dist;
+// int	calc_side(t_vector ray, t_vector delta, t_vector map_pos, t_gen *gen)
+// {
+// 	t_vector	step;
+// 	t_vector	side_dist;
 
-	step.y = 1;
-	step.x = 1;
-	if (ray.x < 0)
-	{
-		step.x = -1;
-		side_dist.x = (gen->player.pos.x - map_pos.x) * delta.x;
-	}
-	else
-		side_dist.x = (map_pos.x + 1.0 - gen->player.pos.x) * delta.x;
-	if (ray.y < 0)
-	{
-		step.y = -1;
-		side_dist.y = (gen->player.pos.y - map_pos.y) * delta.y;
-	}
-	else
-		side_dist.y = (map_pos.y + 1.0 - gen->player.pos.y) * delta.y;
-	return (dda(delta, step, side_dist, gen));
-}
+// 	step.y = 1;
+// 	step.x = 1;
+// 	if (ray.x < 0)
+// 	{
+// 		step.x = -1;
+// 		side_dist.x = (gen->player.pos.x - map_pos.x) * delta.x;
+// 	}
+// 	else
+// 		side_dist.x = (map_pos.x + 1.0 - gen->player.pos.x) * delta.x;
+// 	if (ray.y < 0)
+// 	{
+// 		step.y = -1;
+// 		side_dist.y = (gen->player.pos.y - map_pos.y) * delta.y;
+// 	}
+// 	else
+// 		side_dist.y = (map_pos.y + 1.0 - gen->player.pos.y) * delta.y;
+// 	return (dda(delta, step, side_dist, gen));
+// }
 
-int	calc_delta(t_vector ray, t_gen *gen)
-{
-	t_vector	delta_dist;
-	t_vector	map_pos;
+// int	calc_delta(t_vector ray, t_gen *gen)
+// {
+// 	t_vector	delta_dist;
+// 	t_vector	map_pos;
 
-	map_pos.x = (int)gen->player.pos.x;
-	map_pos.y = (int)gen->player.pos.y;
-	if (ray.x == 0)
-		delta_dist.x = 1e30 ;
-	else
-		delta_dist.x = fabs(1 / ray.x);
-	if (ray.y == 0)
-		delta_dist.y = 1e30 ;
-	else
-		delta_dist.y = fabs(1 / ray.y);
-	return (calc_side(ray, delta_dist, map_pos, gen));
-}
+// 	map_pos.x = (int)gen->player.pos.x;
+// 	map_pos.y = (int)gen->player.pos.y;
+// 	if (ray.x == 0)
+// 		delta_dist.x = 1e30 ;
+// 	else
+// 		delta_dist.x = fabs(1 / ray.x);
+// 	if (ray.y == 0)
+// 		delta_dist.y = 1e30 ;
+// 	else
+// 		delta_dist.y = fabs(1 / ray.y);
+// 	return (calc_side(ray, delta_dist, map_pos, gen));
+// }
 
-void	draw_line(int x, mlx_image_t *win, int line_height)
-{
-	int	start;
-	int	end;
-	int	i;
-	int	color;
+// void	draw_line(int x, mlx_image_t *win, int line_height)
+// {
+// 	int	start;
+// 	int	end;
+// 	int	i;
+// 	int	color;
 
-	start = -line_height / 2 + HEIGHT / 2;
-	if (start < 0)
-		start = 0;
-	end = line_height / 2 + HEIGHT / 2;
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	i = 0;
-	color = 0xFFFFFF;
-	while (i < start)
-		mlx_put_pixel(win, x, i++, 0x000000FF);
-	while (i < end)
-		mlx_put_pixel(win, x, i++, color);
-	while (i < HEIGHT)
-		mlx_put_pixel(win, x, i++, 0x000000FF);
-}
+// 	start = -line_height / 2 + HEIGHT / 2;
+// 	if (start < 0)
+// 		start = 0;
+// 	end = line_height / 2 + HEIGHT / 2;
+// 	if (end >= HEIGHT)
+// 		end = HEIGHT - 1;
+// 	i = 0;
+// 	color = 0xFFFFFF;
+// 	while (i < start)
+// 		mlx_put_pixel(win, x, i++, 0x000000FF);
+// 	while (i < end)
+// 		mlx_put_pixel(win, x, i++, color);
+// 	while (i < HEIGHT)
+// 		mlx_put_pixel(win, x, i++, 0x000000FF);
+// }
 
-void	render_screen(void *param)
-{
-	t_gen		*gen;
-	t_vector	ray;
-	int			cam_x;
-	int			x;
-	int			line_height;
+// void	render_screen(void *param)
+// {
+// 	t_gen		*gen;
+// 	t_vector	ray;
+// 	int			cam_x;
+// 	int			x;
+// 	int			line_height;
 
-	gen = (t_gen *)param;
-	x = 0;
-	while (x < WIDTH)
-	{
-		cam_x = 2 * x / (double)WIDTH - 1;
-		ray.x = gen->player.dir.x + gen->player.plane.x * cam_x;
-		ray.y = gen->player.dir.y + gen->player.plane.y * cam_x;
-		line_height = calc_delta(ray, gen);
-		draw_line(x, gen->win, line_height);
-		++x;
-	}
-	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
-}
+// 	gen = (t_gen *)param;
+// 	x = 0;
+// 	while (x < WIDTH)
+// 	{
+// 		cam_x = 2 * x / (double)WIDTH - 1;
+// 		ray.x = gen->player.dir.x + gen->player.plane.x * cam_x;
+// 		ray.y = gen->player.dir.y + gen->player.plane.y * cam_x;
+// 		line_height = calc_delta(ray, gen);
+// 		draw_line(x, gen->win, line_height);
+// 		++x;
+// 	}
+// 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
+// }
 
 void	init_gen(t_gen *gen, mlx_t *mlx)
 {
@@ -179,6 +179,90 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	gen->player.plane.y = 0.66;
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
 }
+
+void	draw_line(int x, mlx_image_t *win, int draw_start, int draw_end, int color)
+{
+	int y;
+
+	y = draw_start;
+	while (y <= draw_end)
+	{
+		mlx_put_pixel(win, x, y, color);
+		y++;
+	}
+}
+
+void	render_frame(t_gen *gen, int x)
+{
+	float	camera_x;
+	t_vector	ray;
+	t_vector	delta_dist;
+	t_vector	side_dist;
+	t_vector	map_pos;
+	float	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		color;
+
+	camera_x = 2 * x / (float)WIDTH - 1;
+	ray.x = gen->player.dir.x + gen->player.plane.x * camera_x;
+	ray.y = gen->player.dir.y + gen->player.plane.y * camera_x;
+	map_pos.x = (int)gen->player.pos.x;
+	map_pos.y = (int)gen->player.pos.y;
+	if (ray.x == 0)
+		delta_dist.x = 1e30 ;
+	else
+		delta_dist.x = fabs(1 / ray.x);
+	if (ray.y == 0)
+		delta_dist.y = 1e30 ;
+	else
+		delta_dist.y = fabs(1 / ray.y);
+	hit = 0;
+	step_x = 1;
+	if (ray.x < 0)
+		step_x = -1;
+	step_y = 1;
+	if (ray.y < 0)
+		step_y = -1;
+	side_dist.x = (gen->player.pos.x - map_pos.x) * delta_dist.x;
+	side_dist.y = (gen->player.pos.y - map_pos.y) * delta_dist.y;
+	while (hit == 0)
+	{
+		if (side_dist.x < side_dist.y)
+		{
+			side_dist.x += delta_dist.x;
+			map_pos.x += step_x;
+			side = 0;
+		}
+		else
+		{
+			side_dist.y += delta_dist.y;
+			map_pos.y += step_y;
+			side = 1;
+		}
+		if (worldMap[map_pos.x][map_pos.y] > 0)
+			hit = 1;
+	}
+	if (side == 0)
+		perp_wall_dist = (map_pos.x - gen->player.pos.x + (1 - step_x) / 2) / ray.x;
+	else
+		perp_wall_dist = (map_pos.y - gen->player.pos.y + (1 - step_y) / 2) / ray.y;
+	line_height = (int)(HEIGHT / perp_wall_dist);
+	draw_start = -line_height / 2 + HEIGHT / 2;
+	draw_end = line_height / 2 + HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+	color = get_color(worldMap[map_pos.x][map_pos.y]);
+	draw_line(x, gen->win, draw_start, draw_end, color);
+}
+
 
 void	ft_hook(mlx_key_data_t key, void *param)
 {
