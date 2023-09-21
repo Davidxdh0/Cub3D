@@ -192,7 +192,7 @@ void	draw_line(int x, mlx_image_t *win, int draw_start, int draw_end, int color)
 	}
 }
 
-void	render_frame(t_gen *gen, int x)
+void	render_screen(t_gen *gen, int x)
 {
 	float	camera_x;
 	t_vector	ray;
