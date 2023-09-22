@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/21 11:30:30 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/22 09:09:26 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ typedef struct s_vector
 {
 	double		x;
 	double		y;
-	double		z;
 }				t_vector;
 
 typedef struct s_player
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	plane;
+	double		x;
+	double		y;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 }				t_player;
 
 typedef struct s_gen
