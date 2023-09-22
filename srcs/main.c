@@ -148,6 +148,7 @@ void	render_screen(void *param)
 
 	gen = (t_gen *)param;
 	draw2dray(gen, 0x00FF00);
+	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
 }
 
 void	clear_screen(t_gen *gen, int color)
