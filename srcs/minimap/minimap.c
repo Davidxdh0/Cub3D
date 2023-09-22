@@ -1,10 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <MLX42/MLX42.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minimap.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/22 23:12:13 by dyeboa        #+#    #+#                 */
+/*   Updated: 2023/09/22 23:12:14 by dyeboa        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define WIDTH 512
-#define HEIGHT 512
+#include "minimap.h"
 
 static mlx_image_t* image;
 
@@ -50,7 +56,7 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
-int32_t main(int32_t argc, const char* argv[])
+int32_t mlx_init(int32_t argc, const char* argv[])
 {
 	mlx_t* mlx;
 

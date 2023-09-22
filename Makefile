@@ -28,9 +28,11 @@ MAP_PARSER = 	parser.c \
 				free.c \
 				init.c
 
+MINIMAP =		minimap.c
 
-SRCS =		main.c\
-			$(addprefix map_parser/, $(MAP_PARSER)) 
+SRCS =		main.c \
+			$(addprefix map_parser/, $(MAP_PARSER))\
+			$(addprefix minimap/, $(MINIMAP) 
 
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
