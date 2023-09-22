@@ -8,11 +8,7 @@ END=\033[0m
 
 CC = gcc
 
-ifdef DEBUG
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
-else
-CFLAGS = -Wall -Werror -Wextra
-endif
 
 NAME = cub3D
 LIBFT = libft/libft.a
@@ -27,7 +23,8 @@ INCS = -I $(DIR_I) -I libft/$(DIR_I) -IMLX42/include
 MAP_PARSER = 	parser.c \
 				error.c \
 				validate_map.c \
-				parser_util.c \
+				parse_types.c \
+				parse_util.c \
 				free.c \
 				init.c
 

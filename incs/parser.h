@@ -34,17 +34,19 @@ void	error_exit(char* msg);
 
 //parser.c
 void	parse_line(char *line, t_map *map);
-int		parse_textures(char *line, t_map *map, char *word);
-int		parse_colors(char *line, t_map *c_map, char *word);
-void	parse_map(char *line, t_map *c_map, int y);
-int		start_position(char c);
 int		open_file(char *map);
 void	parser(char *map, t_map *c_map);
+
+//parse_file.c
+int		parse_textures(char *line, t_map *map, char *word);
+int		parse_colors(char *line, t_map *c_map, char *word);
+int		parse_map(char *line, t_map *c_map, int y);
+int		type_value(char *word);
+int		start_position(char c);
 
 //parser_util.c
 void	check_width_height(char *file, t_map *map);
 char*	get_first_word(char* line);
-int		type_value(char *word);
 void	print_map(const t_map *map, char **array);
 void	allocate_map(t_map *map);
 
@@ -58,4 +60,5 @@ void	free_t_map(t_map *map);
 
 //init.c
 t_map* 	init_map();
+
 #endif

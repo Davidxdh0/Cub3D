@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_util.c                                      :+:    :+:            */
+/*   parse_util.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 21:00:06 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/22 22:32:26 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,7 @@ char	*get_first_word(char *line)
 	return (str);
 }
 
-//colors	= F:2, C:3
-//textures 	= NO:11, SO:12, WE:14, EA:20
-//combined 	= 57; no other possibilty to get 57.
-int	type_value(char *word)
-{
-	int	type;
-
-	type = 0;
-	if (!strcmp(word, "F"))
-		type = 2;
-	else if (!strcmp(word, "C"))
-		type = 3;
-	else if (!strcmp(word, "NO"))
-		type = 11;
-	else if (!strcmp(word, "SO"))
-		type = 12;
-	else if (!strcmp(word, "WE"))
-		type = 14;
-	else if (!strcmp(word, "EA"))
-		type = 20;
-	else
-		error_message("Weird bug, countmap()");
-	return (type);
-}
-
+//	
 void	check_width_height(char *file, t_map *map)
 {
 	int		fd;
@@ -94,6 +70,7 @@ void	check_width_height(char *file, t_map *map)
 	}
 	free(line);
 	map->y_max -= start;
+	printf("max_x = %d, max_y = %d\n", map->x_max, map->y_max);
 	close(fd);
 }
 
