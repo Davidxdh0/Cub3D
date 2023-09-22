@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parser_util.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
+/*   Updated: 2023/09/22 21:00:06 by dyeboa        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
-char*	getFirstWord(char* line)
+// printf("i=%zu, start=%zu, str=%s, line=%s", i, start, str, line);
+char	*get_first_word(char *line)
 {
-	char *str;
+	char	*str;
+	size_t	i;
+	size_t	start;
 
-	size_t i = 0;
-	size_t start = 0;
-	while(line[i] && ft_isspace(line[i]))
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
 		i++;
 	if (ft_isdigit(line[i]))
-	{
-		// errorExit("Weird bug, countmap()");
 		return (NULL);
-	}
 	if (line[i] && ft_isalpha(line[i]))
 	{
 		start = i;
@@ -21,9 +32,7 @@ char*	getFirstWord(char* line)
 		str = malloc(sizeof(char *) * i - start + 1);
 		if (!str)
 			return (NULL);
-		// printf("i=%zu, start=%zu, str=%s, line=%s", i, start, str, line);
 		ft_strlcpy(str, line, i - start + 1);
-		// printf("i=%zu, start=%zu, str=%s, line=%s", i, start, str, line);
 	}
 	else
 		str = NULL;
@@ -33,9 +42,9 @@ char*	getFirstWord(char* line)
 //colors	= F:2, C:3
 //textures 	= NO:11, SO:12, WE:14, EA:20
 //combined 	= 57; no other possibilty to get 57.
-int	countTypes(char *word)
+int	type_value(char *word)
 {
-	int type;
+	int	type;
 
 	type = 0;
 	if (!strcmp(word, "F"))
@@ -51,24 +60,24 @@ int	countTypes(char *word)
 	else if (!strcmp(word, "EA"))
 		type = 20;
 	else
-		errorExit("Weird bug, countmap()");
+		error_message("Weird bug, countmap()");
 	return (type);
 }
 
 void	check_width_height(char *file, t_map *map)
 {
-	int fd;
-	char *line;
-	size_t	i;
-	size_t	start;
+	int		fd;
+	char	*line;
+	int		i;
+	int		start;
 
 	start = 0;
-	fd = open_file(file, 0);
+	fd = open_file(file);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		i = 0;
-		while(line[i] && ft_isspace(line[i]))
+		while (line[i] && ft_isspace(line[i]))
 			i++;
 		if (line[i] && ft_isdigit(line[i]))
 		{
@@ -80,74 +89,55 @@ void	check_width_height(char *file, t_map *map)
 		if (i > map->x_max)
 			map->x_max = i - 1;
 		map->y_max++;
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	map->y_max -= start;
 	close(fd);
 }
 
 void	allocate_map(t_map *map)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
-	map->map = (char**)malloc(sizeof(char *) * map->y_max);
+	map->map = (char **)malloc(sizeof(char *) * map->y_max);
 	if (!map->map)
-		errorExit("Malloc map->map");
+		error_message("Malloc map->map");
 	while (i < map->y_max)
 	{
-		map->map[i] = (char *)malloc(sizeof(char) * (map->x_max + 1));
+		map->map[i] = malloc(sizeof(char) * map->x_max + 1);
 		if (!map->map[i])
-			errorExit("Malloc map->map[y]");
+			error_message("Malloc map->map[y]");
 		i++;
 	}
 }
 
-void	fill_map(t_map *map)
+void	print_map(const t_map *map, char **array)
 {
-	size_t y;
-	size_t x;
+	size_t	y;
+	size_t	x;
 
 	y = 0;
-	while (y < map->y_max)
+	x = 0;
+	while ((int)y < map->y_max && array[y])
 	{
 		x = 0;
-		while (x < map->x_max)
+		while (x < ft_strlen(array[y]) && array[y][x])
 		{
-			map->map[y][x] = 'X';
-			x++;
-		}
-		y++;
-	}
-}
-
-void	print_map(t_map map)
-{
-	size_t y;
-	size_t x;
-
-	y = 0;
-	while (y < map.y_max)
-	{
-		x = 0;
-		while (x < map.x_max)
-		{
-			printf("-%c-", map.map[y][x]);
+			printf("%c", array[y][x]);
 			x++;
 		}
 		printf("\n");
 		y++;
 	}
-}
-
-void	init_map(t_map *map)
-{
-    map->txtrs      = malloc(sizeof (t_txtrs));
-    map->txtrs->NO  = NULL;
-    map->txtrs->SO  = NULL;
-    map->txtrs->WE  = NULL;
-    map->txtrs->EA  = NULL;
-	map->map	    = NULL;
-	map->y_max	    = 0;
-	map->x_max	    = 0;
+	x = 0;
+	while ((int)x < map->x_max)
+	{
+		printf("__");
+		x++;
+	}
+	printf("\n");
+	printf("\n");
 }

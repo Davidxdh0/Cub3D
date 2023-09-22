@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   free.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 21:00:59 by dyeboa        ########   odam.nl         */
+/*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
+/*   Updated: 2023/09/22 20:47:45 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 #include "parser.h"
 
-int	main(int argc, char *argv[])
+void	free_t_map(t_map *map)
 {
-	t_map	*c_map;
-
-	c_map = NULL;
-	if (argc == 2)
-	{
-		c_map = init_map();
-		parser(argv[1], c_map);
-		validate_map(c_map);
-		print_map(c_map, c_map->map);
-	}
-	free_t_map(c_map);
-	return (1);
+	free(map->txtrs);
+	ft_free_arr(map->map);
+	free(map);
 }

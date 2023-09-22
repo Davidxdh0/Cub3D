@@ -21,35 +21,41 @@ typedef struct s_map
 {
 	t_txtrs *txtrs;
 	char 	**map;
-	size_t	y_max;
-	size_t	x_max;
+	int		startX;
+	int		startY;
+	int		y_max;
+	int		x_max;
 
 }	t_map;
 
 //error.c
-void	errorMessage(char* msg);
-void	errorExit(char* msg);
+void	error_message(char* msg);
+void	error_exit(char* msg);
 
 //parser.c
-void	parseLine(char *line, t_map *map);
-void	parseTextures(char *line, t_map *c_map);
-void	parseColors(char *line, t_map *c_map);
-void	parseMap(char *line, t_map *c_map);
-
-int		open_file(char *map, int fd);
+void	parse_line(char *line, t_map *map);
+int		parse_textures(char *line, t_map *map, char *word);
+int		parse_colors(char *line, t_map *c_map, char *word);
+void	parse_map(char *line, t_map *c_map, int y);
+int		start_position(char c);
+int		open_file(char *map);
 void	parser(char *map, t_map *c_map);
 
 //parser_util.c
-void	init_map(t_map *map);
 void	check_width_height(char *file, t_map *map);
-char*	getFirstWord(char* line);
-int		countTypes(char *word);
-void	print_map(t_map map);
-void	fill_map(t_map *map);
+char*	get_first_word(char* line);
+int		type_value(char *word);
+void	print_map(const t_map *map, char **array);
 void	allocate_map(t_map *map);
 
 //validate_map.c
-void    validateMap(t_map c_map);
-int     floodfill(t_map c_map, size_t x, size_t y);
+void	valid_space(char **array, int x,int y);
+void    validate_map(const t_map *c_map);
+void    flood_fill(const t_map *c_map, char **map, int x,int y);
 
+//free.c
+void	free_t_map(t_map *map);
+
+//init.c
+t_map* 	init_map();
 #endif

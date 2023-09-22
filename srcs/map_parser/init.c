@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   init.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 21:00:59 by dyeboa        ########   odam.nl         */
+/*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
+/*   Updated: 2023/09/22 20:58:39 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 #include "parser.h"
 
-int	main(int argc, char *argv[])
+t_map	*init_map(void)
 {
-	t_map	*c_map;
+	t_map	*map;
 
-	c_map = NULL;
-	if (argc == 2)
-	{
-		c_map = init_map();
-		parser(argv[1], c_map);
-		validate_map(c_map);
-		print_map(c_map, c_map->map);
-	}
-	free_t_map(c_map);
-	return (1);
+	map = malloc(sizeof(t_map));
+	map->txtrs = malloc(sizeof(t_txtrs));
+	map->txtrs->NO = NULL;
+	map->txtrs->SO = NULL;
+	map->txtrs->WE = NULL;
+	map->txtrs->EA = NULL;
+	map->map = NULL;
+	map->startY = -1;
+	map->startX = -1;
+	map->y_max = -1;
+	map->x_max = -1;
+	return (map);
 }
