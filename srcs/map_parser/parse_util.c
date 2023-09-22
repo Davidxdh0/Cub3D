@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 22:32:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/22 22:48:32 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,12 @@ char	*get_first_word(char *line)
 	return (str);
 }
 
-//	
-void	check_width_height(char *file, t_map *map)
+//	printf("max_x = %d, max_y = %d\n", map->x_max, map->y_max);
+void	check_width_height(t_map *map, int start, int fd)
 {
-	int		fd;
 	char	*line;
 	int		i;
-	int		start;
 
-	start = 0;
-	fd = open_file(file);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -70,7 +66,6 @@ void	check_width_height(char *file, t_map *map)
 	}
 	free(line);
 	map->y_max -= start;
-	printf("max_x = %d, max_y = %d\n", map->x_max, map->y_max);
 	close(fd);
 }
 
@@ -79,14 +74,16 @@ void	allocate_map(t_map *map)
 	int	i;
 
 	i = 0;
+	if (map->y_max == -1 || map->x_max == -1)
+		error_exit("No ymax or xmax");
 	map->map = (char **)malloc(sizeof(char *) * map->y_max);
 	if (!map->map)
-		error_message("Malloc map->map");
+		error_exit("Malloc map->map");
 	while (i < map->y_max)
 	{
 		map->map[i] = malloc(sizeof(char) * map->x_max + 1);
 		if (!map->map[i])
-			error_message("Malloc map->map[y]");
+			error_exit("Malloc map->map[y]");
 		i++;
 	}
 }

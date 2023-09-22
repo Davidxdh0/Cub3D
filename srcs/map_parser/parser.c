@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 22:25:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/22 22:55:55 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	open_file(char *map)
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
-		error_message("File can't be opened");
+		error_exit("File can't be opened");
 	return (fd);
 }
 
@@ -31,8 +31,6 @@ void	parse_line(char *line, t_map *map)
 	static int	colors = 0;
 	static int	textures = 0;
 
-	if (line == NULL)
-		error_message("Empty file");
 	if (line[0] == '\n')
 		return ;
 	word = get_first_word(line);
@@ -45,7 +43,7 @@ void	parse_line(char *line, t_map *map)
 	else if (colors == 5 && textures == 57)
 		map_bool += parse_map(line, map, map_bool);
 	else
-		error_message("Incorrect Textures or Colors");
+		error_free("Incorrect Textures or Colors", map);
 	if (word)
 		free(word);
 }
@@ -55,14 +53,14 @@ void	parser(char *file, t_map *c_map)
 	int		fd;
 	char	*line;
 
-	check_width_height(file, c_map);
+	fd = open_file(file);
+	check_width_height(c_map, 0, fd);
 	allocate_map(c_map);
 	fd = open_file(file);
 	line = get_next_line(fd);
 	parse_line(line, c_map);
 	while (line && line != NULL)
 	{
-		// line[ft_strlen(line)] = '\0';
 		parse_line(line, c_map);
 		free(line);
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 22:30:21 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/22 22:56:06 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	parse_textures(char *line, t_map *map, char *word)
 	return (type_value(word));
 }
 
+// line[ft_strlen(line) - 1] = '\0';
 int	parse_colors(char *line, t_map *c_map, char *word)
 {
 	int		i;
@@ -51,26 +52,25 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 
 	i = 0;
 	number = 0;
-	line[ft_strlen(line)-1] = '\0';
 	words = ft_split(line, ' ');
 	if (words == NULL || !words[0])
-		error_message("parse_textures went wrong");
+		return (0);
 	while (words[i])
 		i++;
 	if (i != 2)
-		error_message("parseColours not two words");
+		error_free("parseColours not two words", c_map);
 	colors = ft_split(words[1], ',');
 	i = 0;
 	while (colors[i])
 		i++;
 	if (i != 3)
-		error_message("parse_colors values not three words");
+		error_free("parse_colors values not three words", c_map);
 	i = 0;
 	while (colors[i])
 	{
 		number = ft_atoi(colors[i]);
 		if (number < 0 || number > 255)
-			error_message("parse_colors value < 0 || > 255");
+			error_free("parse_colors value < 0 || > 255", c_map);
 		i++;
 	}
 	if (!strcmp(words[0], "F"))

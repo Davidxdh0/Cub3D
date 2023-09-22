@@ -31,6 +31,7 @@ typedef struct s_map
 //error.c
 void	error_message(char* msg);
 void	error_exit(char* msg);
+void	error_free(char *msg, t_map *map);
 
 //parser.c
 void	parse_line(char *line, t_map *map);
@@ -45,7 +46,7 @@ int		type_value(char *word);
 int		start_position(char c);
 
 //parser_util.c
-void	check_width_height(char *file, t_map *map);
+void	check_width_height(t_map *map, int start, int fd);
 char*	get_first_word(char* line);
 void	print_map(const t_map *map, char **array);
 void	allocate_map(t_map *map);
@@ -57,6 +58,7 @@ void    flood_fill(const t_map *c_map, char **map, int x,int y);
 
 //free.c
 void	free_t_map(t_map *map);
+
 
 //init.c
 t_map* 	init_map();
