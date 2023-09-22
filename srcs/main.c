@@ -39,14 +39,6 @@ int worldMap[MAP_WIDTH][MAP_HEIGHT] = \
 };
 
 
-void	render_screen(void *param)
-{
-	t_gen	*gen;
-
-	gen = (t_gen *)param;
-
-}
-
 void	init_gen(t_gen *gen, mlx_t *mlx)
 {
 	gen->mlx = mlx;
@@ -58,19 +50,19 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	gen->player.planeY = 0.66;
 }
 
-void	calc_delta(t_vector *deltaDist, t_vector ray)
+void	calc_delta(t_vector *deltaDist, t_vector *ray)
 {
-	if (ray.y == 0)
+	if (ray->y == 0)
 		deltaDist->x = 1e30;
 	else
-		deltaDist->x = fabs(1 / ray.x);
-	if (ray.x == 0)
+		deltaDist->x = fabs(1 / ray->x);
+	if (ray->x == 0)
 		deltaDist->y = 1e30;
 	else
-		deltaDist->y = fabs(1 / ray.y);
+		deltaDist->y = fabs(1 / ray->y);
 }
 
-t_vector	calc_side(t_vector *sideDist, t_vector deltaDist, t_player *player, t_vector *ray)
+t_vector	calc_side(t_vector *step, t_vector deltaDist, t_player *player, t_vector *ray)
 {
 	t_vector	pos;
 	t_vector	sideDist;
@@ -81,12 +73,12 @@ t_vector	calc_side(t_vector *sideDist, t_vector deltaDist, t_player *player, t_v
 	step->y = 1;
 	sideDist.x = ((int)pos.x + 1.0 - pos.x) * deltaDist.x;
 	sideDist.y = ((int)pos.y + 1.0 - pos.y) * deltaDist.y;
-	if (ray.x < 0)
+	if (ray->x < 0)
 	{
 		step->x = -1;
 		sideDist.x = (pos.x - (int)pos.x) * deltaDist.x;
 	}
-	if (ray.y < 0)
+	if (ray->y < 0)
 	{
 		step->y = -1;
 		sideDist.y = (pos.y - (int)pos.y) * deltaDist.y;
@@ -101,7 +93,7 @@ t_vector	is_hit(t_gen *gen, t_vector deltaDist, t_vector sideDist, t_vector step
 
 	pos.x = (int)gen->player.x;
 	pos.y = (int)gen->player.y;
-	while (worldMap[pos.x][pos.y] > 0)
+	while (worldMap[(int)pos.x][(int)pos.y] > 0)
 	{
 		if (sideDist.x < sideDist.y)
 		{
@@ -119,7 +111,7 @@ t_vector	is_hit(t_gen *gen, t_vector deltaDist, t_vector sideDist, t_vector step
 	return (ray);
 }
 
-t_vector	calculate_ray(t_gen *gen, t_vector *ray, int x)
+void	calculate_ray(t_gen *gen, t_vector *ray, int x)
 {
 	t_vector	sideDist;
 	t_vector	deltaDist;
@@ -140,6 +132,7 @@ void	draw2dray(t_gen *gen, int color)
 	int			x;
 
 	x = -1;
+	++color;
 	while (++x < WIDTH)
 	{
 		calculate_ray(gen, &ray, x);
@@ -156,17 +149,30 @@ void	render_screen(void *param)
 	draw2dray(gen, 0x00FF00);
 }
 
-void	clear_screen(mlx_t *mlx, int color)
+void	clear_screen(t_gen *gen, int color)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < mlx->height)
+	while (++i < HEIGHT)
 	{
 		j = -1;
-		while (++j < mlx->width)
-			mlxput_pixel_(mlx, j, i, color);
+		while (++j < WIDTH)
+			mlx_put_pixel(gen->win, j, i, color);
+	}
+}
+
+void	ft_hook(mlx_key_data_t data, void *param)
+{
+	t_gen	*gen;
+
+	gen = (t_gen *)param;
+	if (data.key == MLX_KEY_ESCAPE)
+	{
+		mlx_close_window(gen->mlx);
+		mlx_terminate(gen->mlx);
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -179,7 +185,7 @@ int	main(void)
 	if (!mlx)
 		return (EXIT_FAILURE);
 	init_gen(&gen, mlx);
-	clear_screen(mlx, 0x000000);
+	clear_screen(&gen, 0x000000);
 	mlx_loop_hook(mlx, render_screen, &gen);
 	mlx_key_hook(mlx, ft_hook, &gen);
 	mlx_loop(mlx);

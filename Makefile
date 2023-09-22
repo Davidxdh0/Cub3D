@@ -9,7 +9,7 @@ END=\033[0m
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 #CFLAGS += -fsanitize=address
-NAME = cub3D
+NAME = cub3d
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
 
