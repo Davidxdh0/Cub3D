@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 22:48:32 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/23 00:55:43 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	check_width_height(t_map *map, int start, int fd)
 				i++;
 		}
 		if (i > map->x_max)
-			map->x_max = i - 1;
+			map->x_max = i;
 		map->y_max++;
 		free(line);
 		line = get_next_line(fd);
@@ -81,7 +81,7 @@ void	allocate_map(t_map *map)
 		error_exit("Malloc map->map");
 	while (i < map->y_max)
 	{
-		map->map[i] = malloc(sizeof(char) * map->x_max + 1);
+		map->map[i] = malloc(sizeof(char) * map->x_max);
 		if (!map->map[i])
 			error_exit("Malloc map->map[y]");
 		i++;
@@ -90,15 +90,15 @@ void	allocate_map(t_map *map)
 
 void	print_map(const t_map *map, char **array)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	y = 0;
 	x = 0;
-	while ((int)y < map->y_max && array[y])
+	while (y < map->y_max && array[y])
 	{
 		x = 0;
-		while (x < ft_strlen(array[y]) && array[y][x])
+		while (array[y][x])
 		{
 			printf("%c", array[y][x]);
 			x++;
@@ -107,7 +107,7 @@ void	print_map(const t_map *map, char **array)
 		y++;
 	}
 	x = 0;
-	while ((int)x < map->x_max)
+	while (x < map->x_max)
 	{
 		printf("__");
 		x++;

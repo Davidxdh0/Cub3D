@@ -8,17 +8,21 @@ END=\033[0m
 
 CC = gcc
 
+ifdef DEBUG
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
-
+else
+CFLAGS = -Wall -Werror -Wextra
+endif
 NAME = cub3D
 LIBFT = libft/libft.a
-MLX = MLX42/build/libmlx42.a
+MLX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+
 
 DIR_S = srcs
 DIR_I = incs
 DIR_O = obj
 
-INCS = -I $(DIR_I) -I libft/$(DIR_I) -IMLX42/include
+INCS = -I $(DIR_I) -I libft/$(DIR_I) -I MLX42/include 
 
 MAP_PARSER = 	parser.c \
 				error.c \
@@ -32,12 +36,13 @@ MINIMAP =		minimap.c
 
 SRCS =		main.c \
 			$(addprefix map_parser/, $(MAP_PARSER))\
-			$(addprefix minimap/, $(MINIMAP) 
+				$(addprefix minimap/, $(MINIMAP))
 
 
+LIBMLX	:= ./MLX42
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
-all: ${NAME}
+all: libmlx ${NAME}
 
 ${MLX}:
 	@cmake MLX42 -B MLX42/build
@@ -46,13 +51,16 @@ ${MLX}:
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
+	${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
 
 ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@mkdir -p ${@D}
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 run: all
 	./cub3D maps/default.cub

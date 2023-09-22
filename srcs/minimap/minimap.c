@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 23:12:13 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 23:12:14 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/22 23:40:00 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 
 void ft_randomize(void* param)
 {
-	for (int32_t i = 0; i < image->width; ++i)
+	
+	for (uint32_t i = 0; i < image->width; ++i)
 	{
-		for (int32_t y = 0; y < image->height; ++y)
+		for (uint32_t y = 0; y < image->height; ++y)
 		{
 			uint32_t color = ft_pixel(
 				rand() % 0xFF, // R
@@ -36,6 +37,10 @@ void ft_randomize(void* param)
 			mlx_put_pixel(image, i, y, color);
 		}
 	}
+	return ;
+	mlx_t* mlx = param;
+	if (mlx)
+		printf("s");
 }
 
 void ft_hook(void* param)
@@ -56,7 +61,7 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
-int32_t mlx_init(int32_t argc, const char* argv[])
+int32_t mlx_main(void)
 {
 	mlx_t* mlx;
 

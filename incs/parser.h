@@ -58,6 +58,7 @@ void    flood_fill(const t_map *c_map, char **map, int x,int y);
 
 //free.c
 void	free_t_map(t_map *map);
+void	free_arr(char **arg, int max);
 
 
 //init.c
