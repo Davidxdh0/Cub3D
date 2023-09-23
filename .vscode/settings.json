@@ -2,6 +2,8 @@
 	"files.associations": {
 		"main.h": "c",
 		"parser.h": "c",
-		"functional": "c"
+		"functional": "c",
+		"libft.h": "c",
+		"mlx42.h": "c"
 	}
 }

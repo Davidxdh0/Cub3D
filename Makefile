@@ -15,7 +15,7 @@ CFLAGS = -Wall -Werror -Wextra
 endif
 NAME = cub3D
 LIBFT = libft/libft.a
-MLX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+
 
 
 DIR_S = srcs
@@ -32,17 +32,21 @@ MAP_PARSER = 	parser.c \
 				free.c \
 				init.c
 
-MINIMAP =		minimap.c
+MINIMAP =		mlxmain.c
 
 SRCS =		main.c \
-			$(addprefix map_parser/, $(MAP_PARSER))\
-				$(addprefix minimap/, $(MINIMAP))
-
+			$(addprefix map_parser/, $(MAP_PARSER)) \
 
 LIBMLX	:= ./MLX42
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
+ifneq (,$(findstring TafelmMonster,$(shell hostname)))
+MLX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS += $(addprefix minimap/, $(MINIMAP))
 all: libmlx ${NAME}
+else
+all: ${NAME}
+endif
 
 ${MLX}:
 	@cmake MLX42 -B MLX42/build
