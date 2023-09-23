@@ -7,37 +7,46 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
-#CFLAGS += -fsanitize=address
-NAME = Cub3D
+
+ifdef DEBUG
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+else
+CFLAGS = -Wall -Werror -Wextra
+endif
+NAME = cub3D
 LIBFT = libft/libft.a
-MLX = MLX42/build/libmlx42.a
+
+
 
 DIR_S = srcs
 DIR_I = incs
 DIR_O = obj
 
-INCS = -I $(DIR_I) -I libft/$(DIR_I) -IMLX42/include
+INCS = -I $(DIR_I) -I libft/$(DIR_I) -I MLX42/include 
 
-SRCS = main.c
+MAP_PARSER = 	parser.c \
+				error.c \
+				validate_map.c \
+				parse_types.c \
+				parse_util.c \
+				free.c \
+				init.c
 
+MINIMAP =		mlxmain.c
+
+SRCS =		main.c \
+			$(addprefix map_parser/, $(MAP_PARSER)) \
+
+LIBMLX	:= ./MLX42
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
-ifeq ($(OS), Windows_NT)
-	FW_FLAGS := -lglfw3 -lopengl32 -lgdi32
-	NAME := so_long.exe
+ifneq (,$(findstring TafelmMonster,$(shell hostname)))
+MLX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS += $(addprefix minimap/, $(MINIMAP))
+all: libmlx ${NAME}
 else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S), Linux)
-		FW_FLAGS := -ldl -lglfw -pthread -lm
-	else ifeq ($(UNAME_S), Darwin)
-		FW_FLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
-	else
-		$(error OS: $(OS) is not supported!)
-	endif
-endif
-
 all: ${NAME}
+endif
 
 ${MLX}:
 	@cmake MLX42 -B MLX42/build
@@ -46,7 +55,7 @@ ${MLX}:
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
-	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
+	${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
 
 ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
@@ -54,6 +63,14 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+run: all
+	./cub3D maps/default.cub
+
+run2: all
+	./cub3D maps/defaultswitched.cub
 
 clean:
 	@make clean -s -C libft 
@@ -71,3 +88,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#.DEFAULT_GOAL:=run
