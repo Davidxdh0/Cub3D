@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 08:52:56 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/21 11:33:43 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/24 16:44:44 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	main(void)
 	if (!mlx)
 		return (EXIT_FAILURE);
 	init_gen(&gen, mlx);
+	clear_screen(&gen, 0x00000000);
 	// mlx_loop_hook(mlx, render_screen, &gen);
 	// mlx_key_hook(mlx, ft_hook, &gen);
 	drawMap2D(&gen)

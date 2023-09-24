@@ -19,7 +19,7 @@ DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include #-I libft/$(DIR_I) 
 
-SRCS = main.c
+SRCS = main.c movement.c
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
@@ -29,7 +29,7 @@ ifeq ($(OS), Windows_NT)
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S), Linux)
-		FW_FLAGS := -ldl -lglfw -pthread -lm
+		FW_FLAGS := -ldl -Wl,--no-as-needed -lglfw -pthread -lm
 	else ifeq ($(UNAME_S), Darwin)
 		FW_FLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 	else

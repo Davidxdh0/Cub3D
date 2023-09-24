@@ -7,26 +7,26 @@
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
-#define SIZE 16
+#define SIZE 32
 #define WIDTH 800
 #define HEIGHT 600
 
-int worldMap[MAP_WIDTH][MAP_HEIGHT] = \
+int map[MAP_WIDTH][MAP_HEIGHT] = \
 {
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -44,14 +44,14 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 {
 	gen->mlx = mlx;
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
-	gen->player.x = 22;
-	gen->player.y = 12;
+	gen->player.x = 20;
+	gen->player.y = 10;
 	gen->player.dirX = -1;
 	gen->player.dirY = 0;
 	gen->player.planeX = 0;
 	gen->player.planeY = 0.66;
-	gen->player.img = mlx_new_image(mlx, 3, 3);
-	memset(gen->player.img->data, 0xFF000000, 9);
+	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
+	memset(gen->player.img->pixels, 0xFF0000FF, SIZE / 8 * SIZE / 8 * sizeof(int32_t));
 }
 
 // void	calc_delta(t_vector *deltaDist, t_vector *ray)
@@ -170,15 +170,12 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 
 void	draw_square(mlx_t *mlx, int x, int y, int color)
 {
-	int			i;
-	int			j;
-	mlx_img_t	*img;
+	mlx_image_t	*img;
 
-	i = 0;
-	img = mlx_new_image(mlx, SIZE / 4, SIZE / 4);
+	img = mlx_new_image(mlx, SIZE / 2, SIZE / 2);
 	memset(img->pixels, color, img->width * img->height * sizeof(int32_t));
-	mlx_imaget_to_window(mlx, img, x * SIZE, y * SIZE);
-	mlx_delete_image(mlx, img);
+	mlx_image_to_window(mlx, img, x * SIZE / 2, y * SIZE / 2);
+	// mlx_delete_image(mlx, img);
 }
 
 void drawMap2D(t_gen *gen)
@@ -188,10 +185,10 @@ void drawMap2D(t_gen *gen)
 	int			color;
 
 	y = -1;
-	while (++y < mapY)
+	while (++y < MAP_HEIGHT)
 	{
 		x = -1;
-		while (++x < mapX)
+		while (++x < MAP_WIDTH)
 		{
 			if (map[y][x] > 0)
 				color = 0xFFFFFF;
@@ -200,7 +197,6 @@ void drawMap2D(t_gen *gen)
 			draw_square(gen->mlx, x, y, color);
 		} 
 	}
-	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * SIZE, gen->player.y * SIZE);
 }
 
 int	main(void)
@@ -213,8 +209,10 @@ int	main(void)
 		return (EXIT_FAILURE);
 	init_gen(&gen, mlx);
 	// clear_screen(&gen, 0x000000);
+	memset(gen.win->pixels, 0xFF0000FF, WIDTH * HEIGHT * sizeof(int32_t));
 	drawMap2D(&gen);
-	mlx_loop_hook(mlx, render_screen, &gen);
+	mlx_image_to_window(gen.mlx, gen.player.img, gen.player.x * SIZE / 2, gen.player.y * SIZE / 2);
+	// mlx_loop_hook(mlx, render_screen, &gen);
 	mlx_key_hook(mlx, movement, &gen);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
