@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/22 09:09:26 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/24 14:30:28 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ typedef enum e_wall
 	WEST,
 	EAST
 }			t_wall;
+
+
+void	walk(mlx_keydata_t data, t_gen *gen);
+void	rotate(mlx_keydata_t data, t_gen *gen);
+void	movement(mlx_keydata_t data, void *param);
 
 #endif
