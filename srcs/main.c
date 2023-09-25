@@ -12,39 +12,47 @@ int32_t get_rgba(int32_t r, int32_t g, int32_t b, int32_t a)
 
 void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
 {
-	int	x;
-	int	y;
-	int	m_new;
-	int	slope_error_new;
-	
-	x = x1;
-	y = y1;
-	m_new = 2 * (y2 - y1);
-	slope_error_new = m_new - (x2 - x1);
-	while (x <= x2)
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	err2;
+
+	dx = abs(x2 - x1);
+	dy = -abs(y2 - y1);
+	sx = 1;
+	if (x1 > x2)
+		sx = -1;
+	sy = 1;
+	if (y1 > y2)
+		sy = -1;
+	err = dx + dy;
+	while (x1 != x2 && y1 != y2)
 	{
-		slope_error_new += m_new;
-		if (slope_error_new >= 0)
+		mlx_put_pixel(gen->win, x1, y1, 0xFF0000FF);
+		err2 = 2 * err;
+		if (err2 >= dy && x1 != x2)
 		{
-			y++;
-			slope_error_new -= 2 * (x2 - x1);
+			err += dy;
+			x1 += sx;
 		}
-		printf("x = %d, y = %d\n", x, y);
-		mlx_put_pixel(gen->win, x, y, 0xFF0000FF);
-		x++;
-	}
-	while (x2 < x)
-	{
-		slope_error_new += m_new;
-		if (slope_error_new >= 0)
+		if (err2 <= dx && y1 != y2)
 		{
-			y--;
-			slope_error_new -= 2 * (x2 - x1);
+			err += dx;
+			y1 += sy;
 		}
-		printf("x = %d, y = %d\n", x, y);
-		mlx_put_pixel(gen->win, x, y, 0xFF0000FF);
-		x--;
 	}
+}
+
+void	render_screen(void *param)
+{
+	t_gen	*gen;
+
+	gen = (t_gen *)param;
+	memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
+	bresenham(gen, gen->player.x * (SIZE / 2), gen->player.y * (SIZE / 2), SIZE / 2, SIZE / 2);
+	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
 }
 
 void	init_gen(t_gen *gen, mlx_t *mlx)
@@ -62,7 +70,6 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	for (int i = 0; i < SIZE / 8; i++)
 		for (int j = 0; j < SIZE / 8; j++)
 				mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
-	bresenham(gen, gen->player.x * 32, gen->player.y *32, 10 * 32, 10 * 32);
 	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * SIZE / 2, gen->player.y * SIZE / 2);
 }
 
@@ -79,8 +86,7 @@ int	main(void)
 	// clear_screen(&gen, 0x000000);
 	// memset(gen.win->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
 	drawMap2D(&gen);
-	mlx_image_to_window(mlx, gen.win, 0, 0);
-	// mlx_loop_hook(mlx, render_screen, &gen);
+	mlx_loop_hook(mlx, render_screen, &gen);
 	mlx_key_hook(mlx, movement, &gen);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
