@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/24 16:37:16 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/25 16:14:41 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Int.h"
+
+
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
+# define SIZE 64
+# define WIDTH 1920
+# define HEIGHT 1080
+# define SPEED 0.5
+# define ROTATE 0.5
 
 typedef struct s_vector
 {
@@ -51,9 +60,9 @@ typedef enum e_wall
 	EAST
 }			t_wall;
 
-
 void	walk(mlx_key_data_t data, t_gen *gen);
 void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(mlx_key_data_t data, void *param);
+void	drawMap2D(t_gen *gen);
 
 #endif
