@@ -53,8 +53,10 @@ void	allocate_map(t_map *map);
 
 //validate_map.c
 void	valid_space(char **array, int x,int y);
-void    validate_map(const t_map *c_map);
-void    flood_fill(const t_map *c_map, char **map, int x,int y);
+void    validate_map(t_map *c_map);
+void    flood_fill(t_map *c_map, char **map, int x,int y);
+int		heigth_validated_map(t_map *c_map);
+int		width_validated_map(t_map *c_map);
 
 //free.c
 void	free_t_map(t_map *map);

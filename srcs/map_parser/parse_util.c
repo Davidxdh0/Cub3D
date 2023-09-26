@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/23 00:55:43 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/25 15:29:29 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	allocate_map(t_map *map)
 			error_exit("Malloc map->map[y]");
 		i++;
 	}
+	// map->map[i] = NULL;
 }
 
 void	print_map(const t_map *map, char **array)
