@@ -19,7 +19,7 @@ DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include #-I libft/$(DIR_I) 
 
-SRCS = main.c movement.c minimap.c
+SRCS = main.c movement.c minimap.c raycasting.c
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 

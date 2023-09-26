@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 08:52:56 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/24 16:44:44 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/26 14:26:34 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void drawMap2D(t_gen *gen)
 		x = -1;
 		while (++x < mapX)
 		{
-			if (map[y][x] > 0)
+			if (gen->map[y][x] > 0)
 				color = 0xFFFFFF;
 			else
 				color = 0x000000;

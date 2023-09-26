@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/25 16:14:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/26 15:18:25 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,33 @@ typedef struct s_player
 
 typedef struct s_gen
 {
-	void			*mlx;
+	mlx_t			*mlx;
 	mlx_image_t		*win;
+	int				**map;
 	t_player		player;
 }				t_gen;
+
+typedef struct s_ray
+{
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+	int color;
+}				t_ray;
 
 typedef enum e_wall
 {
@@ -64,5 +87,7 @@ void	walk(mlx_key_data_t data, t_gen *gen);
 void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(mlx_key_data_t data, void *param);
 void	drawMap2D(t_gen *gen);
+void	cast_ray(t_gen *gen, t_player *player, int x);
+
 
 #endif
