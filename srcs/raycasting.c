@@ -6,14 +6,27 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/26 15:26:36 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/26 22:21:00 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_vert_line(t_gen *gen, t_ray ray, int x)
+int	get_color(int color)
 {
+	if (color == 1)
+		return (0x000000FF);
+	else if (color == 2)
+		return (0x0000FFFF);
+	else if (color == 3)
+		return (0x00FF00FF);
+	else
+		return (0xFF0000FF);
+}
+
+void	draw_vert_line(t_gen *gen, t_ray ray, int x)
+{
+	// printf("start = %d, end = %d\n", ray.drawStart, ray.drawEnd);
 	while (ray.drawStart < ray.drawEnd)
 	{
 		mlx_put_pixel(gen->win, x, ray.drawStart, ray.color);
@@ -24,7 +37,7 @@ static void	draw_vert_line(t_gen *gen, t_ray ray, int x)
 void cast_ray(t_gen *gen, t_player *player, int x)
 {
 	t_ray	ray;
-
+	(void)x;
 	ray.cameraX = 2 * player->x / (double)WIDTH - 1;
 	ray.rayDirX = player->dirX + player->planeX * ray.cameraX;
 	ray.rayDirY = player->dirY + player->planeY * ray.cameraX;
@@ -71,7 +84,7 @@ void cast_ray(t_gen *gen, t_player *player, int x)
 			ray.mapY += ray.stepY;
 			ray.side = 1;
 		}
-		if (gen->map[ray.mapY][ray.mapX] > 0)
+		if (gen->map[ray.mapX][ray.mapY] > 0)
 			ray.hit = 1;
 	}
 	if (ray.side == 0)
@@ -86,8 +99,21 @@ void cast_ray(t_gen *gen, t_player *player, int x)
 	if (ray.drawEnd >= HEIGHT)
 		ray.drawEnd = HEIGHT - 1;
 	if (ray.side == 1)
-		ray.color = 0x00FF00FF;
+		ray.color = get_color(gen->map[ray.mapY][ray.mapX]);
 	else
-		ray.color = 0x0000FFFF;
-	draw_vert_line(gen, ray, x);
+		ray.color = get_color(gen->map[ray.mapY][ray.mapX]) / 2;
+	// printf("perpWallDist = %f\n", ray.perpWallDist);
+	// draw_vert_line(gen, ray, x);
+	t_vector	line;
+	if (ray.sideDistX < ray.sideDistY)
+	{
+		line.x = ray.mapX;
+		line.y = ray.mapY + ray.sideDistX;
+	}
+	else
+	{
+		line.x = ray.mapX + ray.sideDistY;
+		line.y = ray.mapY;
+	}
+	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), line.x * (SIZE / 4), line.y * (SIZE / 4));
 }

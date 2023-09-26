@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/26 15:18:25 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/26 22:19:43 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(mlx_key_data_t data, void *param);
 void	drawMap2D(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
+void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
 
 
 #endif
