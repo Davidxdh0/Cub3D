@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 12:35:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 12:51:31 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,17 @@ void cast_ray(t_gen *gen, t_player *player, int x)
 		ray.color = get_color(gen->map[ray.mapY][ray.mapX]);
 	else
 		ray.color = get_color(gen->map[ray.mapY][ray.mapX]) / 2;
-	// draw_vert_line(gen, ray, x);
-	t_vector	line;
-	if (ray.sideDistX < ray.sideDistY)
-	{
-		line.x = ray.mapX;
-		line.y = ray.mapY + ray.sideDistX;
-	}
-	else
-	{
-		line.x = ray.mapX + ray.sideDistY;
-		line.y = ray.mapY;
-	}
-	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), line.x * (SIZE / 4), line.y * (SIZE / 4));
+	draw_vert_line(gen, ray, x);
+	// t_vector	line;
+	// if (ray.sideDistX < ray.sideDistY)
+	// {
+	// 	line.x = ray.mapX;
+	// 	line.y = ray.mapY + ray.sideDistX;
+	// }
+	// else
+	// {
+	// 	line.x = ray.mapX + ray.sideDistY;
+	// 	line.y = ray.mapY;
+	// }
+	// bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), line.x * (SIZE / 4), line.y * (SIZE / 4));
 }

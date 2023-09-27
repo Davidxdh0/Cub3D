@@ -118,8 +118,8 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
 	gen->player.x = 12;
 	gen->player.y = 22;
-	gen->player.dirX = 0;
-	gen->player.dirY = 1;
+	gen->player.dirX = -1;
+	gen->player.dirY = 0;
 	gen->player.planeX = 0;
 	gen->player.planeY = 0.66;
 	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
@@ -140,7 +140,7 @@ int	main(void)
 		return (EXIT_FAILURE);
 	init_gen(&gen, mlx);
 	// clear_screen(&gen, 0x000000);
-	drawMap2D(&gen);
+	// drawMap2D(&gen);
 	mlx_loop_hook(mlx, render_screen, &gen);
 	mlx_key_hook(mlx, movement, &gen);
 	mlx_loop(mlx);
