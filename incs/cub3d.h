@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/26 22:19:43 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 16:25:06 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Int.h"
 
-
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
 # define SIZE 64
@@ -30,18 +29,18 @@
 
 typedef struct s_vector
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 }				t_vector;
 
 typedef struct s_player
 {
 	double		x;
 	double		y;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	mlx_image_t	*img;
 }				t_player;
 
@@ -55,24 +54,24 @@ typedef struct s_gen
 
 typedef struct s_ray
 {
-	double cameraX;
-	double rayDirX;
-	double rayDirY;
-	int mapX;
-	int mapY;
-	double sideDistX;
-	double sideDistY;
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
-	int stepX;
-	int stepY;
-	int hit;
-	int side;
-	int lineHeight;
-	int drawStart;
-	int drawEnd;
-	int color;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	walldist;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		height;
+	int		start;
+	int		end;
+	int		color;
 }				t_ray;
 
 typedef enum e_wall
@@ -89,6 +88,5 @@ void	movement(mlx_key_data_t data, void *param);
 void	drawMap2D(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
 void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 12:51:31 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 16:38:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,95 +24,110 @@ int	get_color(int color)
 		return (0xFF0000FF);
 }
 
-void	draw_vert_line(t_gen *gen, t_ray ray, int x)
+void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 {
-	// printf("start = %d, end = %d\n", ray.drawStart, ray.drawEnd);
-	while (ray.drawStart < ray.drawEnd)
+	if (ray->side == 0)
+		ray->walldist = ray->sidedist_x - ray->deltadist_x;
+	else
+		ray->walldist = ray->sidedist_y - ray->deltadist_y;
+	ray->height = (int)(HEIGHT / ray->walldist);
+	ray->start = -ray->height / 2 + HEIGHT / 2;
+	ray->end = ray->height / 2 + HEIGHT / 2;
+	if (ray->start < 0)
+		ray->start = 0;
+	if (ray->end >= HEIGHT)
+		ray->end = HEIGHT - 1;
+	if (ray->side == 1)
+		ray->color = get_color(gen->map[ray->map_y][ray->map_x]);
+	else
+		ray->color = get_color(gen->map[ray->map_y][ray->map_x]) / 2;
+	while (ray->start < ray->end)
 	{
-		mlx_put_pixel(gen->win, x, ray.drawStart, ray.color);
-		++ray.drawStart;
+		mlx_put_pixel(gen->win, x, ray->start, ray->color);
+		++ray->start;
 	}
 }
 
-void cast_ray(t_gen *gen, t_player *player, int x)
+void	calc_side_dist(t_player *player, t_ray *ray)
 {
-	t_ray	ray;
+	if (ray->raydir_y != 0)
+		ray->deltadist_x = fabs(1 / ray->raydir_x);
+	if (ray->deltadist_y != 0)
+		ray->deltadist_y = fabs(1 / ray->raydir_y);
+	if (ray->raydir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->sidedist_x = (player->x - ray->map_x) * ray->deltadist_x;
+	}
+	else
+	{
+		ray->step_x = 1;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->x) * ray->deltadist_x;
+	}
+	if (ray->raydir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->sidedist_y = (player->y - ray->map_y) * ray->deltadist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->y) * ray->deltadist_y;
+	}
+}
 
-	ray.cameraX = 2 * x / (double)WIDTH - 1;
-	ray.rayDirX = player->dirX + player->planeX * ray.cameraX;
-	ray.rayDirY = player->dirY + player->planeY * ray.cameraX;
-	ray.mapX = (int)player->x;
-	ray.mapY = (int)player->y;
-	ray.deltaDistX = 1e30;
-	ray.deltaDistY = 1e30;
-	if (ray.rayDirY != 0)
-		ray.deltaDistX = fabs(1 / ray.rayDirX);
-	if (ray.deltaDistY != 0)
-		ray.deltaDistY = fabs(1 / ray.rayDirY);
-	ray.hit = 0;
-	if (ray.rayDirX < 0)
+void	calc_wall_dist(int **map, t_ray *ray)
+{
+	while (map[ray->map_y][ray->map_x] == 0)
 	{
-		ray.stepX = -1;
-		ray.sideDistX = (player->x - ray.mapX) * ray.deltaDistX;
-	}
-	else
-	{
-		ray.stepX = 1;
-		ray.sideDistX = (ray.mapX + 1.0 - player->x) * ray.deltaDistX;
-	}
-	if (ray.rayDirY < 0)
-	{
-		ray.stepY = -1;
-		ray.sideDistY = (player->y - ray.mapY) * ray.deltaDistY;
-	}
-	else
-	{
-		ray.stepY = 1;
-		ray.sideDistY = (ray.mapY + 1.0 - player->y) * ray.deltaDistY;
-	}
-	while (ray.hit == 0)
-	{
-		if (ray.sideDistX < ray.sideDistY)
+		if (ray->sidedist_x < ray->sidedist_y)
 		{
-			ray.sideDistX += ray.deltaDistX;
-			ray.mapX += ray.stepX;
-			ray.side = 0;
+			ray->sidedist_x += ray->deltadist_x;
+			ray->map_x += ray->step_x;
+			if (ray->map_x > MAP_WIDTH - 1)
+				ray->map_x = MAP_WIDTH - 1;
+			if (ray->map_x < 0)
+				ray->map_x = 0;
+			ray->side = 0;
 		}
 		else
 		{
-			ray.sideDistY += ray.deltaDistY;
-			ray.mapY += ray.stepY;
-			ray.side = 1;
+			ray->sidedist_y += ray->deltadist_y;
+			ray->map_y += ray->step_y;
+			if (ray->map_y > MAP_HEIGHT - 1)
+				ray->map_y = MAP_HEIGHT - 1;
+			if (ray->map_y < 0)
+				ray->map_y = 0;
+			ray->side = 1;
 		}
-		if (gen->map[ray.mapY][ray.mapX] > 0)
-			ray.hit = 1;
 	}
-	if (ray.side == 0)
-		ray.perpWallDist = ray.sideDistX - ray.deltaDistX;
+}
+
+void	cast_ray(t_gen *gen, t_player *player, int x)
+{
+	t_ray		ray;
+	t_vector	line;
+
+	ray.camera_x = 2 * x / (double)WIDTH - 1;
+	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x;
+	ray.raydir_y = player->dir_y + player->plane_y * ray.camera_x;
+	ray.map_x = (int)player->x;
+	ray.map_y = (int)player->y;
+	ray.deltadist_x = 1e30;
+	ray.deltadist_y = 1e30;
+	calc_side_dist(player, &ray);
+	calc_wall_dist(gen->map, &ray);
+	draw_vert_line(gen, &ray, x);
+	if (ray.sidedist_x < ray.sidedist_y)
+	{
+		line.x = ray.map_x;
+		line.y = ray.map_y + ray.sidedist_x;
+	}
 	else
-		ray.perpWallDist = ray.sideDistY - ray.deltaDistY;
-	ray.lineHeight = (int)(HEIGHT / ray.perpWallDist);
-	ray.drawStart = -ray.lineHeight / 2 + HEIGHT / 2;
-	if (ray.drawStart < 0)
-		ray.drawStart = 0;
-	ray.drawEnd = ray.lineHeight / 2 + HEIGHT / 2;
-	if (ray.drawEnd >= HEIGHT)
-		ray.drawEnd = HEIGHT - 1;
-	if (ray.side == 1)
-		ray.color = get_color(gen->map[ray.mapY][ray.mapX]);
-	else
-		ray.color = get_color(gen->map[ray.mapY][ray.mapX]) / 2;
-	draw_vert_line(gen, ray, x);
-	// t_vector	line;
-	// if (ray.sideDistX < ray.sideDistY)
-	// {
-	// 	line.x = ray.mapX;
-	// 	line.y = ray.mapY + ray.sideDistX;
-	// }
-	// else
-	// {
-	// 	line.x = ray.mapX + ray.sideDistY;
-	// 	line.y = ray.mapY;
-	// }
-	// bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), line.x * (SIZE / 4), line.y * (SIZE / 4));
+	{
+		line.x = ray.map_x + ray.sidedist_y;
+		line.y = ray.map_y;
+	}
+	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
+	line.x * (SIZE / 4), line.y * (SIZE / 4));
 }
