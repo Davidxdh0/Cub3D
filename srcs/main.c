@@ -77,7 +77,6 @@ void	render_screen(void *param)
 	gen = (t_gen *)param;
 	x = 0;
 	memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
-	// bresenham(gen, gen->player.x * (SIZE / 2), gen->player.y * (SIZE / 2), SIZE / 2, SIZE / 2);
 	while (x < WIDTH)
 	{
 		cast_ray(gen, &gen->player, x);
@@ -119,8 +118,8 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
 	gen->player.x = 12;
 	gen->player.y = 22;
-	gen->player.dirX = -1;
-	gen->player.dirY = 0;
+	gen->player.dirX = 0;
+	gen->player.dirY = 1;
 	gen->player.planeX = 0;
 	gen->player.planeY = 0.66;
 	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
@@ -141,7 +140,6 @@ int	main(void)
 		return (EXIT_FAILURE);
 	init_gen(&gen, mlx);
 	// clear_screen(&gen, 0x000000);
-	// memset(gen.win->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
 	drawMap2D(&gen);
 	mlx_loop_hook(mlx, render_screen, &gen);
 	mlx_key_hook(mlx, movement, &gen);

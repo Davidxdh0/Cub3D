@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/26 22:21:00 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 12:35:15 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	draw_vert_line(t_gen *gen, t_ray ray, int x)
 void cast_ray(t_gen *gen, t_player *player, int x)
 {
 	t_ray	ray;
-	(void)x;
-	ray.cameraX = 2 * player->x / (double)WIDTH - 1;
+
+	ray.cameraX = 2 * x / (double)WIDTH - 1;
 	ray.rayDirX = player->dirX + player->planeX * ray.cameraX;
 	ray.rayDirY = player->dirY + player->planeY * ray.cameraX;
 	ray.mapX = (int)player->x;
@@ -84,7 +84,7 @@ void cast_ray(t_gen *gen, t_player *player, int x)
 			ray.mapY += ray.stepY;
 			ray.side = 1;
 		}
-		if (gen->map[ray.mapX][ray.mapY] > 0)
+		if (gen->map[ray.mapY][ray.mapX] > 0)
 			ray.hit = 1;
 	}
 	if (ray.side == 0)
@@ -102,7 +102,6 @@ void cast_ray(t_gen *gen, t_player *player, int x)
 		ray.color = get_color(gen->map[ray.mapY][ray.mapX]);
 	else
 		ray.color = get_color(gen->map[ray.mapY][ray.mapX]) / 2;
-	// printf("perpWallDist = %f\n", ray.perpWallDist);
 	// draw_vert_line(gen, ray, x);
 	t_vector	line;
 	if (ray.sideDistX < ray.sideDistY)

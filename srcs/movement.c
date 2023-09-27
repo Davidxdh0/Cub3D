@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 10:19:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 11:59:05 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	can_move(t_gen *gen, int speed)
 
 	x = (int)(gen->player.x + gen->player.dirX * speed);
 	y = (int)(gen->player.y + gen->player.dirY * speed);
-	if (x < 1 || x > MAP_WIDTH - 1 || y < 1 || y > MAP_HEIGHT - 1)
+	if (x < 1 || x > MAP_WIDTH - 2 || y < 1 || y > MAP_HEIGHT - 2)
 		return (0);
 	return (1);
 }
@@ -34,25 +34,25 @@ void	walk(mlx_key_data_t data, t_gen *gen)
 	{
 		gen->player.y += (gen->player.dirY * moveSpeed);
 		gen->player.x += (gen->player.dirX * moveSpeed);
-		gen->player.img->instances->y = gen->player.y * SIZE / 4;
-		gen->player.img->instances->x = gen->player.x * SIZE / 4;
+		// gen->player.img->instances->y = gen->player.y * SIZE / 4;
+		// gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else if (data.key == MLX_KEY_S && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
 		gen->player.y -= (gen->player.dirY * moveSpeed);
 		gen->player.x -= (gen->player.dirX * moveSpeed);
-		gen->player.img->instances->y = gen->player.y * SIZE / 4;
-		gen->player.img->instances->x = gen->player.x * SIZE / 4;
+		// gen->player.img->instances->y = gen->player.y * SIZE / 4;
+		// gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else if (data.key == MLX_KEY_A && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
-		gen->player.x += (gen->player.dirX * moveSpeed);
-		gen->player.img->instances->x = gen->player.x * SIZE / 4;
+		gen->player.y += (gen->player.dirX * moveSpeed);
+		gen->player.x += -(gen->player.dirY * moveSpeed);
 	}
 	else if (data.key == MLX_KEY_D && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
-		gen->player.x -= (gen->player.dirX * moveSpeed);
-		gen->player.img->instances->x = gen->player.x * SIZE / 4;
+		gen->player.y += -(gen->player.dirX * moveSpeed);
+		gen->player.x += (gen->player.dirY * moveSpeed);
 	}
 	else
 		return ;
@@ -105,7 +105,7 @@ void	movement(mlx_key_data_t data, void *param)
 	{
 		mlx_close_window(gen->mlx);
 		mlx_terminate(gen->mlx);
-		// cleanup and exit
+		exit(0);
 	}
 	rotate(data, gen);
 	walk(data, gen);
