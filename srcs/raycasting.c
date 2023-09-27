@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 16:38:59 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 17:27:24 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 	if (ray->end >= HEIGHT)
 		ray->end = HEIGHT - 1;
 	if (ray->side == 1)
-		ray->color = get_color(gen->map[ray->map_y][ray->map_x]);
+		ray->color = get_color(gen->map[(int)ray->map_y][(int)ray->map_x]);
 	else
-		ray->color = get_color(gen->map[ray->map_y][ray->map_x]) / 2;
+		ray->color = get_color(gen->map[(int)ray->map_y][(int)ray->map_x]) / 2;
 	while (ray->start < ray->end)
 	{
 		mlx_put_pixel(gen->win, x, ray->start, ray->color);
@@ -78,7 +78,7 @@ void	calc_side_dist(t_player *player, t_ray *ray)
 
 void	calc_wall_dist(int **map, t_ray *ray)
 {
-	while (map[ray->map_y][ray->map_x] == 0)
+	while (map[(int)ray->map_y][(int)ray->map_x] == 0)
 	{
 		if (ray->sidedist_x < ray->sidedist_y)
 		{
@@ -120,14 +120,23 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	draw_vert_line(gen, &ray, x);
 	if (ray.sidedist_x < ray.sidedist_y)
 	{
-		line.x = ray.map_x;
-		line.y = ray.map_y + ray.sidedist_x;
+		line.x = ray.map_x + 1;
+		line.y = ray.map_y + 1; // ray.raydir_y * ray.raydir_x;
 	}
 	else
 	{
-		line.x = ray.map_x + ray.sidedist_y;
-		line.y = ray.map_y;
+		line.x = ray.map_x + 1; // ray.raydir_x * ray.raydir_y;
+		line.y = ray.map_y + 1;
 	}
-	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
-	line.x * (SIZE / 4), line.y * (SIZE / 4));
+	static int i = 0;
+	if (i < WIDTH)
+	{
+		printf("map_x = %f, map_y = %f\n", ray.map_x, ray.map_y);
+		i++;
+	}
+	if (x == 0 || x == WIDTH - 1 || x == WIDTH/ 2)
+	{	
+		bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
+		line.x * (SIZE / 4), line.y * (SIZE / 4));
+	}
 }

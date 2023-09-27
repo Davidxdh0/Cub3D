@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 16:25:06 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 17:27:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_ray
 	double	deltadist_x;
 	double	deltadist_y;
 	double	walldist;
-	int		map_x;
-	int		map_y;
+	double		map_x;
+	double		map_y;
 	int		step_x;
 	int		step_y;
 	int		hit;

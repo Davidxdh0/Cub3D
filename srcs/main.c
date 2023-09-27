@@ -121,7 +121,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx)
 	gen->player.dir_x = -1;
 	gen->player.dir_y = 0;
 	gen->player.plane_x = 0;
-	gen->player.plane_y = 0.66;
+	gen->player.plane_y = 0.90;
 	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
 	for (int i = 0; i < SIZE / 8; i++)
 		for (int j = 0; j < SIZE / 8; j++)
