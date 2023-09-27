@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/26 21:48:12 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/27 10:19:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,25 @@ void	walk(mlx_key_data_t data, t_gen *gen)
 	{
 		gen->player.y += (gen->player.dirY * moveSpeed);
 		gen->player.x += (gen->player.dirX * moveSpeed);
-		// gen->player.img->instances->y += -16;//(gen->player.dirY * -moveSpeed);
+		gen->player.img->instances->y = gen->player.y * SIZE / 4;
+		gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else if (data.key == MLX_KEY_S && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
 		gen->player.y -= (gen->player.dirY * moveSpeed);
 		gen->player.x -= (gen->player.dirX * moveSpeed);
-		// gen->player.img->instances->y += 16;//(gen->player.dirY * moveSpeed);
+		gen->player.img->instances->y = gen->player.y * SIZE / 4;
+		gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else if (data.key == MLX_KEY_A && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
 		gen->player.x += (gen->player.dirX * moveSpeed);
-		// gen->player.img->instances->x += -16;//(gen->player.dirX * moveSpeed);
+		gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else if (data.key == MLX_KEY_D && (data.action == MLX_PRESS || data.action  == MLX_REPEAT) && can_move(gen, moveSpeed))
 	{
 		gen->player.x -= (gen->player.dirX * moveSpeed);
-		// gen->player.img->instances->x += 16;//(gen->player.dirX * -moveSpeed);
+		gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	}
 	else
 		return ;
@@ -91,6 +93,7 @@ void	rotate(mlx_key_data_t data, t_gen *gen)
 		// do something
 		return ;
 	}
+	printf("dirx = %f, diry = %f\n", gen->player.dirX , gen->player.dirY);
 }
 
 void	movement(mlx_key_data_t data, void *param)
