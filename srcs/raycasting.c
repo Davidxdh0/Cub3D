@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 17:27:24 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/28 10:09:14 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,6 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	{
 		line.x = ray.map_x + 1; // ray.raydir_x * ray.raydir_y;
 		line.y = ray.map_y + 1;
-	}
-	static int i = 0;
-	if (i < WIDTH)
-	{
-		printf("map_x = %f, map_y = %f\n", ray.map_x, ray.map_y);
-		i++;
 	}
 	if (x == 0 || x == WIDTH - 1 || x == WIDTH/ 2)
 	{	

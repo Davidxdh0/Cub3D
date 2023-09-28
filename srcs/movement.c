@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/27 17:39:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/28 10:08:39 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,27 @@ void	walk(mlx_key_data_t data, t_gen *gen)
 	{
 		gen->player.y += (gen->player.dir_y * move);
 		gen->player.x += (gen->player.dir_x * move);
-		// gen->player.img->instances->x += -(gen->player.dir_x * move * SIZE / 4);
-		// gen->player.img->instances->y += (gen->player.dir_y * move * SIZE / 4);
 	}
 	else if (data.key == MLX_KEY_S && (data.action == MLX_PRESS || \
 	data.action == MLX_REPEAT) && can_move(gen, move))
 	{
 		gen->player.y -= (gen->player.dir_y * move);
 		gen->player.x -= (gen->player.dir_x * move);
-		// gen->player.img->instances->x += (gen->player.dir_x * move * SIZE / 4);
-		// gen->player.img->instances->y += -(gen->player.dir_y * move * SIZE / 4);
 	}
 	else if (data.key == MLX_KEY_A && (data.action == MLX_PRESS || \
 	data.action == MLX_REPEAT) && can_move(gen, move))
 	{
 		gen->player.y += (gen->player.dir_x * move);
 		gen->player.x += -(gen->player.dir_y * move);
-		// gen->player.img->instances->x += (gen->player.dir_y * move * SIZE / 4);
-		// gen->player.img->instances->y += (gen->player.dir_x * move * SIZE / 4);
 	}
 	else if (data.key == MLX_KEY_D && (data.action == MLX_PRESS || \
 	data.action == MLX_REPEAT) && can_move(gen, move))
 	{
 		gen->player.y += -(gen->player.dir_x * move);
 		gen->player.x += (gen->player.dir_y * move);
-		// gen->player.img->instances->x -= (gen->player.dir_y * move * SIZE / 4);
-		// gen->player.img->instances->y -= (gen->player.dir_x * move * SIZE / 4);
 	}
+	gen->player.img->instances->x = gen->player.x * SIZE / 4;
+	gen->player.img->instances->y = gen->player.y * SIZE / 4;
 }
 
 void	rotate(mlx_key_data_t data, t_gen *gen)
