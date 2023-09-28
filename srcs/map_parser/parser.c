@@ -6,21 +6,11 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/27 14:09:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/28 20:42:51 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	open_file(char *map)
-{
-	int	fd;
-
-	fd = open(map, O_RDONLY);
-	if (fd < 0)
-		error_exit("File can't be opened");
-	return (fd);
-}
 
 //colors f 2 , c 3
 //textures no 11, so 12, we 14, ea 20
@@ -53,6 +43,7 @@ void	parser(char *file, t_map *c_map)
 	int		fd;
 	char	*line;
 
+	check_extension(file);
 	fd = open_file(file);
 	check_width_height(c_map, 0, fd);
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
@@ -69,4 +60,5 @@ void	parser(char *file, t_map *c_map)
 	if (c_map->startX == -1)
 		error_free("No starting positions found", c_map);
 	close (fd);
+
 }

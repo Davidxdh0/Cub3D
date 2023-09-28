@@ -30,7 +30,8 @@ MAP_PARSER = 	parser.c \
 				parse_types.c \
 				parse_util.c \
 				free.c \
-				init.c
+				init.c \
+				file_handling.c
 
 MINIMAP =		mlxmain.c
 

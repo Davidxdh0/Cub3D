@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/27 16:14:07 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/28 20:43:23 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,16 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 // printf("= '%c'\n", c_map.map[c_map.startY][c_map.startX]);
 void	validate_map(t_map *c_map)
 {
+	int newx;
+	int newy;
 	char **array;
+
 	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	print_map(c_map, c_map->map);
-	int newx = width_validated_map(c_map);
-	int newy = heigth_validated_map(c_map);
+	newx = width_validated_map(c_map);
+	newy = heigth_validated_map(c_map);
 	array = c_map->map;
 	c_map->map = allocate_map(c_map->map, newy + 2, newx+ 2);
-	fill_map(c_map, array, c_map->y_max, c_map->x_max);
-	// printf("newx = %d\n", newx);
-	printf("newx = %d, newy = %d\n", newx, newy);
+	fill_map(c_map, array, newy, newx);
 	
 }
 
@@ -141,56 +141,27 @@ int	heigth_validated_map(t_map *c_map)
 	}
 	return (y_max);
 }
-
+// 	printf("y: %d > %d && %d > %d + %d\n", y, (c_map->y_start - 1), y, c_map->y_start, ymax);
+// 	printf("x: %d > %d && %d > %d\n", x, (c_map->x_start - 1), x, c_map->x_start + xmax);
+//	printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
 void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 {
 	int y;
 	int x;
 	int posy;
 	int posx;
-	int written;
 
-
-	y = 0;
-	x = 0;
+	y = -1;
 	posy = 0;
-	posx = 0;
-	while (old_map[y])
+	while (old_map[++y])
 	{
-		written = 0;
-		x = 0;
-		while (old_map[y][x])
-		{
-			
-			if (y >= (c_map->y_start - 1) && y < c_map->y_start + ymax)
-			{
-				if (x == 0)
-					printf("y: %d > %d && %d > %d + %d\n", y, (c_map->y_start - 1), y, c_map->y_start, ymax);
-				if (x == 0)
-					printf("x: %d > %d && %d > %d\n", x, (c_map->x_start - 1), x, c_map->x_start + xmax);
-				if (x > c_map->x_start - 1 && x < c_map->x_start + xmax)
-				{
-					
-					
-					// printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
-					c_map->map[posy][posx] = old_map[y][x];
-					posx++;
-					written = 1;
-				}
-			}
-			x++;
-		}
-		if (written == 1)
+		x = -1;
+		posx = -1;
+		while (old_map[y][++x])
+			if (y >= (c_map->y_start - 1) && y <= c_map->y_start + ymax)
+				if (x >= c_map->x_start - 1 && x <= c_map->x_start + xmax)
+					c_map->map[posy][++posx] = old_map[y][x];
+		if (posx > 0)
 			posy++;
-		
-		// ymax--;
-		y++;
 	}
-	if (written == 1)
-		printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
-	printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
-	return ;
-	old_map++;
-	ymax++;
-	xmax++;
 }

@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/24 01:40:52 by daaf          ########   odam.nl         */
+/*   Updated: 2023/09/28 20:34:51 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ int	parse_textures(char *line, t_map *map, char *word)
 
 	i = 0;
 	words = ft_split(line, ' ');
-	if (words == NULL || !words[0])
-		error_free("parse_textures went wrong", map);
-	while (words[i])
-		i++;
-	if (i != 2)
+	if (count_array(words) != 2)
 		error_free("parse_textures went wrong", map);
 	words[1][ft_strlen(words[1]) - 1] = '\0';
 	i = open_file(words[1]);
@@ -50,21 +46,12 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 	char	**colors;
 	char	**words;
 
-	i = 0;
-	number = 0;
 	line[ft_strlen(line) - 1] = '\0';
 	words = ft_split(line, ' ');
-	if (words == NULL || !words[0])
-		return (0);
-	while (words[i])
-		i++;
-	if (i != 2)
+	if (count_array(words) != 2)
 		error_free("parseColours not two words", c_map);
 	colors = ft_split(words[1], ',');
-	i = 0;
-	while (colors[i] != NULL)
-		i++;
-	if (i != 3)
+	if (count_array(colors) != 3)
 		error_free("parse_colors values not three words", c_map);
 	i = 0;
 	while (colors[i])
@@ -78,9 +65,7 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 		c_map->txtrs->F = words[1];
 	else if (!strcmp(words[0], "C"))
 		c_map->txtrs->C = words[1];
-	ft_free_arr(words);
-	ft_free_arr(colors);
-	return (type_value(word));
+	return (ft_free_arr(words), ft_free_arr(colors), type_value(word));
 }
 
 int	parse_map(char *str, t_map *c_map, int y)
@@ -90,8 +75,8 @@ int	parse_map(char *str, t_map *c_map, int y)
 	i = 0;
 	if (y < c_map->y_max - 1)
 		str[ft_strlen(str) - 1] = '\0';
-	while (str[i] != '\0' && (str[i] == '1' || str[i] == '0' || str[i] == \
-	' ' || str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'D'))
+	while (str[i] != '\0' && (str[i] == '1' || str[i] == '0' || \
+		str[i] == ' ' || start_position(str[i])))
 	{
 		if (start_position(str[i]))
 		{

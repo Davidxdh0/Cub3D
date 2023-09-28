@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   file_handling.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 20:25:19 by dyeboa        ########   odam.nl         */
+/*   Created: 2023/09/28 20:37:45 by dyeboa        #+#    #+#                 */
+/*   Updated: 2023/09/28 20:45:18 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 #include "parser.h"
-#include "minimap.h"
-
-//valgrind --leak-check=full --show-leak-kinds=all 
-// --track-origins=yes ./cub3D maps/default.cub
-int	main(int argc, char *argv[])
+//	printf("exten: %s\n", extension);
+void	check_extension(char *file)
 {
-	t_map	*c_map;
+	int len;
+	char *extension;
 
-	c_map = NULL;
-	if (argc == 2)
-	{
-		c_map = init_map();
-		parser(argv[1], c_map);
-		validate_map(c_map);
-		print_map(c_map, c_map->map);
-		// mlx_main();
-	}
-	free_t_map(c_map);
-	return (1);
+	len = ft_strlen(file);
+	if (len < 5)
+		error_exit("Extension not .cub");
+	extension = ft_substr(file, len - 4, 4);
+	if (strncmp(extension, ".cub", 4))
+		error_exit("Extension not .cub");
+}
+
+
+int	open_file(char *map)
+{
+	int	fd;
+
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		error_exit("File can't be opened");
+	return (fd);
 }

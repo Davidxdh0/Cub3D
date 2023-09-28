@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/27 14:30:38 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/28 20:46:46 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ char**	allocate_map(char **map, int y, int x)
 {
 	int	i;
 
-	i = 0;
 	if (y == -1 || x == -1)
 		error_exit("No ymax or xmax");
 	map = (char **)malloc(sizeof(char *) * (y + 1));
 	if (!map)
 		error_exit("Malloc map");
+	i = 0;
 	while (i < y)
 	{
 		map[i] = malloc(sizeof(char) * x );
@@ -86,7 +86,7 @@ char**	allocate_map(char **map, int y, int x)
 			error_exit("Malloc map[y]");
 		i++;
 	}
-	map[i] = '\0';
+	map[i] = NULL;
 	return (map);
 }
 
@@ -116,4 +116,16 @@ void	print_map(const t_map *map, char **array)
 	}
 	printf("\n");
 	printf("\n");
+}
+
+int	count_array(char **array)
+{
+	int i;
+
+	i = 0;
+	if (!array)
+		return (i);
+	while (array[i])
+		i++;
+	return (i);
 }
