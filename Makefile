@@ -35,26 +35,35 @@ MAP_PARSER = 	parser.c \
 
 MINIMAP =		mlxmain.c
 
-SRCS =		main.c \
+
+SRCS =		main.c movement.c minimap.c raycasting.c\
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 
 LIBMLX	:= ./MLX42
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
-ifneq (,$(findstring TafelmMonster,$(shell hostname)))
-MLX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS += $(addprefix minimap/, $(MINIMAP))
-all: libmlx ${NAME}
+ifeq ($(OS), Windows_NT)
+	FW_FLAGS := -lglfw3 -lopengl32 -lgdi32
+	NAME := so_long.exe
 else
-all: ${NAME}
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S), Linux)
+		FW_FLAGS := -ldl -Wl,--no-as-needed -lglfw -pthread -lm
+	else ifeq ($(UNAME_S), Darwin)
+		FW_FLAGS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+	else
+		$(error OS: $(OS) is not supported!)
+	endif
 endif
+
+all: ${NAME}
 
 ${MLX}:
 	@cmake MLX42 -B MLX42/build
 	@make -C MLX42/build -j4
 
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
-	@make -s -C libft
+# @make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
 	${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
 	@echo "${GREEN}Done!${END}"
@@ -64,6 +73,8 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
+debug: fclean
+	@make DEBUG=1
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
@@ -74,7 +85,7 @@ run2: all
 	./cub3D maps/defaultswitched.cub
 
 clean:
-	@make clean -s -C libft 
+# @make clean -s -C libft 
 	@echo "${RED}Removing MLX42${END}"
 	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"

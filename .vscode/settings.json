@@ -1,9 +1,8 @@
 {
 	"files.associations": {
-		"main.h": "c",
-		"parser.h": "c",
-		"functional": "c",
-		"libft.h": "c",
-		"mlx42.h": "c"
-	}
+		"TEST.C": "cpp",
+		"cub3d.h": "c"
+	},
+	"cmake.sourceDirectory": "/workspaces/codespaces-blank/cubed/MLX42",
+	"C_Cpp.errorSquiggles": "disabled"
 }
