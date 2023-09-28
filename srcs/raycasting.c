@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 10:09:14 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/28 11:37:21 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 		ray->color = get_color(gen->map[(int)ray->map_y][(int)ray->map_x]) / 2;
 	while (ray->start < ray->end)
 	{
-		mlx_put_pixel(gen->win, x, ray->start, ray->color);
+		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
 		++ray->start;
 	}
 }
@@ -103,10 +103,22 @@ void	calc_wall_dist(int **map, t_ray *ray)
 	}
 }
 
+void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
+{
+	t_vector	line;
+
+	// printf("x: %d, y: %d\n", (int)((ray.sidedist_x - (int)ray.sidedist_x) * 64), (int)((ray.sidedist_y - (int)ray.sidedist_y) * 64));
+	
+	line.x = ray.map_x + 1;
+	line.y = ray.map_y + 1;
+	// printf("player->dir_x: %f, player->dir_y: %f\n", player->dir_x, player->dir_y);
+	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
+	line.x * (SIZE / 4), line.y * (SIZE / 4));
+}
+
 void	cast_ray(t_gen *gen, t_player *player, int x)
 {
 	t_ray		ray;
-	t_vector	line;
 
 	ray.camera_x = 2 * x / (double)WIDTH - 1;
 	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x;
@@ -118,19 +130,5 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	calc_side_dist(player, &ray);
 	calc_wall_dist(gen->map, &ray);
 	draw_vert_line(gen, &ray, x);
-	if (ray.sidedist_x < ray.sidedist_y)
-	{
-		line.x = ray.map_x + 1;
-		line.y = ray.map_y + 1; // ray.raydir_y * ray.raydir_x;
-	}
-	else
-	{
-		line.x = ray.map_x + 1; // ray.raydir_x * ray.raydir_y;
-		line.y = ray.map_y + 1;
-	}
-	if (x == 0 || x == WIDTH - 1 || x == WIDTH/ 2)
-	{	
-		bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
-		line.x * (SIZE / 4), line.y * (SIZE / 4));
-	}
+	draw_vision(gen, player, ray);
 }

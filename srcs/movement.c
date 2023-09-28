@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 10:08:39 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/09/28 11:06:15 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	walk(mlx_key_data_t data, t_gen *gen)
 	else if (data.key == MLX_KEY_A && (data.action == MLX_PRESS || \
 	data.action == MLX_REPEAT) && can_move(gen, move))
 	{
-		gen->player.y += (gen->player.dir_x * move);
-		gen->player.x += -(gen->player.dir_y * move);
+		gen->player.y += -(gen->player.dir_x * move);
+		gen->player.x += (gen->player.dir_y * move);
 	}
 	else if (data.key == MLX_KEY_D && (data.action == MLX_PRESS || \
 	data.action == MLX_REPEAT) && can_move(gen, move))
 	{
-		gen->player.y += -(gen->player.dir_x * move);
-		gen->player.x += (gen->player.dir_y * move);
+		gen->player.y += (gen->player.dir_x * move);
+		gen->player.x += -(gen->player.dir_y * move);
 	}
 	gen->player.img->instances->x = gen->player.x * SIZE / 4;
 	gen->player.img->instances->y = gen->player.y * SIZE / 4;
@@ -71,18 +71,18 @@ void	rotate(mlx_key_data_t data, t_gen *gen)
 	if (data.key == MLX_KEY_LEFT && (data.action == MLX_PRESS \
 	|| data.action == MLX_REPEAT))
 	{
-		player->dir_x = player->dir_x * cos(rot) - player->dir_y * sin(rot);
-		player->dir_y = old_dir * sin(rot) + player->dir_y * cos(rot);
-		player->plane_x = player->plane_x * cos(rot) - player->plane_y * sin(rot);
-		player->plane_y = old_plane * sin(rot) + player->plane_y * cos(rot);
-	}
-	else if (data.key == MLX_KEY_RIGHT && (data.action == MLX_PRESS \
-	|| data.action == MLX_REPEAT))
-	{
 		player->dir_x = player->dir_x * cos(-rot) - player->dir_y * sin(-rot);
 		player->dir_y = old_dir * sin(-rot) + player->dir_y * cos(-rot);
 		player->plane_x = player->plane_x * cos(-rot) - player->plane_y * sin(-rot);
 		player->plane_y = old_plane * sin(-rot) + player->plane_y * cos(-rot);
+	}
+	else if (data.key == MLX_KEY_RIGHT && (data.action == MLX_PRESS \
+	|| data.action == MLX_REPEAT))
+	{
+		player->dir_x = player->dir_x * cos(rot) - player->dir_y * sin(rot);
+		player->dir_y = old_dir * sin(rot) + player->dir_y * cos(rot);
+		player->plane_x = player->plane_x * cos(rot) - player->plane_y * sin(rot);
+		player->plane_y = old_plane * sin(rot) + player->plane_y * cos(rot);
 	}
 }
 
