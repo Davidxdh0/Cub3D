@@ -23,6 +23,8 @@ typedef struct s_map
 	char 	**map;
 	int		startX;
 	int		startY;
+	int		y_start;
+	int		x_start;
 	int		y_max;
 	int		x_max;
 
@@ -49,7 +51,7 @@ int		start_position(char c);
 void	check_width_height(t_map *map, int start, int fd);
 char*	get_first_word(char* line);
 void	print_map(const t_map *map, char **array);
-void	allocate_map(t_map *map);
+char**	allocate_map(char **map, int y, int x);
 
 //validate_map.c
 void	valid_space(char **array, int x,int y);
@@ -57,7 +59,7 @@ void    validate_map(t_map *c_map);
 void    flood_fill(t_map *c_map, char **map, int x,int y);
 int		heigth_validated_map(t_map *c_map);
 int		width_validated_map(t_map *c_map);
-
+void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax);
 //free.c
 void	free_t_map(t_map *map);
 void	free_arr(char **arg, int max);

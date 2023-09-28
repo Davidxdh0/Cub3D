@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/23 00:59:17 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/09/27 15:51:17 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_map	*init_map(void)
 	map->map = NULL;
 	map->startY = -1;
 	map->startX = -1;
+	map->y_start = -1;
+	map->x_start = -1;
 	map->y_max = -1;
 	map->x_max = -1;
 	return (map);

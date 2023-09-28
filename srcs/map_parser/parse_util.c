@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/25 15:29:29 by daaf          ########   odam.nl         */
+/*   Updated: 2023/09/27 14:30:38 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,25 @@ void	check_width_height(t_map *map, int start, int fd)
 	close(fd);
 }
 
-void	allocate_map(t_map *map)
+char**	allocate_map(char **map, int y, int x)
 {
 	int	i;
 
 	i = 0;
-	if (map->y_max == -1 || map->x_max == -1)
+	if (y == -1 || x == -1)
 		error_exit("No ymax or xmax");
-	map->map = (char **)malloc(sizeof(char *) * map->y_max);
-	if (!map->map)
-		error_exit("Malloc map->map");
-	while (i < map->y_max)
+	map = (char **)malloc(sizeof(char *) * (y + 1));
+	if (!map)
+		error_exit("Malloc map");
+	while (i < y)
 	{
-		map->map[i] = malloc(sizeof(char) * map->x_max);
-		if (!map->map[i])
-			error_exit("Malloc map->map[y]");
+		map[i] = malloc(sizeof(char) * x );
+		if (!map[i])
+			error_exit("Malloc map[y]");
 		i++;
 	}
-	// map->map[i] = NULL;
+	map[i] = '\0';
+	return (map);
 }
 
 void	print_map(const t_map *map, char **array)

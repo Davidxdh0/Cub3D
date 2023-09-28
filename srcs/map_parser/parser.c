@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/24 01:35:23 by daaf          ########   odam.nl         */
+/*   Updated: 2023/09/27 14:09:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parser(char *file, t_map *c_map)
 
 	fd = open_file(file);
 	check_width_height(c_map, 0, fd);
-	allocate_map(c_map);
+	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
 	fd = open_file(file);
 	line = get_next_line(fd);
 	parse_line(line, c_map);
