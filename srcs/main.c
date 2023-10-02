@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 22:49:01 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:22:57 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,25 @@ int	main(int argc, char *argv[])
 	{
 		c_map = init_map();
 		parser(argv[1], c_map);
-		validate_map(c_map);
 		// print_map(c_map, c_map->map);
+		validate_map(c_map);
+		print_map(c_map, c_map->map);
 		mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map->map);
 		// clear_screen(&gen, 0x000000);
-		drawMap2D(&gen);
+		// drawMap2D(&gen);
 		// mlx_loop_hook(mlx, render_screen, &gen);
-		mlx_key_hook(mlx, movement, &gen);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
+		// mlx_key_hook(mlx, movement, &gen);
+		// mlx_loop(mlx);
+		// mlx_terminate(mlx);
 	}
 	free_t_map(c_map);
 	return (EXIT_SUCCESS);
 }
 
-// int map[MAP_WIDTH][MAP_HEIGHT] = \
+// int map[MAP_WIDTH][MAP_HEIGHT] = 
 // {
 // 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 // 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -82,6 +83,7 @@ void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
 	int	dx;
 	int	dy;
 	int	sx;
+ 	// create mode 100644 srcs/map_parser/file_handling.c
 	int	sy;
 	int	err;
 	int	err2;

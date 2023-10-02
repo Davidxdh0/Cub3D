@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 22:40:12 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:22:39 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 
 // printf("start[y:x]: %d:%d ", c_map.startY, c_map.startX);
 // printf("= '%c'\n", c_map.map[c_map.startY][c_map.startX]);
+// printf("ymax %d, xmax %d\n", newy, newx);
 void	validate_map(t_map *c_map)
 {
 	int newx;
@@ -75,6 +76,7 @@ void	validate_map(t_map *c_map)
 	newx = width_validated_map(c_map);
 	newy = heigth_validated_map(c_map);
 	array = c_map->map;
+
 	c_map->map = allocate_map(c_map->map, newy + 2, newx+ 2);
 	fill_map(c_map, array, newy, newx);
 	
@@ -166,6 +168,7 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 					else
 						c_map->map[posy][++posx] = old_map[y][x];
 				}
+		c_map->map[posy][++posx] = '\0';
 		if (posx > 0)
 			posy++;
 	}

@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 20:46:46 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:16:56 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	print_map(const t_map *map, char **array)
 	}
 	printf("\n");
 	printf("\n");
+	// printr()
 }
 
 int	count_array(char **array)

@@ -73,19 +73,20 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
-debug: fclean
-	@make DEBUG=1
+debug: fclean 
+	@$(MAKE) re DEBUG=1 
+	./${NAME} maps/default.cub
 
 run: all
-	./cub3D maps/default.cub
+	./${NAME} maps/default.cub
 
 run2: all
-	./cub3D maps/defaultswitched.cub
+	./${NAME} maps/defaultswitched.cub
 
 clean:
 # @make clean -s -C libft 
-	@echo "${RED}Removing MLX42${END}"
-	@rm -rf MLX42/build
+#@echo "${RED}Removing MLX42${END}"
+# @rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"
