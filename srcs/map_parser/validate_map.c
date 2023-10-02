@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:55:20 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:58:53 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 		x = -1;
 		posx = -1;
 		while (old_map[y][++x])
+		{
 			if (y >= (c_map->y_start - 1) && y <= c_map->y_start + ymax)
 				if (x >= c_map->x_start - 1 && x <= c_map->x_start + xmax)
 				{
@@ -169,6 +170,7 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 					else
 						c_map->map[posy][++posx] = old_map[y][x];
 				}
+		}
 		c_map->map[posy][++posx] = '\0';
 		if (posx > 0)
 			posy++;

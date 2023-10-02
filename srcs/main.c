@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:53:02 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 09:00:18 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	main(int argc, char *argv[])
 {
 	mlx_t	*mlx;
-	t_gen	gen;
+	// t_gen	gen;
 	t_map	*c_map;
 
 	c_map = NULL;
@@ -38,14 +38,14 @@ int	main(int argc, char *argv[])
 		mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 		if (!mlx)
 			return (EXIT_FAILURE);
-		init_gen(&gen, mlx, c_map->map);
-		print_map(c_map, gen.map);
+		// init_gen(&gen, mlx, c_map->map);
+		// print_map(c_map, gen.map);
 		// clear_screen(&gen, 0x000000);
 		// drawMap2D(&gen);
 		// mlx_loop_hook(mlx, render_screen, &gen);
 		// mlx_key_hook(mlx, movement, &gen);
 		// mlx_loop(mlx);
-		// mlx_terminate(mlx);
+		mlx_terminate(mlx);
 	}
 	free_t_map(c_map);
 	return (EXIT_SUCCESS);
@@ -149,7 +149,7 @@ void	render_screen(void *param)
 // 		j = 0;
 // 		while (j < MAP_WIDTH)
 // 		{
-// 			my_map[i][j] = map[i][j];
+// 			my_map[i]ATTENTION: default value of option mesa_glthread overridden by environment.[j] = map[i][j];
 // 			++j;
 // 		}
 // 		++i;
