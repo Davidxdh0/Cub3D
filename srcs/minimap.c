@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 15:35:03 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 21:27:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void drawMap2D(t_gen *gen)
 		x = -1;
 		while (gen->map[y][++x])
 		{
-			if (gen->map[y][x] > '0' && gen->map[y][x] != 'S')
-				color = 255;
+			if (gen->map[y][x] == '1')
+				color = 0xFFFFFF;
 			else
-				color = 0;
+				color = 0x0;
 			draw_square(gen->mlx, x, y, color);
+			//printf("map[%d][%d] = %c\n", y, x, gen->map[y][x]);
 		} 
 	}
 	// else

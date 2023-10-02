@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 17:57:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/02 21:31:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_map	*init_map(void)
 {
 	t_map	*map;
 
-	map = malloc(sizeof(t_map));
+	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		return (NULL);
 	map->txtrs.NO = NULL;
