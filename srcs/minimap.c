@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 22:47:31 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 11:42:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void drawMap2D(t_gen *gen)
 	int			color;
 
 	y = -1;
-	while (++y < MAP_HEIGHT)
+	while (gen->map[++y])
 	{
 		x = -1;
-		while (++x < MAP_WIDTH)
+		while (gen->map[y][++x])
 		{
-			if (gen->map[y][x] > 0 && gen->map[y][x] != 'S')
+			if (gen->map[y][x] > '0' && gen->map[y][x] != 'S')
 				color = 255;
 			else
 				color = 0;

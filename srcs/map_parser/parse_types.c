@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:54:27 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 10:53:07 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	parse_map(char *str, t_map *c_map, int y)
 	if (y < c_map->y_max - 1)
 		str[ft_strlen(str) - 1] = '\0';
 	while (str[i] != '\0' && (str[i] == '1' || str[i] == '0' || \
-		str[i] == ' ' || start_position(str[i])))
+		str[i] == ' ' || start_position(str[i]) != -1))
 	{
-		if (start_position(str[i]))
+		if (start_position(str[i]) != -1)
 		{
 			if (c_map->startY == -1)
 			{
@@ -101,15 +101,15 @@ int	parse_map(char *str, t_map *c_map, int y)
 int	start_position(char c)
 {
 	if (c == 'N')
-		return (1);
+		return (90 * M_PI/180);
 	else if (c == 'S')
-		return (2);
+		return (270 * M_PI/180);
 	else if (c == 'E')
-		return (3);
-	else if (c == 'D')
-		return (4);
-	else
 		return (0);
+	else if (c == 'W')
+		return (180 * M_PI/180);
+	else
+		return (-1);
 }
 
 //colors	= F:2, C:3

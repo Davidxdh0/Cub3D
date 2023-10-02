@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:58:53 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 11:19:31 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,25 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 // printf("ymax %d, xmax %d\n", newy, newx);
 void	validate_map(t_map *c_map)
 {
-	int newx;
-	int newy;
 	char **array;
 
 	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	newx = width_validated_map(c_map);
-	newy = heigth_validated_map(c_map);
+	print_map(c_map, c_map->map);
+	width_validated_map(c_map);
+	heigth_validated_map(c_map);
 	array = c_map->map;
-
-	c_map->map = allocate_map(c_map->map, newy + 2, newx+ 2);
-	fill_map(c_map, array, newy, newx);
+	c_map->y_max += 2;
+	c_map->x_max += 2;
+	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
+	fill_map(c_map, array, c_map->y_max - 2, c_map->x_max - 2);
+	find_new_start_pos(c_map);
 	ft_free_arr(array);
 	
 }
 
 //printf("x_max = %d, x = %d, x_start = %d\n", x_max, x, x_start);
 //printf("%c", c_map->map[y][x]);
-int		width_validated_map(t_map *c_map)
+void		width_validated_map(t_map *c_map)
 {
 	int y;
 	int x;
@@ -98,26 +99,28 @@ int		width_validated_map(t_map *c_map)
 	while (y < c_map->y_max)
 	{
 		x = 0;
-		x_start = -1;
 		while(c_map->map[y][x])
 		{
-			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]) > 0)
+			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]) != -1)
 			{
 				if (c_map->x_start == -1 || c_map->x_start > x)
 					c_map->x_start = x;
-				if (x_start == -1)
+				if (x_start > x || x_start == -1)
 					x_start = x;
-				if (x_max < (x - x_start) || x_max == -1)
+				if (x_max < (x + 1 - x_start) || x_max == -1)
+				{
+					printf("x_max = %d, x = %d, x_start = %d\n", x_max, x, x_start);
 					x_max = x + 1 - x_start;
+				}
 			}
 			x++;
 		}
 		y++;
 	}
-	return (x_max);
+	c_map->x_max = x_max;
 }
 
-int	heigth_validated_map(t_map *c_map)
+void	heigth_validated_map(t_map *c_map)
 {
 	int y;
 	int x;
@@ -142,7 +145,7 @@ int	heigth_validated_map(t_map *c_map)
 		}
 		y++;
 	}
-	return (y_max);
+	c_map->y_max = y_max;
 }
 // 	printf("y: %d > %d && %d > %d + %d\n", y, (c_map->y_start - 1), y, c_map->y_start, ymax);
 // 	printf("x: %d > %d && %d > %d\n", x, (c_map->x_start - 1), x, c_map->x_start + xmax);
@@ -161,7 +164,6 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 		x = -1;
 		posx = -1;
 		while (old_map[y][++x])
-		{
 			if (y >= (c_map->y_start - 1) && y <= c_map->y_start + ymax)
 				if (x >= c_map->x_start - 1 && x <= c_map->x_start + xmax)
 				{
@@ -170,9 +172,31 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 					else
 						c_map->map[posy][++posx] = old_map[y][x];
 				}
-		}
 		c_map->map[posy][++posx] = '\0';
 		if (posx > 0)
 			posy++;
+	}
+}
+
+void	find_new_start_pos(t_map *map)
+{
+	int y;
+	int x;
+
+	y = -1;
+	while (map->map[++y])
+	{
+		x = -1;
+		while (map->map[y][++x])
+		{
+			if (start_position(map->map[y][x]) != -1)
+			{
+				map->x_start = x;
+				map->y_start = y;
+				map->dir = start_position(map->map[y][x]);
+				map->map[y][x] = '0';
+				break ;
+			}
+		}
 	}
 }

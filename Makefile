@@ -80,8 +80,8 @@ debug: fclean
 run: all
 	./${NAME} maps/default.cub
 
-run2: all
-	./${NAME} maps/defaultswitched.cub
+main: all
+	./${NAME} maps/main.cub
 
 clean:
 # @make clean -s -C libft 

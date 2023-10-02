@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 22:47:48 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 11:33:29 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static int	can_move(t_gen *gen, int speed)
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
 
-	x = (int)(gen->player.x + gen->player.dir_x * speed);
-	y = (int)(gen->player.y + gen->player.dir_y * speed);
-	if (x < 1 || x > MAP_WIDTH - 2 || y < 1 || y > MAP_HEIGHT - 2)
-		return (0);
+	// x = (int)(gen->player.x + gen->player.dir_x * speed);
+	// y = (int)(gen->player.y + gen->player.dir_y * speed);
+	// if (x < 1 || x > gen->width - 2 || y < 1 || y > gen->height - 2)
+	// 	return (0);
 	return (1);
+	speed++;
+	if (gen)
+		speed++;
 }
 
 void	walk(mlx_key_data_t data, t_gen *gen)

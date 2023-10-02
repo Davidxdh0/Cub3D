@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 08:47:38 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 11:12:13 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include "parser.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Int.h"
 
-# define MAP_WIDTH 5
-# define MAP_HEIGHT 5
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
 # define SIZE 64
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -41,6 +42,7 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		dir;
 	mlx_image_t	*img;
 }				t_player;
 
@@ -50,6 +52,8 @@ typedef struct s_gen
 	mlx_image_t		*win;
 	char			**map;
 	t_player		player;
+	int				width;
+	int				height;
 }				t_gen;
 
 typedef struct s_ray
@@ -88,7 +92,7 @@ void	movement(mlx_key_data_t data, void *param);
 void	drawMap2D(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
 void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
-void	init_gen(t_gen *gen, mlx_t *mlx, char** map);
+void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	render_screen(void *param);
 
 #endif

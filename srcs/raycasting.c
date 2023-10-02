@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 22:48:15 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 12:06:45 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 	if (ray->end >= HEIGHT)
 		ray->end = HEIGHT - 1;
 	if (ray->side == 1)
-		ray->color = get_color((int)(gen->map[(int)ray->map_y][(int)ray->map_x]));
+		ray->color = get_color(gen->map[(int)ray->map_y][(int)ray->map_x]);
 	else
-		ray->color = get_color((int)(gen->map[(int)ray->map_y][(int)ray->map_x])) / 2;
+		ray->color = get_color(gen->map[(int)ray->map_y][(int)ray->map_x]) / 2;
 	while (ray->start < ray->end)
 	{
 		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
@@ -48,11 +48,12 @@ void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 	}
 }
 
+
 void	calc_side_dist(t_player *player, t_ray *ray)
 {
-	if (ray->raydir_y != 0)
+	if (ray->raydir_x != 0)
 		ray->deltadist_x = fabs(1 / ray->raydir_x);
-	if (ray->deltadist_y != 0)
+	if (ray->raydir_y != 0)
 		ray->deltadist_y = fabs(1 / ray->raydir_y);
 	if (ray->raydir_x < 0)
 	{
@@ -76,16 +77,16 @@ void	calc_side_dist(t_player *player, t_ray *ray)
 	}
 }
 
-void	calc_wall_dist(char **map, t_ray *ray)
+void	calc_wall_dist(t_gen *gen, t_ray *ray)
 {
-	while (map[(int)ray->map_y][(int)ray->map_x] == 0)
+	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0')
 	{
 		if (ray->sidedist_x < ray->sidedist_y)
 		{
 			ray->sidedist_x += ray->deltadist_x;
 			ray->map_x += ray->step_x;
-			if (ray->map_x > MAP_WIDTH - 1)
-				ray->map_x = MAP_WIDTH - 1;
+			if (ray->map_x > gen->width - 1)
+				ray->map_x = gen->width - 1;
 			if (ray->map_x < 0)
 				ray->map_x = 0;
 			ray->side = 0;
@@ -94,8 +95,8 @@ void	calc_wall_dist(char **map, t_ray *ray)
 		{
 			ray->sidedist_y += ray->deltadist_y;
 			ray->map_y += ray->step_y;
-			if (ray->map_y > MAP_HEIGHT - 1)
-				ray->map_y = MAP_HEIGHT - 1;
+			if (ray->map_y > gen->height - 1)
+				ray->map_y = gen->height - 1;
 			if (ray->map_y < 0)
 				ray->map_y = 0;
 			ray->side = 1;
@@ -123,12 +124,13 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	ray.camera_x = 2 * x / (double)WIDTH - 1;
 	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x;
 	ray.raydir_y = player->dir_y + player->plane_y * ray.camera_x;
-	ray.map_x = player->x;
-	ray.map_y = player->y;
+	printf("y %f, x %f\n", ray.raydir_y,ray.raydir_x);
+	ray.map_x = (int)player->x;
+	ray.map_y = (int)player->y;
 	ray.deltadist_x = 1e30;
 	ray.deltadist_y = 1e30;
 	calc_side_dist(player, &ray);
-	calc_wall_dist(gen->map, &ray);
+	calc_wall_dist(gen, &ray);
 	draw_vert_line(gen, &ray, x);
 	draw_vision(gen, player, ray);
 }

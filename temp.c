@@ -3,213 +3,132 @@
 /*                                                        ::::::::            */
 /*   temp.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/27 15:25:42 by dyeboa        ########   odam.nl         */
+/*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
+/*   Updated: 2023/10/02 11:07:21 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 
-// printf("valid_space y:x, %d:%d\n", y, x);
-void	valid_space(char **arr, int x, int y)
+int	get_color(int color)
 {
-	if (arr[y - 1][x] == ' ' || !arr[y - 1][x])
-		error_exit("No walls at N edge");
-	if (arr[y + 1][x] == ' ' || !arr[y + 1][x])
-		error_exit("No walls at S edge");
-	if (arr[y][x - 1] == ' ' || !arr[y][x - 1])
-		error_exit("No walls at W edge");
-	if (arr[y][x + 1] == ' ' || !arr[y][x + 1])
-		error_exit("No walls at E edge");
-	if (arr[y - 1][x - 1] == ' ' || !arr[y - 1][x - 1])
-		error_exit("No walls at NW edge");
-	if (arr[y - 1][x + 1] == ' ' || !arr[y - 1][x + 1])
-		error_exit("No walls at NE edge");
-	if (arr[y + 1][x + 1] == ' ' || !arr[y + 1][x + 1])
-		error_exit("No walls at SE edge");
-	if (arr[y + 1][x - 1] == ' ' || !arr[y + 1][x - 1])
-		error_exit("No walls at SW edge");
-	if (arr[y][x] != 'N' && arr[y][x] != 'E' && \
-		arr[y][x] != 'S' && arr[y][x] != 'W')
-		arr[y][x] = '.';
+	if (color == 1)
+		return (0x000000FF);
+	else if (color == 2)
+		return (0x0000FFFF);
+	else if (color == 3)
+		return (0x00FF00FF);
+	else
+		return (0xFF0000FF);
 }
 
-void	flood_fill(t_map *c_map, char **map, int y, int x)
+void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
 {
-	if (x == 0 || x == c_map->x_max)
-		error_exit("No walls at X edge");
-	if (y == 0 || y == c_map->y_max)
-		error_exit("No walls at Y edge");
-	if (map[y][x] == '.')
-		return ;
-	valid_space(map, x, y);
-	if (map[y - 1][x] != '.' && map[y - 1][x] == '0')
-		flood_fill(c_map, map, y - 1, x);
-	if (map[y + 1][x] != '.' && map[y + 1][x] == '0')
-		flood_fill(c_map, map, y + 1, x);
-	if (map[y][x - 1] != '.' && map[y][x - 1] == '0')
-		flood_fill(c_map, map, y, x - 1);
-	if (map[y][x + 1] != '.' && map[y][x + 1] == '0')
-		flood_fill(c_map, map, y, x + 1);
-	if (map[y - 1][x - 1] != '.' && map[y - 1][x - 1] == '0')
-		flood_fill(c_map, map, y - 1, x - 1);
-	if (map[y + 1][x + 1] != '.' && map[y + 1][x + 1] == '0')
-		flood_fill(c_map, map, y + 1, x + 1);
-	if (map[y + 1][x + 1] != '.' && map[y + 1][x + 1] == '0')
-		flood_fill(c_map, map, y, x - 1);
-	if (map[y + 1][x - 1] != '.' && map[y + 1][x - 1] == '0')
-		flood_fill(c_map, map, y, x + 1);
-}
-
-// printf("start[y:x]: %d:%d ", c_map.startY, c_map.startX);
-// printf("= '%c'\n", c_map.map[c_map.startY][c_map.startX]);
-void	validate_map(t_map *c_map)
-{
-	// int newx = 0;
-	// int newy = 0;
-	char **array;
-	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	width_validated_map(c_map);
-	heigth_validated_map(c_map);
-	array = c_map->map;
-	c_map->map = allocate_map(c_map->map, c_map->y_max + 2, c_map->x_max + 2);
-	fill_map(&c_map->map, array, c_map->y_max, c_map->x_max);
-	// printf("newx = %d\n", newx);
-	// printf("newx = %d, newy = %d\n", newx, newy);
-	
-}
-
-//printf("x_max = %d, x = %d, x_start = %d\n", x_max, x, x_start);
-//printf("%c", c_map->map[y][x]);
-void		width_validated_map(t_map *c_map)
-{
-	int y;
-	int x;
-	int x_start;
-
-	y = 0;
-	x_start = -1;
-	c_map->x_max = -1;
-	while (y < c_map->y_max)
+	if (ray->side == 0)
+		ray->walldist = ray->sidedist_x - ray->deltadist_x;
+	else
+		ray->walldist = ray->sidedist_y - ray->deltadist_y;
+	ray->height = (int)(HEIGHT / ray->walldist);
+	ray->start = -ray->height / 2 + HEIGHT / 2;
+	ray->end = ray->height / 2 + HEIGHT / 2;
+	if (ray->start < 0)
+		ray->start = 0;
+	if (ray->end >= HEIGHT)
+		ray->end = HEIGHT - 1;
+	if (ray->side == 1)
+		ray->color = get_color((int)(gen->map[(int)ray->map_y][(int)ray->map_x]));
+	else
+		ray->color = get_color((int)(gen->map[(int)ray->map_y][(int)ray->map_x])) / 2;
+	while (ray->start < ray->end)
 	{
-		x = 0;
-		x_start = -1;
-		while(c_map->map[y][x])
-		{
-			if (c_map->map[y][x] != '1' && c_map->map[y][x] != ' ')
-			{
-				if (x_start == -1)
-					x_start = x;
-				if (c_map->x_max < (x - x_start) || c_map->x_max == -1)
-					c_map->x_max = x + 1 - x_start;
-			}
-			x++;
-		}
-		y++;
+		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
+		++ray->start;
 	}
 }
 
-// int		width_validated_map(t_map *c_map)
-// {
-// 	int y;
-// 	int x;
-// 	int x_start;
-// 	int x_max;
-	
-// 	y = 0;
-// 	x_start = -1;
-// 	x_max = -1;
-// 	while (y < c_map->y_max)
-// 	{
-// 		x = 0;
-// 		x_start = -1;
-// 		while(c_map->map[y][x])
-// 		{
-// 			if (c_map->map[y][x] == '.')
-// 			{
-// 				if (x_start == -1)
-// 					x_start = x;
-// 				if ((x_max < (x - x_start) || x_max == -1) && x_start != -1)
-// 					x_max = x + 1 - x_start;
-// 			}
-// 			x++;
-			
-// 		}
-// 		y++;
-// 	}
-// 	return (x_max);
-// }
-
-
-void	heigth_validated_map(t_map *c_map)
+void	calc_side_dist(t_player *player, t_ray *ray)
 {
-	int y;
-	int x;
-	int y_max;
-	
-	y = 0;
-	y_max = 0;
-	while (y < c_map->y_max)
+	if (ray->raydir_y != 0)
+		ray->deltadist_x = fabs(1 / ray->raydir_x);
+	if (ray->deltadist_y != 0)
+		ray->deltadist_y = fabs(1 / ray->raydir_y);
+	if (ray->raydir_x < 0)
 	{
-		x = 0;
-		while (c_map->map[y][x])
-		{
-			if (c_map->map[y][x] == '.')
-			{
-				y_max++;
-				break;
-			}
-			x++;
-		}
-		y++;
+		ray->step_x = -1;
+		ray->sidedist_x = (player->x - ray->map_x) * ray->deltadist_x;
 	}
-	c_map->y_max = y_max;
+	else
+	{
+		ray->step_x = 1;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->x) * ray->deltadist_x;
+	}
+	if (ray->raydir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->sidedist_y = (player->y - ray->map_y) * ray->deltadist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->y) * ray->deltadist_y;
+	}
 }
 
-void	fill_map(char ***map, char **old_map, int ymax, int xmax)
+void	calc_wall_dist(t_gen *gen, t_ray *ray)
 {
-	int y;
-	int x;
-	int posy;
-	int posx;
-	int written;
-
-	y = 0;
-	x = 0;
-	posy = 0;
-	posx = 0;
-	
-	while (old_map[y])
+	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0')
 	{
-		x = 0;
-		written = 0;
-		while (old_map[y][x])
+		if (ray->sidedist_x < ray->sidedist_y)
 		{
-			if (posy == 0 || posy == ymax || posx == 0 || posy == xmax)
-			{
-				printf("map[%d][%d] ymax = %d xmax = %d\n", posy, posx, ymax, xmax);
-				// *map[posy][posx] = '1';
-				posx++;
-				written = 1;
-				
-			}
-			// else if (old_map[y][x] != '1' && old_map[y][x] != ' ' && old_map[y][x] != '0')
-			// {
-			// 	printf("old_map = %c, posy = %d\n", old_map[y][x], posy);
-			// 	*map[posy][posx] = old_map[y][x];
-			// 	posx++;
-			// 	written = 1;
-			// }
-			x++;
-			if (written == 1)
-				posy++;
+			ray->sidedist_x += ray->deltadist_x;
+			ray->map_x += ray->step_x;
+			if (ray->map_x > gen->width - 1)
+				ray->map_x = gen->width - 1;
+			if (ray->map_x < 0)
+				ray->map_x = 0;
+			ray->side = 0;
 		}
-		
-		y++;
+		else
+		{
+			ray->sidedist_y += ray->deltadist_y;
+			ray->map_y += ray->step_y;
+			if (ray->map_y > gen->height - 1)
+				ray->map_y = gen->height - 1;
+			if (ray->map_y < 0)
+				ray->map_y = 0;
+			ray->side = 1;
+		}
 	}
-	return ;
-	map++;
-	ymax++;
+}
+
+void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
+{
+	t_vector	line;
+
+	// printf("x: %d, y: %d\n", (int)((ray.sidedist_x - (int)ray.sidedist_x) * 64), (int)((ray.sidedist_y - (int)ray.sidedist_y) * 64));
+	
+	line.x = ray.map_x + 1;
+	line.y = ray.map_y + 1;
+	// printf("player->dir_x: %f, player->dir_y: %f\n", player->dir_x, player->dir_y);
+	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
+	line.x * (SIZE / 4), line.y * (SIZE / 4));
+}
+
+void	cast_ray(t_gen *gen, t_player *player, int x)
+{
+	t_ray		ray;
+
+	ray.camera_x = 2 * x / (double)WIDTH - 1;
+	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x;
+	ray.raydir_y = player->dir_y + player->plane_y * ray.camera_x;
+	ray.map_x = player->x;
+	ray.map_y = player->y;
+	ray.deltadist_x = 1e30;
+	ray.deltadist_y = 1e30;
+	calc_side_dist(player, &ray);
+	calc_wall_dist(gen, &ray);
+	draw_vert_line(gen, &ray, x);
+	draw_vision(gen, player, ray);
 }

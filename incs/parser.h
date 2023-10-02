@@ -6,6 +6,7 @@
 #include <fcntl.h> // open
 #include <stdlib.h> // exit
 #include <stdbool.h> // bool
+# include <math.h>
 
 typedef struct s_txtrs
 {
@@ -27,6 +28,7 @@ typedef struct s_map
 	int		x_start;
 	int		y_max;
 	int		x_max;
+	int 	dir;
 }	t_map;
 
 //error.c
@@ -54,9 +56,10 @@ void	check_extension(char *file);
 void	valid_space(char **array, int x,int y);
 void    validate_map(t_map *c_map);
 void    flood_fill(t_map *c_map, char **map, int x,int y);
-int		heigth_validated_map(t_map *c_map);
-int		width_validated_map(t_map *c_map);
+void	heigth_validated_map(t_map *c_map);
+void	width_validated_map(t_map *c_map);
 void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax);
+void	find_new_start_pos(t_map *map);
 //free.c
 void	free_t_map(t_map *map);
 void	free_arr(char **arg, int max);

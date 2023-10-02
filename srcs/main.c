@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 09:00:18 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 12:10:21 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	main(int argc, char *argv[])
 {
 	mlx_t	*mlx;
-	// t_gen	gen;
+	t_gen	gen;
 	t_map	*c_map;
 
 	c_map = NULL;
@@ -32,19 +32,19 @@ int	main(int argc, char *argv[])
 	{
 		c_map = init_map();
 		parser(argv[1], c_map);
-		// print_map(c_map, c_map->map);
 		validate_map(c_map);
-		print_map(c_map, c_map->map);
+	// print_map(c_map, c_map->map);
 		mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 		if (!mlx)
 			return (EXIT_FAILURE);
-		// init_gen(&gen, mlx, c_map->map);
-		// print_map(c_map, gen.map);
+		init_gen(&gen, mlx, c_map);
+	printf("ymax = %d, xmax = %d\n\n", c_map->y_max, c_map->x_max);
+	print_map(c_map, gen.map);
 		// clear_screen(&gen, 0x000000);
-		// drawMap2D(&gen);
-		// mlx_loop_hook(mlx, render_screen, &gen);
-		// mlx_key_hook(mlx, movement, &gen);
-		// mlx_loop(mlx);
+		drawMap2D(&gen);
+		mlx_loop_hook(mlx, render_screen, &gen);
+		mlx_key_hook(mlx, movement, &gen);
+		mlx_loop(mlx);
 		mlx_terminate(mlx);
 	}
 	free_t_map(c_map);
@@ -157,15 +157,19 @@ void	render_screen(void *param)
 // 	return (my_map);
 // }
 
-void	init_gen(t_gen *gen, mlx_t *mlx, char** map)
+void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 {
+	// printf("y %d, x %d\n", cmap->y_max, cmap->x_max);
 	gen->mlx = mlx;
-	gen->map = map;
+	gen->map = cmap->map;
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
-	gen->player.x = 12;
-	gen->player.y = 22;
-	gen->player.dir_x = -1;
-	gen->player.dir_y = 0;
+	gen->width = cmap->x_max;
+	gen->height = cmap->y_max;
+	gen->player.dir = cmap->dir;
+	gen->player.x = cmap->x_start;
+	gen->player.y = cmap->y_start;
+	gen->player.dir_x = 0;
+	gen->player.dir_y = 1;
 	gen->player.plane_x = 0;
 	gen->player.plane_y = 0.90;
 	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
