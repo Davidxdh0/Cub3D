@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 12:10:21 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 13:19:23 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	main(int argc, char *argv[])
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
-	printf("ymax = %d, xmax = %d\n\n", c_map->y_max, c_map->x_max);
-	print_map(c_map, gen.map);
+	// printf("ymax = %d, xmax = %d\n\n", c_map->y_max, c_map->x_max);
+	// print_map(c_map, gen.map);
 		// clear_screen(&gen, 0x000000);
 		drawMap2D(&gen);
 		mlx_loop_hook(mlx, render_screen, &gen);
@@ -51,40 +51,11 @@ int	main(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-// int map[MAP_WIDTH][MAP_HEIGHT] = 
-// {
-// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,1,3,3,3,3,3,3,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,3,3,3,3,3,3,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,1,1,1,3,3,3,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-// };
-
 void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
 {
 	int	dx;
 	int	dy;
 	int	sx;
- 	// create mode 100644 srcs/map_parser/file_handling.c
 	int	sy;
 	int	err;
 	int	err2;
@@ -131,53 +102,7 @@ void	render_screen(void *param)
 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
 }
 
-// char **create_map(void)
-// {
-// 	char	**my_map;
-// 	int	i;
-// 	int	j;
 
-// 	my_map = malloc(sizeof(char *) * MAP_HEIGHT);
-// 	if (!my_map)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < MAP_HEIGHT)
-// 	{
-// 		my_map[i] = malloc(sizeof(char) * MAP_WIDTH);
-// 		if (!my_map[i])
-// 			return (NULL);
-// 		j = 0;
-// 		while (j < MAP_WIDTH)
-// 		{
-// 			my_map[i]ATTENTION: default value of option mesa_glthread overridden by environment.[j] = map[i][j];
-// 			++j;
-// 		}
-// 		++i;
-// 	}
-// 	return (my_map);
-// }
-
-void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
-{
-	// printf("y %d, x %d\n", cmap->y_max, cmap->x_max);
-	gen->mlx = mlx;
-	gen->map = cmap->map;
-	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
-	gen->width = cmap->x_max;
-	gen->height = cmap->y_max;
-	gen->player.dir = cmap->dir;
-	gen->player.x = cmap->x_start;
-	gen->player.y = cmap->y_start;
-	gen->player.dir_x = 0;
-	gen->player.dir_y = 1;
-	gen->player.plane_x = 0;
-	gen->player.plane_y = 0.90;
-	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
-	for (int i = 0; i < SIZE / 8; i++)
-		for (int j = 0; j < SIZE / 8; j++)
-				mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
-	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * SIZE / 4, gen->player.y * SIZE / 4);
-}
 
 
 

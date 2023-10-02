@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 11:33:29 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 12:56:41 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,42 @@ void	walk(mlx_key_data_t data, t_gen *gen)
 	gen->player.img->instances->y = gen->player.y * SIZE / 4;
 }
 
+// void	walk(mlx_key_data_t data, t_gen *gen)
+// {
+// 	double	move;
+
+// 	move = gen->mlx->delta_time * 5.0;
+// 	if (data.key == MLX_KEY_W && (data.action == MLX_PRESS || 
+// 	data.action == MLX_REPEAT) && can_move(gen, move))
+// 	{
+// 		walk_forwards(data, gen, move);
+// 	}
+// 	if (data.key == MLX_KEY_S && (data.action == MLX_PRESS || 
+// 	data.action == MLX_REPEAT) && can_move(gen, move))
+// 	{
+// 		walk_backwards(data, gen, move);
+// 	}
+// 	if (data.key == MLX_KEY_A && (data.action == MLX_PRESS || 
+// 	data.action == MLX_REPEAT) && can_move(gen, move))
+// 	{
+// 		walk_left(data, gen, move);
+// 	}
+// 	if (data.key == MLX_KEY_D && (data.action == MLX_PRESS || 
+// 	data.action == MLX_REPEAT) && can_move(gen, move))
+// 	{
+// 		walk_right(data, gen, move);
+// 	}
+// 	if (data.key == MLX_KEY_LEFT && (data.action == MLX_PRESS 
+// 	|| data.action == MLX_REPEAT))
+// 		rotate_left(data, gen);
+// 	if (data.key == MLX_KEY_RIGHT && (data.action == MLX_PRESS 
+// 	|| data.action == MLX_REPEAT))
+// 		rotate_right(data, gen);
+// 	if (gen->draw == 1)
+// 		render_screen(gen);
+
+// }
+
 void	rotate(mlx_key_data_t data, t_gen *gen)
 {
 	double		old_dir;
@@ -71,7 +107,7 @@ void	rotate(mlx_key_data_t data, t_gen *gen)
 	rot = gen->mlx->delta_time * 5.0;
 	old_dir = player->dir_x;
 	old_plane = player->plane_x;
-	if (data.key == MLX_KEY_LEFT && (data.action == MLX_PRESS \
+	if (data.key == MLX_KEY_RIGHT && (data.action == MLX_PRESS \
 	|| data.action == MLX_REPEAT))
 	{
 		player->dir_x = player->dir_x * cos(-rot) - player->dir_y * sin(-rot);
@@ -79,9 +115,10 @@ void	rotate(mlx_key_data_t data, t_gen *gen)
 		player->plane_x = player->plane_x * cos(-rot) - player->plane_y * sin(-rot);
 		player->plane_y = old_plane * sin(-rot) + player->plane_y * cos(-rot);
 	}
-	else if (data.key == MLX_KEY_RIGHT && (data.action == MLX_PRESS \
+	else if (data.key == MLX_KEY_LEFT && (data.action == MLX_PRESS \
 	|| data.action == MLX_REPEAT))
 	{
+		//printf("x %f, y %f, plane x %f, plane y %f\n", player->dir_x, player->dir_y, player->plane_x, player->plane_y);
 		player->dir_x = player->dir_x * cos(rot) - player->dir_y * sin(rot);
 		player->dir_y = old_dir * sin(rot) + player->dir_y * cos(rot);
 		player->plane_x = player->plane_x * cos(rot) - player->plane_y * sin(rot);
@@ -103,3 +140,7 @@ void	movement(mlx_key_data_t data, void *param)
 	rotate(data, gen);
 	walk(data, gen);
 }
+
+
+
+

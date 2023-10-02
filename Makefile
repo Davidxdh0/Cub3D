@@ -25,13 +25,12 @@ MAP_PARSER = 	parser.c \
 				parse_types.c \
 				parse_util.c \
 				free.c \
-				init.c \
 				file_handling.c
 
 MINIMAP =		mlxmain.c
 
 
-SRCS =		main.c movement.c minimap.c raycasting.c \
+SRCS =		main.c init.c movement.c minimap.c raycasting.c \
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}

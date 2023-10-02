@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 11:12:13 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 12:40:56 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_gen
 	t_player		player;
 	int				width;
 	int				height;
+	int				draw;
 }				t_gen;
 
 typedef struct s_ray

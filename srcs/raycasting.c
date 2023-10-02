@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 12:06:45 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 13:13:05 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,14 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	ray.camera_x = 2 * x / (double)WIDTH - 1;
 	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x;
 	ray.raydir_y = player->dir_y + player->plane_y * ray.camera_x;
-	printf("y %f, x %f\n", ray.raydir_y,ray.raydir_x);
 	ray.map_x = (int)player->x;
 	ray.map_y = (int)player->y;
+	
 	ray.deltadist_x = 1e30;
 	ray.deltadist_y = 1e30;
 	calc_side_dist(player, &ray);
 	calc_wall_dist(gen, &ray);
 	draw_vert_line(gen, &ray, x);
 	draw_vision(gen, player, ray);
+	
 }

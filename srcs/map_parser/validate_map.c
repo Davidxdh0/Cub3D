@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 11:19:31 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 13:19:54 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	validate_map(t_map *c_map)
 	char **array;
 
 	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	print_map(c_map, c_map->map);
+	// print_map(c_map, c_map->map);
 	width_validated_map(c_map);
 	heigth_validated_map(c_map);
 	array = c_map->map;
@@ -109,7 +109,6 @@ void		width_validated_map(t_map *c_map)
 					x_start = x;
 				if (x_max < (x + 1 - x_start) || x_max == -1)
 				{
-					printf("x_max = %d, x = %d, x_start = %d\n", x_max, x, x_start);
 					x_max = x + 1 - x_start;
 				}
 			}
