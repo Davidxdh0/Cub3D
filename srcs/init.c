@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 13:18:50 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 14:37:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
 	gen->width = cmap->x_max;
 	gen->height = cmap->y_max;
-	gen->draw = 0;
+	gen->draw = 1;
 	gen->player.dir = cmap->dir;
 	gen->player.x = cmap->x_start;
 	gen->player.y = cmap->y_start;

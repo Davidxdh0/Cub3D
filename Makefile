@@ -30,7 +30,7 @@ MAP_PARSER = 	parser.c \
 MINIMAP =		mlxmain.c
 
 
-SRCS =		main.c init.c movement.c minimap.c raycasting.c \
+SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c\
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}

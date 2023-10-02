@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 13:19:23 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 15:43:56 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,13 @@ int	main(int argc, char *argv[])
 		c_map = init_map();
 		parser(argv[1], c_map);
 		validate_map(c_map);
-	// print_map(c_map, c_map->map);
 		mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
-	// printf("ymax = %d, xmax = %d\n\n", c_map->y_max, c_map->x_max);
-	// print_map(c_map, gen.map);
-		// clear_screen(&gen, 0x000000);
 		drawMap2D(&gen);
-		mlx_loop_hook(mlx, render_screen, &gen);
-		mlx_key_hook(mlx, movement, &gen);
+		mlx_loop_hook(mlx, movement, &gen);
+		// mlx_scroll_hook(mlx, scrolling, &gen);
 		mlx_loop(mlx);
 		mlx_terminate(mlx);
 	}
@@ -100,6 +96,7 @@ void	render_screen(void *param)
 		++x;
 	}
 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
+	gen->draw = 0;
 }
 
 

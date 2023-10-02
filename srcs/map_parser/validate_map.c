@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 13:19:54 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 15:32:12 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	validate_map(t_map *c_map)
 	c_map->y_max += 2;
 	c_map->x_max += 2;
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
+	// printf("ymax %d, xmax %d\n", c_map->y_max, c_map->x_max);
 	fill_map(c_map, array, c_map->y_max - 2, c_map->x_max - 2);
 	find_new_start_pos(c_map);
 	ft_free_arr(array);
@@ -149,6 +150,7 @@ void	heigth_validated_map(t_map *c_map)
 // 	printf("y: %d > %d && %d > %d + %d\n", y, (c_map->y_start - 1), y, c_map->y_start, ymax);
 // 	printf("x: %d > %d && %d > %d\n", x, (c_map->x_start - 1), x, c_map->x_start + xmax);
 //	printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
+//	rintf("y %d, x %d\n", posy, posx);
 void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 {
 	int y;
@@ -158,25 +160,31 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 
 	y = -1;
 	posy = 0;
-	while (old_map[++y])
+	while (old_map[++y] && c_map->map[posy])
 	{
 		x = -1;
 		posx = -1;
 		while (old_map[y][++x])
+		{
+			posx++;
 			if (y >= (c_map->y_start - 1) && y <= c_map->y_start + ymax)
-				if (x >= c_map->x_start - 1 && x <= c_map->x_start + xmax)
+			{
+				if (x >= c_map->x_start - 1 && x < c_map->x_start + xmax -1)
 				{
 					if (old_map[y][x] == '.')
-						c_map->map[posy][++posx] = '0';
+						c_map->map[posy][posx] = '0';
 					else
-						c_map->map[posy][++posx] = old_map[y][x];
+						c_map->map[posy][posx] = old_map[y][x];
 				}
-		c_map->map[posy][++posx] = '\0';
+				else if (x  == c_map->x_start + xmax)
+					c_map->map[posy][posx] = '\0';
+			}	
+		}
 		if (posx > 0)
 			posy++;
 	}
 }
-
+// printf("find new start pos x %d\n", x);
 void	find_new_start_pos(t_map *map)
 {
 	int y;
@@ -185,8 +193,8 @@ void	find_new_start_pos(t_map *map)
 	y = -1;
 	while (map->map[++y])
 	{
-		x = -1;
-		while (map->map[y][++x])
+		x = 0;
+		while (map->map[y][x] && x < map->x_max)
 		{
 			if (start_position(map->map[y][x]) != -1)
 			{
@@ -196,6 +204,7 @@ void	find_new_start_pos(t_map *map)
 				map->map[y][x] = '0';
 				break ;
 			}
+			x++;
 		}
 	}
 }

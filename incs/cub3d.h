@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 12:40:56 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 15:40:48 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_gen
 	mlx_image_t		*win;
 	char			**map;
 	t_player		player;
+	t_txtrs			txtrs;
 	int				width;
 	int				height;
 	int				draw;
@@ -87,13 +88,24 @@ typedef enum e_wall
 	EAST
 }			t_wall;
 
-void	walk(mlx_key_data_t data, t_gen *gen);
+
 void	rotate(mlx_key_data_t data, t_gen *gen);
-void	movement(mlx_key_data_t data, void *param);
+void	movement(void *param);
+void	scrolling(void *param);
 void	drawMap2D(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
 void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	render_screen(void *param);
+
+//keys.c
+// void	walk(t_gen *gen);
+void	close_escape(t_gen *gen);
+void	rotate_right(t_gen *gen);
+void	rotate_left(t_gen *gen);
+void	walk_forwards(t_gen *gen, double move);
+void	walk_backwards(t_gen *gen, double move);
+void	walk_left(t_gen *gen, double move);
+void	walk_right(t_gen *gen, double move);
 
 #endif

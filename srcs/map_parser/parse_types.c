@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 10:53:07 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 15:13:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 			error_free("parse_colors value < 0 || > 255", c_map);
 		i++;
 	}
+	// printf("Parsecolors: %s\n", words[1]);
 	if (!strcmp(words[0], "F"))
-		c_map->txtrs.F = words[1];
+		c_map->txtrs.F = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "C"))
-		c_map->txtrs.C = words[1];
+		c_map->txtrs.C = ft_strdup(words[1]);
 	return (ft_free_arr(words), ft_free_arr(colors), type_value(word));
 }
 
