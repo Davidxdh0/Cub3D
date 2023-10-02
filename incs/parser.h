@@ -19,7 +19,7 @@ typedef struct s_txtrs
 
 typedef struct s_map
 {
-	t_txtrs *txtrs;
+	t_txtrs txtrs;
 	char 	**map;
 	int		startX;
 	int		startY;
@@ -27,7 +27,6 @@ typedef struct s_map
 	int		x_start;
 	int		y_max;
 	int		x_max;
-
 }	t_map;
 
 //error.c

@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:22:39 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:55:20 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	validate_map(t_map *c_map)
 
 	c_map->map = allocate_map(c_map->map, newy + 2, newx+ 2);
 	fill_map(c_map, array, newy, newx);
+	ft_free_arr(array);
 	
 }
 

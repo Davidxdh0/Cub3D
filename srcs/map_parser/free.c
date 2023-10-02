@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 19:57:19 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:52:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_arr(char **arg, int max)
 // 	 gives invalid read
 void	free_t_map(t_map *map)
 {
-	free(map->txtrs);
+	// free(map->txtrs);
 	if (map->map != NULL)
 		ft_free_arr(map->map);
 	free(map);

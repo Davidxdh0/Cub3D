@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:15:50 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:54:27 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	parse_textures(char *line, t_map *map, char *word)
 	words[1][ft_strlen(words[1]) - 1] = '\0';
 	i = open_file(words[1]);
 	close(i);
-	if (!strcmp(words[0], "NO") && map->txtrs->NO == NULL)
-		map->txtrs->NO = words[1];
-	else if (!strcmp(words[0], "SO") && map->txtrs->SO == NULL)
-		map->txtrs->SO = words[1];
-	else if (!strcmp(words[0], "WE") && map->txtrs->WE == NULL)
-		map->txtrs->WE = words[1];
-	else if (!strcmp(words[0], "EA") && map->txtrs->EA == NULL)
-		map->txtrs->EA = words[1];
+	if (!strcmp(words[0], "NO") && map->txtrs.NO == NULL)
+		map->txtrs.NO = words[1];
+	else if (!strcmp(words[0], "SO") && map->txtrs.SO == NULL)
+		map->txtrs.SO = words[1];
+	else if (!strcmp(words[0], "WE") && map->txtrs.WE == NULL)
+		map->txtrs.WE = words[1];
+	else if (!strcmp(words[0], "EA") && map->txtrs.EA == NULL)
+		map->txtrs.EA = words[1];
 	else
 		error_free("parse_textures went wrong", map);
 	ft_free_arr(words);
@@ -62,9 +62,9 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 		i++;
 	}
 	if (!strcmp(words[0], "F"))
-		c_map->txtrs->F = words[1];
+		c_map->txtrs.F = words[1];
 	else if (!strcmp(words[0], "C"))
-		c_map->txtrs->C = words[1];
+		c_map->txtrs.C = words[1];
 	return (ft_free_arr(words), ft_free_arr(colors), type_value(word));
 }
 

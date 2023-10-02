@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cub3D.h                                            :+:    :+:            */
+/*   cub3d.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/09/28 22:48:27 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:47:38 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_gen
 {
 	mlx_t			*mlx;
 	mlx_image_t		*win;
-	char				**map;
+	char			**map;
 	t_player		player;
 }				t_gen;
 

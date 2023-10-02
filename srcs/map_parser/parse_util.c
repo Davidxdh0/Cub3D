@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 08:16:56 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:41:46 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char**	allocate_map(char **map, int y, int x)
 	i = 0;
 	while (i < y)
 	{
-		map[i] = malloc(sizeof(char) * x );
+		map[i] = malloc(sizeof(char) * (x + 1) );
 		if (!map[i])
 			error_exit("Malloc map[y]");
 		i++;

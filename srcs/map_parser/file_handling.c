@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 20:37:45 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/28 20:45:18 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 08:45:36 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void	check_extension(char *file)
 	len = ft_strlen(file);
 	if (len < 5)
 		error_exit("Extension not .cub");
-	extension = ft_substr(file, len - 4, 4);
+	extension = ft_strrchr(file, '.');
+	if (!extension)
+		error_exit("Extension not .cub");
 	if (strncmp(extension, ".cub", 4))
 		error_exit("Extension not .cub");
+	// free(extension);
 }
 
 
