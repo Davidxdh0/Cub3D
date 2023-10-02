@@ -14,8 +14,8 @@ typedef struct s_txtrs
 	char	*SO;
 	char	*WE;
 	char	*EA;
-	char    *C;
-	char    *F;
+	char	*C;
+	char	*F;
 }	t_txtrs;
 
 typedef struct s_map
@@ -28,7 +28,7 @@ typedef struct s_map
 	int		x_start;
 	int		y_max;
 	int		x_max;
-	int 	dir;
+	char	dir;
 }	t_map;
 
 //error.c
@@ -44,7 +44,7 @@ int		parse_textures(char *line, t_map *map, char *word);
 int		parse_colors(char *line, t_map *c_map, char *word);
 int		parse_map(char *line, t_map *c_map, int y);
 int		type_value(char *word);
-int		start_position(char c);
+char	start_position(char c);
 void	check_width_height(t_map *map, int start, int fd);
 char*	get_first_word(char* line);
 void	print_map(const t_map *map, char **array);

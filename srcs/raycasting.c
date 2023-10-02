@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 14:46:34 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 18:05:43 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 {
 	t_vector	line;
 
-	// printf("x: %d, y: %d\n", (int)((ray.sidedist_x - (int)ray.sidedist_x) * 64), (int)((ray.sidedist_y - (int)ray.sidedist_y) * 64));
-	
 	line.x = ray.map_x + 1;
 	line.y = ray.map_y + 1;
+
+	// printf("x: %d, y: %d\n", (int)((ray.sidedist_x - (int)ray.sidedist_x) * 64), (int)((ray.sidedist_y - (int)ray.sidedist_y) * 64));
 	// printf("player->dir_x: %f, player->dir_y: %f\n", player->dir_x, player->dir_y);
 	bresenham(gen, player->x * (SIZE / 4), player->y * (SIZE / 4), \
 	line.x * (SIZE / 4), line.y * (SIZE / 4));

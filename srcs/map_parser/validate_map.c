@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   validate_map.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 15:32:12 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 17:13:24 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		width_validated_map(t_map *c_map)
 		x = 0;
 		while(c_map->map[y][x])
 		{
-			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]) != -1)
+			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]))
 			{
 				if (c_map->x_start == -1 || c_map->x_start > x)
 					c_map->x_start = x;
@@ -196,7 +196,7 @@ void	find_new_start_pos(t_map *map)
 		x = 0;
 		while (map->map[y][x] && x < map->x_max)
 		{
-			if (start_position(map->map[y][x]) != -1)
+			if (start_position(map->map[y][x]))
 			{
 				map->x_start = x;
 				map->y_start = y;

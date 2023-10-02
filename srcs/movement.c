@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 15:44:00 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 17:45:48 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	can_move(t_gen *gen, int speed)
 {
-	// int	x;
-	// int	y;
+	double	x;
+	double	y;
 
-	// x = (int)(gen->player.x + gen->player.dir_x * speed);
-	// y = (int)(gen->player.y + gen->player.dir_y * speed);
-	// if (x < 1 || x > gen->width - 2 || y < 1 || y > gen->height - 2)
-	// 	return (0);
+	x = (int)gen->player.x + (1 * gen->player.dir_x * speed);
+	y = (int)gen->player.y + (1 * gen->player.dir_y * speed);
+	printf("x: %f, y: %f\n", x, y);
+	if (x < 1 || x > gen->width - 2 || y < 1 || y > gen->height - 2)
+		return (0);
+	if (gen->map[(int)y][(int)x] == '1')
+		return (0);
 	return (1);
-	speed++;
-	if (gen)
-		speed++;
 }
 
 void	movement(void *param)
@@ -36,14 +36,14 @@ void	movement(void *param)
 	move = gen->mlx->delta_time * 5.0;
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_ESCAPE))
 		close_escape(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_W) && can_move(gen, move))
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_W) && can_move(gen, move) == 1)
 		walk_forwards(gen, move);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_S) && can_move(gen, move))
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_S) && can_move(gen, move) == 1)
 		walk_backwards(gen, move);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_A) && can_move(gen, move))
-		walk_left(gen, move);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_D) && can_move(gen, move))
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_A) && can_move(gen, move) == 1)
 		walk_right(gen, move);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_D) && can_move(gen, move) == 1)
+		walk_left(gen, move);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_LEFT))
 		rotate_right(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 15:40:48 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 17:14:42 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	double		dir;
+	char		dir;
 	mlx_image_t	*img;
 }				t_player;
 

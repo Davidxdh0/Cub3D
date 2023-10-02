@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   keys.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 14:34:01 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 18:05:10 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rotate_right(t_gen *gen)
 	t_player	*player;
 
 	player = &gen->player;
-	rot = gen->mlx->delta_time * 5.0;
+	rot = gen->mlx->delta_time * 3.0;
 	old_dir = player->dir_x;
 	old_plane = player->plane_x;
 	player->dir_x = player->dir_x * cos(-rot) - player->dir_y * sin(-rot);

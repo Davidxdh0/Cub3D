@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   parse_types.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 15:13:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 17:13:09 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int	parse_map(char *str, t_map *c_map, int y)
 	if (y < c_map->y_max - 1)
 		str[ft_strlen(str) - 1] = '\0';
 	while (str[i] != '\0' && (str[i] == '1' || str[i] == '0' || \
-		str[i] == ' ' || start_position(str[i]) != -1))
+		str[i] == ' ' || start_position(str[i])))
 	{
-		if (start_position(str[i]) != -1)
+		if (start_position(str[i]))
 		{
 			if (c_map->startY == -1)
 			{
@@ -99,18 +99,12 @@ int	parse_map(char *str, t_map *c_map, int y)
 }
 
 // 1 " " n s w e
-int	start_position(char c)
+char	start_position(char c)
 {
-	if (c == 'N')
-		return (90 * M_PI/180);
-	else if (c == 'S')
-		return (270 * M_PI/180);
-	else if (c == 'E')
-		return (0);
-	else if (c == 'W')
-		return (180 * M_PI/180);
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (c);
 	else
-		return (-1);
+		return (0);
 }
 
 //colors	= F:2, C:3

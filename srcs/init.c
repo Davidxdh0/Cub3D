@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   init.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 14:37:25 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/02 17:57:41 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,39 @@ t_map	*init_map(void)
 	return (map);
 }
 
+void	init_plane(t_gen *gen)
+{
+	printf("%c\n", gen->player.dir);
+	if (gen->player.dir == 'W')
+	{
+		gen->player.dir_x = -1;
+		gen->player.dir_y = 0;
+		gen->player.plane_x = 0;
+		gen->player.plane_y = 0.66;
+	}
+	if (gen->player.dir == 'E')
+	{
+		gen->player.dir_x = 1;
+		gen->player.dir_y = 0;
+		gen->player.plane_x = 0;
+		gen->player.plane_y = -0.66;
+	}
+	if (gen->player.dir == 'S')
+	{
+		gen->player.dir_x = 0;
+		gen->player.dir_y = 1;
+		gen->player.plane_x = 0.66;
+		gen->player.plane_y = 0;
+	}
+	if (gen->player.dir == 'N')
+	{
+		gen->player.dir_x = 0;
+		gen->player.dir_y = -1;
+		gen->player.plane_x = -0.66;
+		gen->player.plane_y = 0;
+	}
+}
+
 /*
 camera direction: planeX & planeY - Make sure the camera plane is perpendicular to the direction
 */
@@ -48,12 +81,9 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->height = cmap->y_max;
 	gen->draw = 1;
 	gen->player.dir = cmap->dir;
-	gen->player.x = cmap->x_start;
-	gen->player.y = cmap->y_start;
-	gen->player.dir_x = 0;
-	gen->player.dir_y = -1;
-	gen->player.plane_x = 0.66;
-	gen->player.plane_y = 0;
+	gen->player.x = cmap->x_start + 0.5;
+	gen->player.y = cmap->y_start + 0.5;
+	init_plane(gen);
 	gen->player.img = mlx_new_image(mlx, SIZE / 8, SIZE / 8);
 	for (int i = 0; i < SIZE / 8; i++)
 		for (int j = 0; j < SIZE / 8; j++)
