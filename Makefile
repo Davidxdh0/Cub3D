@@ -8,7 +8,6 @@ END=\033[0m
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
-#CFLAGS += -fsanitize=address
 NAME = cub3d
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -18,6 +17,14 @@ DIR_I = incs
 DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include -I libft/$(DIR_I) 
+
+HEADER_FILES = location.h \
+				main.h \
+				minimap.h \
+				cub3d.h \
+				parser.h
+
+HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
 
 MAP_PARSER = 	parser.c \
 				error.c \
@@ -30,7 +37,7 @@ MAP_PARSER = 	parser.c \
 MINIMAP =		mlxmain.c
 
 
-SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c\
+SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c player.c\
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
@@ -61,7 +68,7 @@ ${MLX}:
 	@cmake MLX42 -B MLX42/build
 	@make -C MLX42/build -j4
 
-${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
+${NAME}: ${MLX} ${OBJS} ${HEADERS}
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
 	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 

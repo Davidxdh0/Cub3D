@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 12:22:10 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 15:55:12 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ void	render_screen(void *param)
 		++x;
 	}
 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
+	mlx_set_instance_depth(&gen->win->instances[0], 1);
+	mlx_image_to_window(gen->mlx, gen->minimap, 0, 0);
+	mlx_set_instance_depth(&gen->minimap->instances[0], 2);
+	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
+	// mlx_set_instance_depth(&gen->player.img->instances[0], 3);
 	gen->draw = 0;
 }
 
