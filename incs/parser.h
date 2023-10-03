@@ -14,8 +14,8 @@ typedef struct s_txtrs
 	char	*SO;
 	char	*WE;
 	char	*EA;
-	char	*C;
-	char	*F;
+	int32_t	C;
+	int32_t	F;
 }	t_txtrs;
 
 typedef struct s_map
@@ -49,7 +49,8 @@ void	check_width_height(t_map *map, int start, int fd);
 char*	get_first_word(char* line);
 void	print_map(const t_map *map, char **array);
 char**	allocate_map(char **map, int y, int x);
-int		count_array(char **array);
+// int		count_array(char **array);
+void	get_colors(t_map *map, char **words, char **colors);
 void	check_extension(char *file);
 
 //validate_map.c

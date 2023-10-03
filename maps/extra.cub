@@ -4,8 +4,8 @@ SO ./maps/default.cub
 WE ./maps/default.cub
 EA ./maps/default.cub
 
-F 220,100,0
-C 225,30,0
+C 0,0,150
+F 0,150,00
 
 111111111
 100000001

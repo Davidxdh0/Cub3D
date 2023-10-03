@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 17:14:42 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 12:16:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../MLX42/include/MLX42/MLX42_Int.h"
 
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 24
 # define SIZE 64
 # define WIDTH 1920
 # define HEIGHT 1080
-# define SPEED 0.5
-# define ROTATE 0.5
 
 typedef struct s_vector
 {
@@ -50,6 +46,7 @@ typedef struct s_gen
 {
 	mlx_t			*mlx;
 	mlx_image_t		*win;
+	mlx_image_t		*bg;
 	char			**map;
 	t_player		player;
 	t_txtrs			txtrs;
@@ -93,6 +90,7 @@ void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(void *param);
 void	scrolling(void *param);
 void	drawMap2D(t_gen *gen);
+void	draw_background(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
 void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);

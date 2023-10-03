@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 21:27:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 13:09:52 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,25 @@ void drawMap2D(t_gen *gen)
 // {
 	
 // }
+
+void	draw_background(t_gen *gen)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = -1;
+	printf("C = %#X, F = %#X\n", gen->txtrs.C, gen->txtrs.F);
+	while (++y < HEIGHT)
+	{
+		if (y < HEIGHT / 2)
+			color = gen->txtrs.C;
+		else
+			color = gen->txtrs.F;
+		// printf("color = %d\n", color);
+		x = -1;
+		while (++x < WIDTH)
+			mlx_put_pixel(gen->bg, x, y, color);
+	}
+	mlx_image_to_window(gen->mlx, gen->bg, 0, 0);
+}

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/02 17:45:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 12:24:15 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int	can_move(t_gen *gen, int speed)
 	double	x;
 	double	y;
 
-	x = (int)gen->player.x + (1 * gen->player.dir_x * speed);
-	y = (int)gen->player.y + (1 * gen->player.dir_y * speed);
+	(void)speed;
+	x = (int)gen->player.x + (1 * gen->player.dir_x);
+	y = (int)gen->player.y + (1 * gen->player.dir_y);
 	printf("x: %f, y: %f\n", x, y);
 	if (x < 1 || x > gen->width - 2 || y < 1 || y > gen->height - 2)
 		return (0);
@@ -49,8 +50,10 @@ void	movement(void *param)
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
 		rotate_left(gen);
 	if (gen->draw == 1)
+	{
 		render_screen(gen);
-
+		gen->draw = 0;
+	}
 }
 
 // void	scrolling(void *param)

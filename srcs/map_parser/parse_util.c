@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 21:32:34 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 13:04:06 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,44 @@ void	print_map(const t_map *map, char **array)
 	// printr()
 }
 
-int	count_array(char **array)
+int get_rgba(int r, int g, int b, int a)
 {
-	int i;
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void	get_colors(t_map *map, char **words, char **colors)
+{
+	int		i;
+	int		number;
+	int32_t	rgb;
+	int		arr[3];
 
 	i = 0;
-	if (!array)
-		return (i);
-	while (array[i])
+	rgb = 0;
+	while (colors[i])
+	{
+		number = ft_atoi(colors[i]);
+		if (number < 0 || number > 255)
+			error_free("parse_colors value < 0 || > 255", map);
+		arr[i] = number;
 		i++;
-	return (i);
+	}
+	rgb = get_rgba(arr[0], arr[1], arr[2], 255);
+	printf("rgb = %#X\n", rgb);
+	if (!strcmp(words[0], "F"))
+		map->txtrs.F = rgb;
+	else if (!strcmp(words[0], "C"))
+		map->txtrs.C = rgb;
 }
+
+// int	count_array(char **array)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	if (!array)
+// 		return (i);
+// 	while (array[i])
+// 		i++;
+// 	return (i);
+// }

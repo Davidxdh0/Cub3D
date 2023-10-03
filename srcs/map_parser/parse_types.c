@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 21:54:09 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 13:09:23 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parse_textures(char *line, t_map *map, char *word)
 
 	i = 0;
 	words = ft_split(line, ' ');
-	if (count_array(words) != 2)
+	if (ft_arrlen(words) != 2)
 		error_free("parse_textures went wrong", map);
 	words[1][ft_strlen(words[1]) - 1] = '\0';
 	i = open_file(words[1]);
@@ -41,32 +41,20 @@ int	parse_textures(char *line, t_map *map, char *word)
 // line[ft_strlen(line) - 1] = '\0';
 int	parse_colors(char *line, t_map *c_map, char *word)
 {
-	int		i;
-	int		number;
 	char	**colors;
 	char	**words;
 
 	line[ft_strlen(line) - 1] = '\0';
 	words = ft_split(line, ' ');
-	if (count_array(words) != 2)
-		error_free("parseColours not two words", c_map);
+	if (ft_arrlen(words) != 2)
+		error_free("parse_colours not two words", c_map);
 	colors = ft_split(words[1], ',');
-	if (count_array(colors) != 3)
+	if (ft_arrlen(colors) != 3)
 		error_free("parse_colors values not three words", c_map);
-	i = 0;
-	while (colors[i])
-	{
-		number = ft_atoi(colors[i]);
-		if (number < 0 || number > 255)
-			error_free("parse_colors value < 0 || > 255", c_map);
-		i++;
-	}
-	// printf("Parsecolors: %s\n", words[1]);
-	if (!strcmp(words[0], "F"))
-		c_map->txtrs.F = ft_strdup(words[1]);
-	else if (!strcmp(words[0], "C"))
-		c_map->txtrs.C = ft_strdup(words[1]);
-	return (ft_free_arr(words), ft_free_arr(colors), type_value(word));
+	get_colors(c_map, words, colors);
+	ft_free_arr(words);
+	ft_free_arr(colors); 
+	return (type_value(word));
 }
 
 int	parse_map(char *str, t_map *c_map, int y)

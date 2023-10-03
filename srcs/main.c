@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
+/*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 15:43:56 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/03 12:22:10 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ int	main(int argc, char *argv[])
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
+		draw_background(&gen);
 		drawMap2D(&gen);
 		mlx_loop_hook(mlx, movement, &gen);
 		// mlx_scroll_hook(mlx, scrolling, &gen);
 		mlx_loop(mlx);
 		mlx_terminate(mlx);
+		free_t_map(c_map);
 	}
-	free_t_map(c_map);
 	return (EXIT_SUCCESS);
 }
 
