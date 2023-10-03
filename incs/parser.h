@@ -8,6 +8,10 @@
 #include <stdbool.h> // bool
 # include <math.h>
 
+#ifndef TESTMAP
+#define TESTMAP 0
+#endif
+
 typedef struct s_txtrs
 {
 	char	*NO;
@@ -47,7 +51,7 @@ int		type_value(char *word);
 char	start_position(char c);
 void	check_width_height(t_map *map, int start, int fd);
 char*	get_first_word(char* line);
-void	print_map(const t_map *map, char **array);
+void	print_map(char **array, int ymax, int xmax);
 char**	allocate_map(char **map, int y, int x);
 // int		count_array(char **array);
 void	get_colors(t_map *map, char **words, char **colors);

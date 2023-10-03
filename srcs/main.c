@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 15:55:12 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 18:45:01 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ int	main(int argc, char *argv[])
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
-		draw_background(&gen);
-		drawMap2D(&gen);
-		mlx_loop_hook(mlx, movement, &gen);
+		if (TESTMAP == 0)
+		{
+			draw_background(&gen);
+			drawMap2D(&gen);
+			mlx_loop_hook(mlx, movement, &gen);
 		// mlx_scroll_hook(mlx, scrolling, &gen);
-		mlx_loop(mlx);
+			mlx_loop(mlx);
+		}
 		mlx_terminate(mlx);
 		free_t_map(c_map);
 	}

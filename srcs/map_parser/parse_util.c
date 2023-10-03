@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 13:04:06 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 21:25:50 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char**	allocate_map(char **map, int y, int x)
 	i = 0;
 	while (i < y)
 	{
-		map[i] = ft_calloc(sizeof(char), (x + 1) );
+		map[i] = ft_calloc(sizeof(char), (x + 2));
 		if (!map[i])
 			error_exit("Malloc map[y]");
 		i++;
@@ -90,14 +90,14 @@ char**	allocate_map(char **map, int y, int x)
 	return (map);
 }
 
-void	print_map(const t_map *map, char **array)
+void	print_map(char **array, int ymax, int xmax)
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	x = 0;
-	while (y < map->y_max && array[y])
+	while (array[y])
 	{
 		x = 0;
 		while (array[y][x])
@@ -109,12 +109,12 @@ void	print_map(const t_map *map, char **array)
 		y++;
 	}
 	x = 0;
-	while (x < map->x_max)
+	printf("\nSize map: \nY = %d\nX = %d\n", ymax, xmax);
+	while (x < xmax)
 	{
-		printf("__");
+		write(1, "-", 1);
 		x++;
 	}
-	printf("\n");
 	printf("\n");
 	// printr()
 }
@@ -142,7 +142,7 @@ void	get_colors(t_map *map, char **words, char **colors)
 		i++;
 	}
 	rgb = get_rgba(arr[0], arr[1], arr[2], 255);
-	printf("rgb = %#X\n", rgb);
+	// printf("rgb = %#X\n", rgb);
 	if (!strcmp(words[0], "F"))
 		map->txtrs.F = rgb;
 	else if (!strcmp(words[0], "C"))

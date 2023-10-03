@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 16:01:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 18:53:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 {
 	gen->mlx = mlx;
 	gen->map = cmap->map;
-	for (int i = 0; gen->map[i]; i++)
-		printf("%s\n", gen->map[i]);
+	// for (int i = 0; gen->map[i]; i++)
+	// 	printf("%s\n", gen->map[i]);
 	gen->win = mlx_new_image(mlx, WIDTH, HEIGHT);
 	gen->bg = mlx_new_image(mlx, WIDTH, HEIGHT);
 	gen->minimap = mlx_new_image(mlx, SIZE, SIZE);

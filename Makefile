@@ -86,6 +86,9 @@ debug: fclean
 run: all
 	./${NAME} maps/default.cub
 
+map: 	clean
+		$(MAKE) CFLAGS="-DTESTMAP=1"
+
 main: all
 	./${NAME} maps/main.cub
 

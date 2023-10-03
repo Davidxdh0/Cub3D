@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 14:51:52 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/03 15:50:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 18:24:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	size = gen->sq_size / 2;
 	if (size < 4)
 		size = 4;
-	printf("size = %d\n", size);
+	// printf("size = %d\n", size);
 	gen->player.img = mlx_new_image(mlx, size, size);
 	gen->player.dir = cmap->dir;
 	gen->player.x = cmap->x_start + 0.5;
@@ -68,7 +68,7 @@ void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 		for (int j = 0; j < size; j++)
 				mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
 	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
-	printf("player.x = %f, player.y = %f\n", gen->player.x, gen->player.y);
-	printf("xpos = %f, ypos = %f\n", gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
+	// printf("player.x = %f, player.y = %f\n", gen->player.x, gen->player.y);
+	// printf("xpos = %f, ypos = %f\n", gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
 	mlx_set_instance_depth(&gen->player.img->instances[0], 3);
 }

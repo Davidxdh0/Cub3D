@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/02 17:13:24 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/03 18:58:08 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	validate_map(t_map *c_map)
 	char **array;
 
 	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	// print_map(c_map, c_map->map);
+	print_map(c_map->map, c_map->y_max, c_map->x_max);
 	width_validated_map(c_map);
 	heigth_validated_map(c_map);
 	array = c_map->map;
@@ -80,6 +80,7 @@ void	validate_map(t_map *c_map)
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
 	// printf("ymax %d, xmax %d\n", c_map->y_max, c_map->x_max);
 	fill_map(c_map, array, c_map->y_max - 2, c_map->x_max - 2);
+	print_map(c_map->map, c_map->y_max, c_map->x_max);
 	find_new_start_pos(c_map);
 	ft_free_arr(array);
 	
@@ -176,8 +177,11 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 					else
 						c_map->map[posy][posx] = old_map[y][x];
 				}
-				else if (x  == c_map->x_start + xmax)
+				if (x  == xmax + 2)
+				{
+					printf("fill_map end of line character %d %d\n", y, x);
 					c_map->map[posy][posx] = '\0';
+				}
 			}	
 		}
 		if (posx > 0)
