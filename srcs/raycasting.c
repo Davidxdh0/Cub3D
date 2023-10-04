@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/04 16:06:54 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/04 17:39:28 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 	if(ray->side == 0 && ray->raydir_x > 0) texX = gen->txtrs.t_no->width - texX - 1;
 	if(ray->side == 1 && ray->raydir_y < 0) texX = gen->txtrs.t_no->width - texX - 1;
 	double step = 1.0 * gen->txtrs.t_no->height / ray->height;
-	double texPos = (ray->start - (int)HEIGHT  / 2 + ray->height / 2) * step;
+	double texPos = (ray->start - (int)HEIGHT / 2 + ray->height / 2) * step;
 	// printf("start[%d:%d] end: %d height: %d\n", ray->start, x, ray->end, ray->height);
 	while (ray->start < ray->end)
  	{
 		texY = (int)texPos & (gen->txtrs.t_no->height - 1);
 		texPos += step;
-		ray->color = get_color_textures(gen->txtrs.t_no->pixels + (gen->txtrs.t_no->height * texY + texX) \
-				* gen->txtrs.t_no->bytes_per_pixel);
+		ray->color = get_color_textures(&gen->txtrs.t_no->pixels[(gen->txtrs.t_no->height * texY + texX) * 4]);
 		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
 		// printf("start[%d:%d] %d\n", ray->start, x, ray->end);
 		++ray->start;
