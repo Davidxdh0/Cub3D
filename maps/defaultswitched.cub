@@ -2,10 +2,10 @@
 F 220,100,0
 C 225,30,0
 
-NO ./maps/defaultswitched.cub
-SO ./maps/defaultswitched.cub
-WE ./maps/defaultswitched.cub
-EA ./maps/defaultswitched.cub
+NO textures/blue_wall.png
+SO textures/blue_wall.png
+WE textures/blue_wall.png
+EA textures/blue_wall.png
 
 
 

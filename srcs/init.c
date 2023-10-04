@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 18:53:33 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/04 15:40:44 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,18 @@ t_map	*init_map(void)
 	return (map);
 }
 
+//check for errors
+void	init_textures(t_gen *gen)
+{
+	
+	gen->txtrs.t_no = mlx_load_png(gen->txtrs.NO);
+	gen->txtrs.t_so = mlx_load_png(gen->txtrs.SO);
+	gen->txtrs.t_we = mlx_load_png(gen->txtrs.WE);
+	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.EA);
+	// printf("txt: %d\n", gen->txtrs.t_no->height);
+	// printf("txt: %d\n", gen->txtrs.t_no->width);
+	// printf("txt: %d\n", gen->txtrs.t_no->bytes_per_pixel);
+}
 
 /*
 camera direction: planeX & planeY - Make sure the camera plane is perpendicular to the direction
@@ -62,4 +74,5 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 		gen->sq_size = 32;
 	printf("sq_size = %d\n", gen->sq_size);
 	init_player(gen, mlx, cmap);
+	init_textures(gen);
 }

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/03 15:51:46 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/04 09:08:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	draw_square(t_gen *gen, int x, int y, int color)
 	int	j;
 
 	i = x * gen->sq_size;
+	// printf("i = %d\n", i);
 	while (i < (x + 1) * gen->sq_size && i < SIZE)
 	{
 		j = y * gen->sq_size;
@@ -50,6 +51,7 @@ void drawMap2D(t_gen *gen)
 				color = 0xFFFFFF;
 			else
 				color = 0x0000FF;
+			// printf("draw square: ");
 			draw_square(gen, x, y, color);
 			//printf("map[%d][%d] = %c\n", y, x, gen->map[y][x]);
 		} 
@@ -57,7 +59,7 @@ void drawMap2D(t_gen *gen)
 	// else
 	// 	scaled_minimap(t_gen *gen);
 	mlx_image_to_window(gen->mlx, gen->minimap, 0, 0);
-	mlx_set_instance_depth(&gen->minimap->instances[0], 2);
+	mlx_set_instance_depth(&gen->minimap->instances[0], 1);
 }
 
 // void scaled_minimap(t_gen *gen)

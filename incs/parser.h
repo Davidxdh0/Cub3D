@@ -7,6 +7,8 @@
 #include <stdlib.h> // exit
 #include <stdbool.h> // bool
 # include <math.h>
+#include "../MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42_Int.h"
 
 #ifndef TESTMAP
 #define TESTMAP 0
@@ -18,6 +20,10 @@ typedef struct s_txtrs
 	char	*SO;
 	char	*WE;
 	char	*EA;
+	mlx_texture_t *t_no;
+	mlx_texture_t *t_so;
+	mlx_texture_t *t_we;
+	mlx_texture_t *t_ea;
 	int32_t	C;
 	int32_t	F;
 }	t_txtrs;

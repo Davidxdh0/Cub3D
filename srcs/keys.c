@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 15:29:55 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/04 06:01:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void	rotate_left(t_gen *gen)
 
 void	walk_forwards(t_gen *gen, double move)
 {
-	gen->player.y += (gen->player.dir_y * move);
-	gen->player.x += (gen->player.dir_x * move);
+	if (can_move_y(gen, 1))
+		gen->player.y += (gen->player.dir_y * move);
+	if (can_move_x(gen, 1))	
+		gen->player.x += (gen->player.dir_x * move);
 	gen->player.img->instances->x = gen->player.x * gen->sq_size;
 	gen->player.img->instances->y = gen->player.y * gen->sq_size;
 	gen->draw = 1;
@@ -66,8 +68,10 @@ void	walk_forwards(t_gen *gen, double move)
 
 void	walk_backwards(t_gen *gen, double move)
 {
-	gen->player.y -= (gen->player.dir_y * move);
-	gen->player.x -= (gen->player.dir_x * move);
+	if (can_move_y(gen, 1))
+		gen->player.y -= (gen->player.dir_y * move);
+	if (can_move_x(gen, 1))
+		gen->player.x -= (gen->player.dir_x * move);
 	gen->player.img->instances->x = gen->player.x * gen->sq_size;
 	gen->player.img->instances->y = gen->player.y * gen->sq_size;
 	gen->draw = 1;
@@ -75,8 +79,10 @@ void	walk_backwards(t_gen *gen, double move)
 
 void	walk_left(t_gen *gen, double move)
 {
-	gen->player.y += (gen->player.dir_x * move);
-	gen->player.x += -(gen->player.dir_y * move);
+	if (can_move_y(gen, 1))
+		gen->player.y += (gen->player.dir_x * move);
+	if (can_move_x(gen, 1))
+		gen->player.x += -(gen->player.dir_y * move);
 	gen->player.img->instances->x = gen->player.x * gen->sq_size;
 	gen->player.img->instances->y = gen->player.y * gen->sq_size;
 	gen->draw = 1;
@@ -84,10 +90,10 @@ void	walk_left(t_gen *gen, double move)
 
 void	walk_right(t_gen *gen, double move)
 {
-	gen->player.y += -(gen->player.dir_x * move);
-	gen->player.x += (gen->player.dir_y * move);
-	printf("x: %f, y: %f\n", gen->player.x, gen->player.y);
-	printf("x: %f, y: %f\n", gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
+	if (can_move_y(gen, 1))
+		gen->player.y += -(gen->player.dir_x * move);
+	if (can_move_x(gen, 1))
+		gen->player.x += (gen->player.dir_y * move);
 	gen->player.img->instances->x = gen->player.x * gen->sq_size;
 	gen->player.img->instances->y = gen->player.y * gen->sq_size;
 	gen->draw = 1;

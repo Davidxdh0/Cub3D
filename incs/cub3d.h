@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/03 15:27:20 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/04 14:56:54 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define SIZE HEIGHT / 4
+
 
 typedef struct s_vector
 {
@@ -110,4 +111,10 @@ void	walk_backwards(t_gen *gen, double move);
 void	walk_left(t_gen *gen, double move);
 void	walk_right(t_gen *gen, double move);
 
+//collision
+int	can_move_y(t_gen *gen, int speed);
+int	can_move_x(t_gen *gen, int speed);
+
+//free
+void	free_textures(t_gen gen);
 #endif

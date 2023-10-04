@@ -80,7 +80,7 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 debug: fclean 
-	@$(MAKE) re DEBUG=1 
+	@$(MAKE) re CFLAGS="-DTESTMAP=1" DEBUG=1 
 	./${NAME} maps/default.cub
 
 run: all

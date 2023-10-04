@@ -1,6 +1,4 @@
 textures
-wall collision
-minimap
 mouse movement
 eventueel deuren/sprites
 bonus kijken

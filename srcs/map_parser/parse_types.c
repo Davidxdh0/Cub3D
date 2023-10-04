@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 01:00:27 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/04 13:05:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	parse_textures(char *line, t_map *map, char *word)
 	i = open_file(words[1]);
 	close(i);
 	if (!strcmp(words[0], "NO") && map->txtrs.NO == NULL)
-		map->txtrs.NO = words[1];
+		map->txtrs.NO = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "SO") && map->txtrs.SO == NULL)
-		map->txtrs.SO = words[1];
+		map->txtrs.SO = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "WE") && map->txtrs.WE == NULL)
-		map->txtrs.WE = words[1];
+		map->txtrs.WE = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "EA") && map->txtrs.EA == NULL)
-		map->txtrs.EA = words[1];
+		map->txtrs.EA = ft_strdup(words[1]);
 	else
 		error_free("parse_textures went wrong", map);
 	ft_free_arr(words);

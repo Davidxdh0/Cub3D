@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 18:45:01 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/04 15:17:20 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ int	main(int argc, char *argv[])
 		if (!mlx)
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
-		if (TESTMAP == 0)
-		{
-			draw_background(&gen);
-			drawMap2D(&gen);
-			mlx_loop_hook(mlx, movement, &gen);
+		draw_background(&gen);
+		drawMap2D(&gen);
+		mlx_loop_hook(mlx, movement, &gen);
 		// mlx_scroll_hook(mlx, scrolling, &gen);
-			mlx_loop(mlx);
-		}
+		mlx_loop(mlx);
+		free_textures(gen);
 		mlx_terminate(mlx);
 		free_t_map(c_map);
 	}
@@ -69,9 +67,10 @@ void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
 	if (y1 > y2)
 		sy = -1;
 	err = dx + dy;
-	while (x1 != x2 && y1 != y2)
+	while (x1 != x2 && y1 != y2 )
 	{
-		mlx_put_pixel(gen->win, x1, y1, 0xFF0000FF);
+		if ((x1 <= WIDTH && x1 >= 0) && (y1 >= 0 && y1 <= HEIGHT))
+			mlx_put_pixel(gen->minimap, x1, y1, 0xFF0000FF);
 		err2 = 2 * err;
 		if (err2 >= dy && x1 != x2)
 		{
@@ -93,6 +92,9 @@ void	render_screen(void *param)
 
 	gen = (t_gen *)param;
 	x = 0;
+	mlx_delete_image(gen->mlx, gen->win);
+	gen->win = mlx_new_image(gen->mlx, WIDTH, HEIGHT);
+	drawMap2D(gen);
 	memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
 	while (x < WIDTH)
 	{
