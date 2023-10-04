@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 15:40:44 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/04 16:23:27 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->width = cmap->x_max;
 	gen->height = cmap->y_max;
 	gen->draw = 1;
-	if (gen->width < gen->height)
+	if (gen->width > gen->height)
 		gen->sq_size = SIZE / gen->width;
 	else
 		gen->sq_size = SIZE / gen->height;
@@ -72,7 +72,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 		gen->sq_size = 4;
 	if (gen->sq_size > 32)
 		gen->sq_size = 32;
-	printf("sq_size = %d\n", gen->sq_size);
+	// printf("sq_size = %d\n", gen->sq_size);
 	init_player(gen, mlx, cmap);
 	init_textures(gen);
 }
