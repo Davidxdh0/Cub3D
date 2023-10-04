@@ -1,4 +1,3 @@
-map altijd werkend
 textures
 wall collision
 minimap

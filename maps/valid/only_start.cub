@@ -1,0 +1,12 @@
+
+NO ./maps/default.cub
+SO ./maps/default.cub
+WE ./maps/default.cub
+EA ./maps/default.cub
+
+F 220,100,0
+C 225,30,0
+
+1111
+1S11
+1111

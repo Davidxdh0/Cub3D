@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/03 18:58:08 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/04 02:02:20 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	validate_map(t_map *c_map)
 	char **array;
 
 	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
-	print_map(c_map->map, c_map->y_max, c_map->x_max);
+	// print_map(c_map->map, c_map->y_max, c_map->x_max);
 	width_validated_map(c_map);
 	heigth_validated_map(c_map);
 	array = c_map->map;
@@ -80,7 +80,7 @@ void	validate_map(t_map *c_map)
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
 	// printf("ymax %d, xmax %d\n", c_map->y_max, c_map->x_max);
 	fill_map(c_map, array, c_map->y_max - 2, c_map->x_max - 2);
-	print_map(c_map->map, c_map->y_max, c_map->x_max);
+	// print_map(c_map->map, c_map->y_max, c_map->x_max);
 	find_new_start_pos(c_map);
 	ft_free_arr(array);
 	
@@ -118,6 +118,7 @@ void		width_validated_map(t_map *c_map)
 		}
 		y++;
 	}
+	// x_max++;
 	c_map->x_max = x_max;
 }
 
@@ -135,7 +136,7 @@ void	heigth_validated_map(t_map *c_map)
 		x = 0;
 		while (c_map->map[y][x])
 		{
-			if (c_map->map[y][x] == '.')
+			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]))
 			{
 				if (c_map->y_start == -1)
 					c_map->y_start = y;
@@ -166,24 +167,16 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 		x = -1;
 		posx = -1;
 		while (old_map[y][++x])
-		{
-			posx++;
 			if (y >= (c_map->y_start - 1) && y <= c_map->y_start + ymax)
-			{
-				if (x >= c_map->x_start - 1 && x < c_map->x_start + xmax -1)
+				if (x >= c_map->x_start - 1 && x < c_map->x_start + xmax + 1)
 				{
 					if (old_map[y][x] == '.')
-						c_map->map[posy][posx] = '0';
+						c_map->map[posy][++posx] = '0';
 					else
-						c_map->map[posy][posx] = old_map[y][x];
+						c_map->map[posy][++posx] = old_map[y][x];
 				}
-				if (x  == xmax + 2)
-				{
-					printf("fill_map end of line character %d %d\n", y, x);
-					c_map->map[posy][posx] = '\0';
-				}
-			}	
-		}
+		if (!old_map[y][x])
+			c_map->map[posy][++posx] = '\0';
 		if (posx > 0)
 			posy++;
 	}
