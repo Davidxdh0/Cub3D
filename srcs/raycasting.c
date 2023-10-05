@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/04 17:39:28 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/05 17:33:48 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 	texNum++;
 	if (ray->side == 0)
 		ray->walldist = ray->sidedist_x - ray->deltadist_x;
-	else
+	else 
 		ray->walldist = ray->sidedist_y - ray->deltadist_y;
 	int texY = 0;
 	if (TESTMAP)
 		texNum = gen->map[(int)ray->map_y][(int)ray->map_x] - 1;
-
 	double wallX;
 	if (ray->side == 0)
-		wallX = ray->map_y + ray->walldist * ray->raydir_y;
+		wallX = gen->player.y + ray->walldist * ray->raydir_y;
 	else
-		wallX = ray->map_x + ray->walldist * ray->raydir_x;
-	wallX -= floor((wallX));
+		wallX = gen->player.x + ray->walldist * ray->raydir_x;
+	wallX -= floor(wallX);
+	printf("wallX: %f\n", wallX);
 	ray->height = (int)(HEIGHT / ray->walldist);
 	ray->start = -ray->height / 2 + HEIGHT / 2;
 	ray->end = ray->height / 2 + HEIGHT / 2;
@@ -67,9 +67,9 @@ void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 		texPos += step;
 		ray->color = get_color_textures(&gen->txtrs.t_no->pixels[(gen->txtrs.t_no->height * texY + texX) * 4]);
 		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
-		// printf("start[%d:%d] %d\n", ray->start, x, ray->end);
 		++ray->start;
 	}
+	// printf("texY: %d texX: %d\n", texY, texX);
 }
 
 void	draw_vert_line(t_gen *gen, t_ray *ray, int x)
@@ -162,8 +162,7 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 		line.x = player->x + ray.walldist * ray.raydir_x;
 	else
 		line.y = player->y + ray.walldist * ray.raydir_y;
-	// printf("x: %d, y: %d\n", (int)((ray.sidedist_x - (int)ray.sidedist_x) * 64), (int)((ray.sidedist_y - (int)ray.sidedist_y) * 64));
-	// printf("player->dir_x: %f, player->dir_y: %f\n", player->dir_x, player->dir_y);
+	// printf("line.x: %f line.y: %f\n", line.x, line.y);
 	bresenham(gen, player->x * gen->sq_size, player->y * gen->sq_size, \
 	line.x * gen->sq_size, line.y * gen->sq_size);
 }
@@ -182,7 +181,6 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	ray.deltadist_y = 1e30;
 	calc_side_dist(player, &ray);
 	calc_wall_dist(gen, &ray);
-	// printf("sidedist x = %f y %f, raymapx %f mapy %f\n", ray.sidedist_x, ray.sidedist_y, ray.map_x, ray.map_y);
 	if (TESTMAP == 0)
 		draw_vert_line(gen, &ray, x);
 	if (TESTMAP == 1)
