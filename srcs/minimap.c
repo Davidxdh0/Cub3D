@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 19:06:53 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 19:11:16 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	draw_background(t_gen *gen)
 	mlx_set_instance_depth(&gen->bg->instances[0], 0);
 }
 
-
 void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 {
 	t_vector	line;
@@ -88,6 +87,10 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 		line.x = player->x + ray.walldist * ray.raydir_x;
 	line.x *= gen->sq_size;
 	line.y *= gen->sq_size;
+	if (ray.raydir_x < 0)
+		line.x += gen->sq_size;
+	if (ray.raydir_y < 0)
+		line.y += gen->sq_size;
 	pos.x = player->x * gen->sq_size + gen->sq_size / 4;
 	pos.y = player->y * gen->sq_size + gen->sq_size / 4;
 	bresenham(gen, pos.x, pos.y, line.x, line.y);
