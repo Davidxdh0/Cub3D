@@ -1,0 +1,20 @@
+The map must be composed of only 6 possible characters: 0 for an empty space,
+1 for a wall, and N,S,E or W for the player’s start position and spawning
+orientation.
+
+minimap img size = (HEIGHT / 4) ^ 2
+
+1 square = (HEIGHT / 4) / gen->map->height
+or 
+1 square = (HEIGHT / 4) / gen->map->width
+deppending on which is smaller
+max sqaure = 32x32
+min square = 4x4
+
+player = (HEIGHT / 8)
+player max = 8x8
+player min = 4x4
+
+if 1 square <= player size
+	hide player from minimap
+	highlight square instead

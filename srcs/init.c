@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 17:29:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 19:57:22 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	init_textures(t_gen *gen)
 	gen->txtrs.t_so = mlx_load_png(gen->txtrs.so);
 	gen->txtrs.t_we = mlx_load_png(gen->txtrs.we);
 	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.ea);
+	if (!gen->txtrs.t_no || !gen->txtrs.t_so \
+	|| !gen->txtrs.t_we || !gen->txtrs.t_ea)
+	{
+		free_textures(gen);
+		error_exit("Failed to load textures");
+	}
 }
 
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 19:07:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 20:33:27 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,16 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray);
 void	close_escape(t_gen *gen);
 void	rotate_right(t_gen *gen);
 void	rotate_left(t_gen *gen);
-void	walk_forwards(t_gen *gen, double move);
-void	walk_backwards(t_gen *gen, double move);
-void	walk_left(t_gen *gen, double move);
-void	walk_right(t_gen *gen, double move);
+void	walk_forwards(t_gen *gen);
+void	walk_backwards(t_gen *gen);
+void	walk_left(t_gen *gen);
+void	walk_right(t_gen *gen);
 
 //collision
 int		can_move_y(t_gen *gen, int speed);
 int		can_move_x(t_gen *gen, int speed);
 
 //free
-void	free_textures(t_gen gen);
+void	free_textures(t_gen *gen);
 
 #endif

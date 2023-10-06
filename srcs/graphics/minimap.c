@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 19:11:16 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 19:46:27 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,3 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 	pos.y = player->y * gen->sq_size + gen->sq_size / 4;
 	bresenham(gen, pos.x, pos.y, line.x, line.y);
 }
-/*
-	minimap img size = (HEIGHT / 4) ^ 2
-	
-	1 square = (HEIGHT / 4) / gen->map->height
-	or 
-	1 square = (HEIGHT / 4) / gen->map->width
-	deppending on which is smaller
-	max sqaure = 32x32
-	min square = 4x4
-
-	player = (HEIGHT / 8)
-	player max = 8x8
-	player min = 4x4
-
-	if 1 square <= player size
-		hide player from minimap
-		highlight square instead
-*/

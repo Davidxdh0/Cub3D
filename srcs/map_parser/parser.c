@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 11:12:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 21:07:36 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	parse_line(char *line, t_map *map)
 	if (line[0] == '\n')
 		return ;
 	word = get_first_word(line);
-	if (word && (!strcmp(word, "F") || !strcmp(word, "C")) && map_bool == 0)
+	if (word && (!ft_strncmp(word, "F", 2) \
+	|| !ft_strncmp(word, "C", 2)) && !map_bool)
 		colors += parse_colors(line, map, word);
-	else if (word && (!strcmp(word, "NO") || !strcmp(word, "SO") || \
-		!strcmp(word, "WE") || !strcmp(word, "EA")) \
-		&& map_bool == 0)
+	else if (word && (!ft_strncmp(word, "NO", 3) || !ft_strncmp(word, "SO", 3) \
+	|| !ft_strncmp(word, "WE", 3) || !ft_strncmp(word, "EA", 3)) && !map_bool)
 		textures += parse_textures(line, map, word);
 	else if (colors == 5 && textures == 57)
 		map_bool += parse_map(line, map, map_bool);
 	else
-		error_free("Incorrect Textures or Colors", map);
+		error_free("Invalid Textures or Colors", map);
 	if (word)
 		free(word);
 }
@@ -57,8 +57,7 @@ void	parser(char *file, t_map *c_map)
 		line = get_next_line(fd);
 	}
 	free(line);
+	close (fd);
 	if (c_map->start_x == -1)
 		error_free("No starting positions found", c_map);
-	close (fd);
-
 }

@@ -7,7 +7,7 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -Ofast
 NAME = cub3d
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -19,14 +19,16 @@ DIR_O = obj
 INCS = -I $(DIR_I) -IMLX42/include -I libft/$(DIR_I) 
 
 HEADER_FILES = location.h main.h minimap.h cub3d.h parser.h
-
 HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
 
-MAP_PARSER = 	parser.c error.c validate_map.c parse_types.c \
-				parse_util.c free.c file_handling.c
+MAP_PARSER = parser.c validate_map.c parse_types.c parse_util.c file_handling.c
+PLAYER = player.c movement.c keys.c keys2.c
+GRAPHICS = raycasting.c textures.c minimap.c
 
-SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c player.c \
-			textures.c $(addprefix map_parser/, $(MAP_PARSER))
+SRCS =		main.c init.c free.c error.c \
+$(addprefix map_parser/, $(MAP_PARSER)) \
+$(addprefix player/, $(PLAYER)) \
+$(addprefix graphics/, $(GRAPHICS))
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
@@ -45,9 +47,7 @@ else
 endif
 
 ifdef DEBUG
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
-else
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS += -g -fsanitize=address
 endif
 
 all: ${NAME}

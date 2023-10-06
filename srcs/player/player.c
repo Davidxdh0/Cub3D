@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 14:51:52 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 16:57:59 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 20:35:21 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,33 @@ static void	init_horiz_plane(t_gen *gen)
 void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 {
 	int	size;
-	int	i;
-	int	j;
 
 	size = gen->sq_size / 2;
 	if (size < 4)
 		size = 4;
 	gen->player.img = mlx_new_image(mlx, size, size);
+	if (!gen->player.img)
+	{
+		free(cmap);
+		ft_free_arr(gen->map);
+		error_exit("Failed to create player image");
+	}
 	gen->player.dir = cmap->dir;
 	gen->player.x = cmap->x_start + 0.5;
 	gen->player.y = cmap->y_start + 0.5;
 	gen->txtrs = cmap->txtrs;
 	init_horiz_plane(gen);
-	i = -1;
-	while (++i < size)
-	{
-		j = -1;
-		while (++j < size)
-			mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
-	}
-	mlx_image_to_window(gen->mlx, gen->player.img, \
-	gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
-	mlx_set_instance_depth(&gen->player.img->instances[0], 2);
+	// // move to minimap file
+	// int	i;
+	// int	j;
+	// i = -1;
+	// while (++i < size)
+	// {
+	// 	j = -1;
+	// 	while (++j < size)
+	// 		mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
+	// }
+	// mlx_image_to_window(gen->mlx, gen->player.img, 
+	// gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
+	// mlx_set_instance_depth(&gen->player.img->instances[0], 2);
 }

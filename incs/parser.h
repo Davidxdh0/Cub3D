@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 11:20:42 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 19:40:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	find_new_start_pos(t_map *map);
 
 //free.c
 void	free_t_map(t_map *map);
-void	free_arr(char **arg, int max);
+// void	free_arr(char **arg, int max);
 
 //init.c
 t_map	*init_map(void);

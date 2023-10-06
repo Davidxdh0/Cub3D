@@ -6,13 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 11:17:55 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 21:12:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// printf("i=%zu, start=%zu, str=%s, line=%s", i, start, str, line);
 char	*get_first_word(char *line)
 {
 	char	*str;
@@ -39,7 +38,6 @@ char	*get_first_word(char *line)
 	return (str);
 }
 
-//	printf("max_x = %d, max_y = %d\n", map->x_max, map->y_max);
 void	check_width_height(t_map *map, int start, int fd)
 {
 	char	*line;
@@ -64,17 +62,17 @@ void	check_width_height(t_map *map, int start, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	map->y_max -= start;
+	free(line);
 	close(fd);
 }
 
-char**	allocate_map(char **map, int y, int x)
+char	**allocate_map(char **map, int y, int x)
 {
 	int	i;
 
 	if (y == -1 || x == -1)
-		error_exit("No ymax or xmax");
+		error_exit("Invalid ymax or xmax");
 	map = (char **)ft_calloc(sizeof(char *), (y + 1));
 	if (!map)
 		error_exit("Malloc map");
@@ -90,36 +88,7 @@ char**	allocate_map(char **map, int y, int x)
 	return (map);
 }
 
-void	print_map(char **array, int ymax, int xmax)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while (array[y])
-	{
-		x = 0;
-		while (array[y][x])
-		{
-			printf("%c", array[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	x = 0;
-	printf("\nSize map: \nY = %d\nX = %d\n", ymax, xmax);
-	while (x < xmax)
-	{
-		write(1, "-", 1);
-		x++;
-	}
-	printf("\n");
-	// printr()
-}
-
-int get_rgba(int r, int g, int b, int a)
+static int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -137,26 +106,13 @@ void	get_colors(t_map *map, char **words, char **colors)
 	{
 		number = ft_atoi(colors[i]);
 		if (number < 0 || number > 255)
-			error_free("parse_colors value < 0 || > 255", map);
+			error_free("Invalid color value", map);
 		arr[i] = number;
 		i++;
 	}
 	rgb = get_rgba(arr[0], arr[1], arr[2], 255);
-	// printf("rgb = %#X\n", rgb);
 	if (!strcmp(words[0], "F"))
 		map->txtrs.floor = rgb;
 	else if (!strcmp(words[0], "C"))
 		map->txtrs.ceil = rgb;
 }
-
-// int	count_array(char **array)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	if (!array)
-// 		return (i);
-// 	while (array[i])
-// 		i++;
-// 	return (i);
-// }

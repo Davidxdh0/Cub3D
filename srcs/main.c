@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 18:59:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 20:51:41 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,47 +42,10 @@ int	main(int argc, char *argv[])
 		mlx_loop_hook(mlx, movement, &gen);
 		// mlx_scroll_hook(mlx, scrolling, &gen);
 		mlx_loop(mlx);
-		free_textures(gen);
+		free_textures(&gen);
 		mlx_terminate(mlx);
-		free_t_map(c_map);
 	}
 	return (EXIT_SUCCESS);
-}
-
-void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
-{
-	t_vector	d;
-	t_vector	s;
-	float		err;
-	float		err2;
-
-	d.x = abs(x2 - x1);
-	d.y = -abs(y2 - y1);
-	s.x = 1;
-	if (x1 > x2)
-		s.x = -0.1;
-	s.y = 1;
-	if (y1 > y2)
-		s.y = -0.1;
-	err = d.x + d.y;
-	while (1)
-	{
-		if ((x1 <= WIDTH && x1 >= 0) && (y1 >= 0 && y1 <= HEIGHT))
-			mlx_put_pixel(gen->minimap, x1, y1, 0xFF0000FF);
-		if (x1 == x2 && y1 == y2)
-			break ;
-		err2 = 2 * err;
-		if (err2 >= d.y)
-		{
-			err += d.y;
-			x1 += s.x;
-		}
-		if (err2 <= d.x)
-		{
-			err += d.x;
-			y1 += s.y;
-		}
-	}
 }
 
 void	render_screen(void *param)
@@ -105,7 +68,8 @@ void	render_screen(void *param)
 	mlx_set_instance_depth(&gen->win->instances[0], 1);
 	mlx_image_to_window(gen->mlx, gen->minimap, 0, 0);
 	mlx_set_instance_depth(&gen->minimap->instances[0], 2);
-	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
+	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x \
+	* gen->sq_size, gen->player.y * gen->sq_size);
 	mlx_set_instance_depth(&gen->player.img->instances[0], 3);
 	gen->draw = 0;
 }

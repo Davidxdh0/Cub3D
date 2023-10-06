@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 11:21:49 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 21:13:11 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	parse_textures(char *line, t_map *map, char *word)
 	char	**words;
 
 	i = 0;
+	line[ft_strlen(line) - 1] = '\0';
 	words = ft_split(line, ' ');
 	if (ft_arrlen(words) != 2)
 		error_free("parse_textures went wrong", map);
-	words[1][ft_strlen(words[1]) - 1] = '\0';
 	i = open_file(words[1]);
 	close(i);
 	if (!strcmp(words[0], "NO") && map->txtrs.no == NULL)
@@ -38,7 +38,6 @@ int	parse_textures(char *line, t_map *map, char *word)
 	return (type_value(word));
 }
 
-// line[ft_strlen(line) - 1] = '\0';
 int	parse_colors(char *line, t_map *c_map, char *word)
 {
 	char	**colors;
@@ -53,7 +52,7 @@ int	parse_colors(char *line, t_map *c_map, char *word)
 		error_free("parse_colors values not three words", c_map);
 	get_colors(c_map, words, colors);
 	ft_free_arr(words);
-	ft_free_arr(colors); 
+	ft_free_arr(colors);
 	return (type_value(word));
 }
 
@@ -86,7 +85,6 @@ int	parse_map(char *str, t_map *c_map, int y)
 	return (1);
 }
 
-// 1 " " n s w e
 char	start_position(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
