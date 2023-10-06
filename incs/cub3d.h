@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/04 14:56:54 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 10:23:55 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define SIZE HEIGHT / 4
-
+# define SIZE HEIGHT/4
 
 typedef struct s_vector
 {
@@ -45,17 +44,17 @@ typedef struct s_player
 
 typedef struct s_gen
 {
-	mlx_t			*mlx;
-	mlx_image_t		*win;
-	mlx_image_t		*bg;
-	mlx_image_t		*minimap;
-	t_player		player;
-	t_txtrs			txtrs;
-	char			**map;
-	int				width;
-	int				height;
-	int				sq_size;
-	int				draw;
+	mlx_t		*mlx;
+	mlx_image_t	*win;
+	mlx_image_t	*bg;
+	mlx_image_t	*minimap;
+	t_player	player;
+	t_txtrs		txtrs;
+	char		**map;
+	int			width;
+	int			height;
+	int			sq_size;
+	int			draw;
 }				t_gen;
 
 typedef struct s_ray
@@ -68,8 +67,8 @@ typedef struct s_ray
 	double	deltadist_x;
 	double	deltadist_y;
 	double	walldist;
-	double		map_x;
-	double		map_y;
+	double	map_x;
+	double	map_y;
 	int		step_x;
 	int		step_y;
 	int		hit;
@@ -78,7 +77,7 @@ typedef struct s_ray
 	int		start;
 	int		end;
 	int		color;
-}				t_ray;
+}			t_ray;
 
 typedef enum e_wall
 {
@@ -87,7 +86,6 @@ typedef enum e_wall
 	WEST,
 	EAST
 }			t_wall;
-
 
 void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(void *param);
@@ -100,9 +98,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	render_screen(void *param);
 void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap);
 
-
 //keys.c
-// void	walk(t_gen *gen);
 void	close_escape(t_gen *gen);
 void	rotate_right(t_gen *gen);
 void	rotate_left(t_gen *gen);
@@ -112,9 +108,10 @@ void	walk_left(t_gen *gen, double move);
 void	walk_right(t_gen *gen, double move);
 
 //collision
-int	can_move_y(t_gen *gen, int speed);
-int	can_move_x(t_gen *gen, int speed);
+int		can_move_y(t_gen *gen, int speed);
+int		can_move_x(t_gen *gen, int speed);
 
 //free
 void	free_textures(t_gen gen);
+
 #endif

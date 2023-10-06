@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 16:23:27 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 11:18:21 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ t_map	*init_map(void)
 	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		return (NULL);
-	map->txtrs.NO = NULL;
-	map->txtrs.SO = NULL;
-	map->txtrs.WE = NULL;
-	map->txtrs.EA = NULL;
-	map->txtrs.C = 0;
-	map->txtrs.F = 0;
+	map->txtrs.no = NULL;
+	map->txtrs.so = NULL;
+	map->txtrs.we = NULL;
+	map->txtrs.ea = NULL;
+	map->txtrs.ceil = 0;
+	map->txtrs.floor = 0;
 	map->map = NULL;
-	map->startY = -1;
-	map->startX = -1;
+	map->start_y = -1;
+	map->start_x = -1;
 	map->y_start = -1;
 	map->x_start = -1;
 	map->y_max = -1;
@@ -40,10 +40,10 @@ t_map	*init_map(void)
 void	init_textures(t_gen *gen)
 {
 	
-	gen->txtrs.t_no = mlx_load_png(gen->txtrs.NO);
-	gen->txtrs.t_so = mlx_load_png(gen->txtrs.SO);
-	gen->txtrs.t_we = mlx_load_png(gen->txtrs.WE);
-	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.EA);
+	gen->txtrs.t_no = mlx_load_png(gen->txtrs.no);
+	gen->txtrs.t_so = mlx_load_png(gen->txtrs.so);
+	gen->txtrs.t_we = mlx_load_png(gen->txtrs.we);
+	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.ea);
 	// printf("txt: %d\n", gen->txtrs.t_no->height);
 	// printf("txt: %d\n", gen->txtrs.t_no->width);
 	// printf("txt: %d\n", gen->txtrs.t_no->bytes_per_pixel);

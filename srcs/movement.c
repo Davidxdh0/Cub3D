@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/04 09:13:03 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:23:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	can_move_x(t_gen *gen, int speed)
 	double	y;
 	double diff;
 
-	(void)speed;
-	x = (gen->player.x) + (0.5 * gen->player.dir_x);
+	// (void)speed;
+	x = (gen->player.x) + (speed * gen->player.dir_x);
 	y = (gen->player.y);
 	// printf("move x = x: %f, y: %f, int x %d, int y %d\n", x, y, (int)round(x), (int)round(y));
 	if (x < 1 || x > gen->width - 1.5 || y < 1 || y > gen->height - 1)
@@ -65,9 +65,9 @@ int	can_move_y(t_gen *gen, int speed)
 	double	x;
 	double	y;
 	double diff;
-	(void)speed;
+
 	x = (gen->player.x);
-	y = (gen->player.y) + (0.5 * gen->player.dir_y);
+	y = (gen->player.y) + (speed * gen->player.dir_y);
 	// printf("move y = x: %f, y: %f, int x %d, int y %f inty %d, height %d\n", x, y, (int)round(x), round(y), (int)round(y),  gen->height);
 	if (x < 1 || x > gen->width - 1.5 || y < 1 || y > gen->height - 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 13:05:33 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:21:49 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	parse_textures(char *line, t_map *map, char *word)
 	words[1][ft_strlen(words[1]) - 1] = '\0';
 	i = open_file(words[1]);
 	close(i);
-	if (!strcmp(words[0], "NO") && map->txtrs.NO == NULL)
-		map->txtrs.NO = ft_strdup(words[1]);
-	else if (!strcmp(words[0], "SO") && map->txtrs.SO == NULL)
-		map->txtrs.SO = ft_strdup(words[1]);
-	else if (!strcmp(words[0], "WE") && map->txtrs.WE == NULL)
-		map->txtrs.WE = ft_strdup(words[1]);
-	else if (!strcmp(words[0], "EA") && map->txtrs.EA == NULL)
-		map->txtrs.EA = ft_strdup(words[1]);
+	if (!strcmp(words[0], "NO") && map->txtrs.no == NULL)
+		map->txtrs.no = ft_strdup(words[1]);
+	else if (!strcmp(words[0], "SO") && map->txtrs.so == NULL)
+		map->txtrs.so = ft_strdup(words[1]);
+	else if (!strcmp(words[0], "WE") && map->txtrs.we == NULL)
+		map->txtrs.we = ft_strdup(words[1]);
+	else if (!strcmp(words[0], "EA") && map->txtrs.ea == NULL)
+		map->txtrs.ea = ft_strdup(words[1]);
 	else
 		error_free("parse_textures went wrong", map);
 	ft_free_arr(words);
@@ -69,10 +69,10 @@ int	parse_map(char *str, t_map *c_map, int y)
 	{
 		if (start_position(str[i]))
 		{
-			if (c_map->startY == -1)
+			if (c_map->start_y == -1)
 			{
-				c_map->startX = i;
-				c_map->startY = y;
+				c_map->start_x = i;
+				c_map->start_y = y;
 			}
 			else
 				error_free("Multiple starting positions", c_map);

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 12:51:56 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:12:33 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 		flood_fill(c_map, map, y, x + 1);
 }
 
-// printf("start[y:x]: %d:%d ", c_map.startY, c_map.startX);
-// printf("= '%c'\n", c_map.map[c_map.startY][c_map.startX]);
+// printf("start[y:x]: %d:%d ", c_map.start_y, c_map.start_x);
+// printf("= '%c'\n", c_map.map[c_map.start_y][c_map.start_x]);
 // printf("ymax %d, xmax %d\n", newy, newx);
 void	validate_map(t_map *c_map)
 {
 	char **array;
 
-	flood_fill(c_map, c_map->map, c_map->startY, c_map->startX);
+	flood_fill(c_map, c_map->map, c_map->start_y, c_map->start_x);
 	// print_map(c_map->map, c_map->y_max, c_map->x_max);
 	width_validated_map(c_map);
 	heigth_validated_map(c_map);

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/04 09:08:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:22:09 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	draw_background(t_gen *gen)
 	while (++y < HEIGHT)
 	{
 		if (y < HEIGHT / 2)
-			color = gen->txtrs.C;
+			color = gen->txtrs.ceil;
 		else
-			color = gen->txtrs.F;
+			color = gen->txtrs.floor;
 		x = -1;
 		while (++x < WIDTH)
 			mlx_put_pixel(gen->bg, x, y, color);

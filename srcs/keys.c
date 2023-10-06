@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 06:01:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:41:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	walk_forwards(t_gen *gen, double move)
 {
 	if (can_move_y(gen, 1))
 		gen->player.y += (gen->player.dir_y * move);
-	if (can_move_x(gen, 1))	
+	if (can_move_x(gen, 1))
 		gen->player.x += (gen->player.dir_x * move);
 	gen->player.img->instances->x = gen->player.x * gen->sq_size;
 	gen->player.img->instances->y = gen->player.y * gen->sq_size;

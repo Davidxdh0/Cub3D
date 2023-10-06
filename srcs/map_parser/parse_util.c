@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 04:05:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:17:55 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,9 @@ void	get_colors(t_map *map, char **words, char **colors)
 	rgb = get_rgba(arr[0], arr[1], arr[2], 255);
 	// printf("rgb = %#X\n", rgb);
 	if (!strcmp(words[0], "F"))
-		map->txtrs.F = rgb;
+		map->txtrs.floor = rgb;
 	else if (!strcmp(words[0], "C"))
-		map->txtrs.C = rgb;
+		map->txtrs.ceil = rgb;
 }
 
 // int	count_array(char **array)

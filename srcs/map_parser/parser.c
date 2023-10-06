@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 01:57:18 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 11:12:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parser(char *file, t_map *c_map)
 		line = get_next_line(fd);
 	}
 	free(line);
-	if (c_map->startX == -1)
+	if (c_map->start_x == -1)
 		error_free("No starting positions found", c_map);
 	close (fd);
 
