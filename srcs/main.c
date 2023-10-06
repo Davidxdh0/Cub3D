@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/04 15:17:20 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/06 18:59:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 			return (EXIT_FAILURE);
 		init_gen(&gen, mlx, c_map);
 		draw_background(&gen);
-		drawMap2D(&gen);
+		draw_minimap(&gen);
 		mlx_loop_hook(mlx, movement, &gen);
 		// mlx_scroll_hook(mlx, scrolling, &gen);
 		mlx_loop(mlx);
@@ -51,36 +51,36 @@ int	main(int argc, char *argv[])
 
 void bresenham(t_gen *gen, int x1, int y1, int x2, int y2)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	err2;
+	t_vector	d;
+	t_vector	s;
+	float		err;
+	float		err2;
 
-	dx = abs(x2 - x1);
-	dy = -abs(y2 - y1);
-	sx = 1;
+	d.x = abs(x2 - x1);
+	d.y = -abs(y2 - y1);
+	s.x = 1;
 	if (x1 > x2)
-		sx = -1;
-	sy = 1;
+		s.x = -0.1;
+	s.y = 1;
 	if (y1 > y2)
-		sy = -1;
-	err = dx + dy;
-	while (x1 != x2 && y1 != y2 )
+		s.y = -0.1;
+	err = d.x + d.y;
+	while (1)
 	{
 		if ((x1 <= WIDTH && x1 >= 0) && (y1 >= 0 && y1 <= HEIGHT))
 			mlx_put_pixel(gen->minimap, x1, y1, 0xFF0000FF);
+		if (x1 == x2 && y1 == y2)
+			break ;
 		err2 = 2 * err;
-		if (err2 >= dy && x1 != x2)
+		if (err2 >= d.y)
 		{
-			err += dy;
-			x1 += sx;
+			err += d.y;
+			x1 += s.x;
 		}
-		if (err2 <= dx && y1 != y2)
+		if (err2 <= d.x)
 		{
-			err += dx;
-			y1 += sy;
+			err += d.x;
+			y1 += s.y;
 		}
 	}
 }
@@ -94,7 +94,7 @@ void	render_screen(void *param)
 	x = 0;
 	mlx_delete_image(gen->mlx, gen->win);
 	gen->win = mlx_new_image(gen->mlx, WIDTH, HEIGHT);
-	drawMap2D(gen);
+	draw_minimap(gen);
 	memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
 	while (x < WIDTH)
 	{
@@ -106,11 +106,6 @@ void	render_screen(void *param)
 	mlx_image_to_window(gen->mlx, gen->minimap, 0, 0);
 	mlx_set_instance_depth(&gen->minimap->instances[0], 2);
 	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
-	// mlx_set_instance_depth(&gen->player.img->instances[0], 3);
+	mlx_set_instance_depth(&gen->player.img->instances[0], 3);
 	gen->draw = 0;
 }
-
-
-
-
-

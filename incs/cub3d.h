@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 15:07:56 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 19:07:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ typedef enum e_wall
 void	rotate(mlx_key_data_t data, t_gen *gen);
 void	movement(void *param);
 void	scrolling(void *param);
-void	drawMap2D(t_gen *gen);
+void	draw_minimap(t_gen *gen);
 void	draw_background(t_gen *gen);
 void	cast_ray(t_gen *gen, t_player *player, int x);
 void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	render_screen(void *param);
 void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap);
+void	draw_pixels(t_gen *gen, t_ray *ray, int x);
+void	draw_vision(t_gen *gen, t_player *player, t_ray ray);
 
 //keys.c
 void	close_escape(t_gen *gen);

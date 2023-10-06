@@ -18,27 +18,15 @@ DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include -I libft/$(DIR_I) 
 
-HEADER_FILES = location.h \
-				main.h \
-				minimap.h \
-				cub3d.h \
-				parser.h
+HEADER_FILES = location.h main.h minimap.h cub3d.h parser.h
 
 HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
 
-MAP_PARSER = 	parser.c \
-				error.c \
-				validate_map.c \
-				parse_types.c \
-				parse_util.c \
-				free.c \
-				file_handling.c
+MAP_PARSER = 	parser.c error.c validate_map.c parse_types.c \
+				parse_util.c free.c file_handling.c
 
-MINIMAP =		mlxmain.c
-
-
-SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c player.c\
-			$(addprefix map_parser/, $(MAP_PARSER)) \
+SRCS =		main.c init.c movement.c minimap.c raycasting.c keys.c player.c \
+			textures.c $(addprefix map_parser/, $(MAP_PARSER))
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
@@ -79,15 +67,11 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
-debug: fclean 
-	@$(MAKE) re CFLAGS="-DTESTMAP=1" DEBUG=1 
-	./${NAME} maps/default.cub
+debug:
+	@$(MAKE) re DEBUG=1 
 
 run: all
 	./${NAME} maps/default.cub
-
-map: 	clean
-		$(MAKE) CFLAGS="-DTESTMAP=1"
 
 main: all
 	./${NAME} maps/main.cub
@@ -107,4 +91,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
