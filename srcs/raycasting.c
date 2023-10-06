@@ -6,11 +6,23 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/05 17:33:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 15:16:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+mlx_texture_t	*choose_texture(t_gen *gen, t_ray *ray)
+{
+	if (ray->side == 0 && ray->raydir_x > 0)
+		return (gen->txtrs.t_ea);
+	else if (ray->side == 0 && ray->raydir_x < 0)
+		return (gen->txtrs.t_we);
+	else if (ray->side == 1 && ray->raydir_y > 0)
+		return (gen->txtrs.t_so);
+	else
+		return (gen->txtrs.t_no);
+}
 
 int	get_color(int color)
 {
@@ -24,30 +36,32 @@ int	get_color(int color)
 		return (0xFF0000FF);
 }
 
-int	get_color_textures(uint8_t *pixel)
+int	get_color_textures(t_gen *gen, t_ray *ray, int x, int y)
 {
+	uint8_t			*pixel;
+	mlx_texture_t	*text;
+
+	text = choose_texture(gen, ray);
+	pixel = &text->pixels[(text->width * y + x) * 4];
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
 void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 {
 		//texturing calculations
-	int texNum = 0;
-	texNum++;
+	int		texY = 0;
+	int		texX = 0;
+
 	if (ray->side == 0)
 		ray->walldist = ray->sidedist_x - ray->deltadist_x;
 	else 
 		ray->walldist = ray->sidedist_y - ray->deltadist_y;
-	int texY = 0;
-	if (TESTMAP)
-		texNum = gen->map[(int)ray->map_y][(int)ray->map_x] - 1;
-	double wallX;
 	if (ray->side == 0)
-		wallX = gen->player.y + ray->walldist * ray->raydir_y;
+		ray->wall_x = gen->player.y + ray->walldist * ray->raydir_y;
 	else
-		wallX = gen->player.x + ray->walldist * ray->raydir_x;
-	wallX -= floor(wallX);
-	printf("wallX: %f\n", wallX);
+		ray->wall_x = gen->player.x + ray->walldist * ray->raydir_x;
+	ray->wall_x -= floor(ray->wall_x);
+	// printf("ray->wall_x: %f\n", ray->wall_x);
 	ray->height = (int)(HEIGHT / ray->walldist);
 	ray->start = -ray->height / 2 + HEIGHT / 2;
 	ray->end = ray->height / 2 + HEIGHT / 2;
@@ -55,7 +69,7 @@ void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 		ray->start = 0;
 	if (ray->end >= HEIGHT)
 		ray->end = HEIGHT - 1;
-	int texX = (int)(wallX * (double)(gen->txtrs.t_no->width));
+	texX = (int)(ray->wall_x * (double)(gen->txtrs.t_no->width));
 	if(ray->side == 0 && ray->raydir_x > 0) texX = gen->txtrs.t_no->width - texX - 1;
 	if(ray->side == 1 && ray->raydir_y < 0) texX = gen->txtrs.t_no->width - texX - 1;
 	double step = 1.0 * gen->txtrs.t_no->height / ray->height;
@@ -65,7 +79,7 @@ void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
  	{
 		texY = (int)texPos & (gen->txtrs.t_no->height - 1);
 		texPos += step;
-		ray->color = get_color_textures(&gen->txtrs.t_no->pixels[(gen->txtrs.t_no->height * texY + texX) * 4]);
+		ray->color = get_color_textures(gen, ray, texX, texY);
 		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
 		++ray->start;
 	}

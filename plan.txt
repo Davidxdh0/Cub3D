@@ -1,4 +1,9 @@
-textures
-mouse movement
-eventueel deuren/sprites
-bonus kijken
+not working yet:
+    wall collision
+
+want to do:
+    mouse movement
+
+maybe:
+    doors
+    sprites

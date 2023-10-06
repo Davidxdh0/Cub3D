@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 11:23:51 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 15:07:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	can_move_x(t_gen *gen, int speed)
 	if (gen->map[(int)round(y)][(int)round(x)] == '1' || gen->map[(int)round(y)][(int)round(x - 1)] == '1' \
 		|| gen->map[(int)round(y - 1)][(int)round(x)] == '1' || gen->map[(int)round(y - 1)][(int)round(x) - 1] == '1')
 	{
-		// printf("wallx: %d %d ", (int)round(y), (int)round(x));
+		// printf("wall_x: %d %d ", (int)round(y), (int)round(x));
 		diff = round(x);
 		if (fabs(x - diff) < 0.5 )//&& fabs(diff - x) < 0.3)
 		{
