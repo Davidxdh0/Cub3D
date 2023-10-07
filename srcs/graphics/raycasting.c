@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 19:06:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 23:17:07 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	ray.map_y = (int)player->y;
 	ray.deltadist_x = 1e30;
 	ray.deltadist_y = 1e30;
+	ray.side = 0;
 	calc_side_dist(player, &ray);
 	calc_wall_dist(gen, &ray);
 	draw_vert_line_textures(gen, &ray, x);

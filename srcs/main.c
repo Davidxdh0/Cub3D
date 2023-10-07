@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 20:51:41 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 13:34:26 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	main(int argc, char *argv[])
 
 void	render_screen(void *param)
 {
-	t_gen	*gen;
-	int		x;
+	t_gen		*gen;
+	int			x;
+	t_vector	pos;
 
 	gen = (t_gen *)param;
+	
 	x = 0;
 	mlx_delete_image(gen->mlx, gen->win);
 	gen->win = mlx_new_image(gen->mlx, WIDTH, HEIGHT);
@@ -64,12 +66,13 @@ void	render_screen(void *param)
 		cast_ray(gen, &gen->player, x);
 		++x;
 	}
+	pos.x = gen->player.x * gen->sq_size;
+	pos.y = gen->player.y * gen->sq_size;
 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);
 	mlx_set_instance_depth(&gen->win->instances[0], 1);
 	mlx_image_to_window(gen->mlx, gen->minimap, 0, 0);
 	mlx_set_instance_depth(&gen->minimap->instances[0], 2);
-	mlx_image_to_window(gen->mlx, gen->player.img, gen->player.x \
-	* gen->sq_size, gen->player.y * gen->sq_size);
-	mlx_set_instance_depth(&gen->player.img->instances[0], 3);
+	mlx_image_to_window(gen->mlx, gen->player.img, pos.x, pos.y);
+	mlx_set_instance_depth(&gen->player.img->instances[0], 5);
 	gen->draw = 0;
 }

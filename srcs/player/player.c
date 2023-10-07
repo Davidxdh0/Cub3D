@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 14:51:52 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 20:35:21 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/06 23:30:43 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,4 @@ void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->player.y = cmap->y_start + 0.5;
 	gen->txtrs = cmap->txtrs;
 	init_horiz_plane(gen);
-	// // move to minimap file
-	// int	i;
-	// int	j;
-	// i = -1;
-	// while (++i < size)
-	// {
-	// 	j = -1;
-	// 	while (++j < size)
-	// 		mlx_put_pixel(gen->player.img, i, j, 0xFF00FFFF);
-	// }
-	// mlx_image_to_window(gen->mlx, gen->player.img, 
-	// gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
-	// mlx_set_instance_depth(&gen->player.img->instances[0], 2);
 }

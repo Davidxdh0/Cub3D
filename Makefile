@@ -23,7 +23,7 @@ HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
 
 MAP_PARSER = parser.c validate_map.c parse_types.c parse_util.c file_handling.c
 PLAYER = player.c movement.c keys.c keys2.c
-GRAPHICS = raycasting.c textures.c minimap.c
+GRAPHICS = raycasting.c textures.c minimap.c bresenham.c
 
 SRCS =		main.c init.c free.c error.c \
 $(addprefix map_parser/, $(MAP_PARSER)) \
