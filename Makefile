@@ -18,7 +18,7 @@ DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include -I libft/$(DIR_I) 
 
-HEADER_FILES = location.h main.h minimap.h cub3d.h parser.h
+HEADER_FILES = cub3d.h parser.h player.h graphics.h
 HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
 
 MAP_PARSER = parser.c validate_map.c parse_types.c parse_util.c file_handling.c

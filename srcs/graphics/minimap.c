@@ -6,10 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/07 21:02:50 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:25:19 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "graphics.h"
 #include "cub3d.h"
 
 static void	draw_square(t_gen *gen, int x, int y, int color)
@@ -44,7 +45,7 @@ static void	draw_player(t_gen *gen)
 		while (++x < size)
 			mlx_put_pixel(gen->player.img, x, y, 0xFF00FFFF);
 	}
-	mlx_image_to_window(gen->mlx, gen->player.img, 
+	mlx_image_to_window(gen->mlx, gen->player.img, \
 	gen->player.x * gen->sq_size, gen->player.y * gen->sq_size);
 	mlx_set_instance_depth(&gen->player.img->instances[0], 2);
 }

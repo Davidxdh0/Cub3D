@@ -6,10 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 23:17:07 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:25:03 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "graphics.h"
 #include "cub3d.h"
 
 static void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
@@ -63,7 +64,7 @@ static void	calc_side_dist(t_player *player, t_ray *ray)
 	}
 }
 
-void	calc_wall_dist(t_gen *gen, t_ray *ray)
+static void	calc_wall_dist(t_gen *gen, t_ray *ray)
 {
 	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0')
 	{

@@ -6,17 +6,13 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/07 13:34:26 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:21:40 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 #include "parser.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <MLX42/MLX42.h>
-#include <math.h>
+#include "graphics.h"
+#include "player.h"
 #include "cub3d.h"
 
 //valgrind --leak-check=full --show-leak-kinds=all 
@@ -55,7 +51,6 @@ void	render_screen(void *param)
 	t_vector	pos;
 
 	gen = (t_gen *)param;
-	
 	x = 0;
 	mlx_delete_image(gen->mlx, gen->win);
 	gen->win = mlx_new_image(gen->mlx, WIDTH, HEIGHT);

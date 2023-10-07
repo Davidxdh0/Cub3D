@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 21:11:47 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:29:29 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ void	width_validated_map(t_map *c_map)
 
 void	heigth_validated_map(t_map *c_map)
 {
-	int y;
-	int x;
-	int y_max;
+	int	y;
+	int	x;
+	int	y_max;
 
 	y = 0;
 	y_max = 0;
@@ -144,10 +144,10 @@ void	heigth_validated_map(t_map *c_map)
 	}
 	c_map->y_max = y_max;
 }
+
 // 	printf("y: %d > %d && %d > %d + %d\n", y, (c_map->y_start - 1), y, c_map->y_start, ymax);
 // 	printf("x: %d > %d && %d > %d\n", x, (c_map->x_start - 1), x, c_map->x_start + xmax);
 //	printf("Lijn kopieren, y;%d ystart: %d, xstart %d\n", y, c_map->y_start, c_map->x_start);
-//	rintf("y %d, x %d\n", posy, posx);
 void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 {
 	int	y;
@@ -178,7 +178,7 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax)
 			posy++;
 	}
 }
-// printf("find new start pos x %d\n", x);
+
 void	find_new_start_pos(t_map *map)
 {
 	int	y;

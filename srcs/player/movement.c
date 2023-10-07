@@ -6,10 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 20:33:47 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:22:40 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "player.h"
+#include "graphics.h"
 #include "cub3d.h"
 
 // static int	can_move(t_gen *gen, int speed)

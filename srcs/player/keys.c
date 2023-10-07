@@ -6,10 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 20:33:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/07 20:22:52 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "player.h"
 #include "cub3d.h"
 
 void	walk_forwards(t_gen *gen)
