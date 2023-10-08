@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/07 20:29:29 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 16:47:47 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	width_validated_map(t_map *c_map)
 		y++;
 	}
 	// x_max++;
-	printf("x_start: %d, cmap->x_start: %d\n", x_start, c_map->x_start);
+	//printf("x_start: %d, cmap->x_start: %d\n", x_start, c_map->x_start);
 	c_map->x_max = x_max;
 }
 

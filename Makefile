@@ -7,7 +7,8 @@ CYAN=\033[1;36m
 END=\033[0m
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -Ofast
+CFLAGS = -Wall -Werror -Wextra 
+#CFLAGS += -g -fsanitize=address
 NAME = cub3d
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
@@ -18,17 +19,26 @@ DIR_O = obj
 
 INCS = -I $(DIR_I) -IMLX42/include -I libft/$(DIR_I) 
 
-HEADER_FILES = cub3d.h parser.h player.h graphics.h
-HEADERS = $(addprefix $(DIR_I)/, ${HEADER_FILES})
+MAP_PARSER	= 	parser.c \
+				validate_map.c \
+				parse_types.c \
+				parse_util.c \
+				file_handling.c
 
-MAP_PARSER = parser.c validate_map.c parse_types.c parse_util.c file_handling.c
-PLAYER = player.c movement.c keys.c keys2.c
-GRAPHICS = raycasting.c textures.c minimap.c bresenham.c
+GRAPIHCS	=	bresenham.c \
+				minimap.c \
+				raycasting.c \
+				textures.c
 
-SRCS =		main.c init.c free.c error.c \
-$(addprefix map_parser/, $(MAP_PARSER)) \
-$(addprefix player/, $(PLAYER)) \
-$(addprefix graphics/, $(GRAPHICS))
+PLAYER		=	keys.c \
+				keys2.c \
+				movement.c \
+				player.c
+
+SRCS =		main.c error.c free.c init.c \
+			$(addprefix map_parser/, $(MAP_PARSER)) \
+			$(addprefix graphics/, $(GRAPIHCS)) \
+			$(addprefix player/, $(PLAYER))
 
 OBJS =  ${SRCS:%.c=${DIR_O}/%.o}
 
@@ -47,8 +57,12 @@ else
 endif
 
 ifdef DEBUG
-CFLAGS += -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+else
+CFLAGS = -Wall -Werror -Wextra
 endif
+
+HOST := $(shell hostname)
 
 all: ${NAME}
 
@@ -56,7 +70,7 @@ ${MLX}:
 	@cmake MLX42 -B MLX42/build
 	@make -C MLX42/build -j4
 
-${NAME}: ${MLX} ${OBJS} ${HEADERS}
+${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
 	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
@@ -67,19 +81,19 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
-debug:
-	@$(MAKE) re DEBUG=1 
+debug: fclean
+	@make DEBUG=1
 
 run: all
-	./${NAME} maps/default.cub
+	./cub3d maps/default.cub
 
-main: all
-	./${NAME} maps/main.cub
+run2: all
+	./cub3d maps/defaultswitched.cub
 
 clean:
 # @make clean -s -C libft 
-#@echo "${RED}Removing MLX42${END}"
-# @rm -rf MLX42/build
+	@echo "${RED}Removing MLX42${END}"
+	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"
@@ -91,4 +105,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re

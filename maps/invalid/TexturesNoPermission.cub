@@ -1,0 +1,17 @@
+NO textures/blue_wall_no_permission.png
+SO textures/blue_wall_no_permission.png
+WE textures/blue_wall_no_permission.png
+EA textures/blue_wall_no_permission.png
+
+F 10,100,0
+C 10,30,0
+
+111111111
+10S000001
+100000001
+100000001
+100010001
+100000001
+100000001
+100000001
+111111111

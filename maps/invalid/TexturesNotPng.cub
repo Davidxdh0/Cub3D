@@ -1,0 +1,17 @@
+NO textures/blue_wall.txt
+SO textures/blue_wall.txt
+WE textures/blue_wall.txt
+EA textures/blue_wall.txt
+
+F 10,100,0
+C 10,30,0
+
+111111111
+10S000001
+100000001
+100000001
+100010001
+100000001
+100000001
+100000001
+111111111
