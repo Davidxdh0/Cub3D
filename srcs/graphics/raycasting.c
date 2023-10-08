@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/07 20:25:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 14:53:08 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	draw_vert_line_textures(t_gen *gen, t_ray *ray, int x)
 	draw_pixels(gen, ray, x);
 }
 
-static void	calc_side_dist(t_player *player, t_ray *ray)
+void	calc_side_dist(t_player *player, t_ray *ray)
 {
 	if (ray->raydir_x != 0)
 		ray->deltadist_x = fabs(1 / ray->raydir_x);
@@ -64,7 +64,7 @@ static void	calc_side_dist(t_player *player, t_ray *ray)
 	}
 }
 
-static void	calc_wall_dist(t_gen *gen, t_ray *ray)
+void	calc_wall_dist(t_gen *gen, t_ray *ray)
 {
 	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0')
 	{

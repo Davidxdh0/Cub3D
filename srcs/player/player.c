@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 14:51:52 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 23:30:43 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 12:42:47 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->player.x = cmap->x_start + 0.5;
 	gen->player.y = cmap->y_start + 0.5;
 	gen->txtrs = cmap->txtrs;
+	free(cmap);
 	init_horiz_plane(gen);
 }

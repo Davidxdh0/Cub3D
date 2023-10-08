@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/07 20:25:19 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 13:16:44 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,16 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 		line.x = player->x + ray.walldist * ray.raydir_x;
 	line.x *= gen->sq_size;
 	line.y *= gen->sq_size;
-	if (ray.raydir_x < 0)
+	if (ray.raydir_x < 0 && ray.side == 0)
 		line.x += gen->sq_size;
-	if (ray.raydir_y < 0)
+	if (ray.raydir_y < 0 && ray.side == 1)
 		line.y += gen->sq_size;
 	pos.x = player->x * gen->sq_size + gen->sq_size / 4;
 	pos.y = player->y * gen->sq_size + gen->sq_size / 4;
+	return ;
 	// bresenham(gen, &pos, &line);
-	bresenham(gen, pos.x, pos.y, line.x, line.y);
+	if (fabs(pos.x - line.x) < 0.5 || fabs(pos.y - line.y) < 0.5)
+		return ;
+	else
+		bresenham(gen, pos.x, pos.y, line.x, line.y);
 }

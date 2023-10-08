@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 21:12:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 12:47:53 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_width_height(t_map *map, int start, int fd)
 		while (line[i] && ft_isspace(line[i]))
 			i++;
 		if (line[i] && ft_isdigit(line[i]))
-		{	
+		{
 			if (start == 0)
 				start = map->y_max;
 			while (line[i])

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:33:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/07 20:12:48 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 13:00:30 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	walk_left(t_gen *gen);
 void	walk_right(t_gen *gen);
 
 //collision
-int		can_move_y(t_gen *gen, int speed);
-int		can_move_x(t_gen *gen, int speed);
+// int		can_move_y(t_gen *gen, int speed);
+// int		can_move_x(t_gen *gen, int speed);
+int		can_move(t_gen *gen, int xspeed, int yspeed);
 
 #endif

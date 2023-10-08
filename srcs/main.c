@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/07 20:21:40 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 13:27:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int argc, char *argv[])
 		// mlx_scroll_hook(mlx, scrolling, &gen);
 		mlx_loop(mlx);
 		free_textures(&gen);
+		ft_free_arr(gen.map);
 		mlx_terminate(mlx);
 	}
 	return (EXIT_SUCCESS);
