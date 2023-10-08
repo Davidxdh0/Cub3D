@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/08 14:52:59 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 15:57:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	can_move(t_gen *gen, int xspeed, int yspeed)
 	t_player	*player;
 
 	player = &gen->player;
-	ray.camera_x = WIDTH / (double)WIDTH - 1;
-	ray.raydir_x = player->dir_x + player->plane_x * ray.camera_x * xspeed;
-	ray.raydir_y = player->dir_y + player->plane_y * ray.camera_x * yspeed;
+	ray.camera_x = 2 * (WIDTH / 2) / (HEIGHT - 1);
+	ray.raydir_x = (player->dir_x + player->plane_x * ray.camera_x) * xspeed;
+	ray.raydir_y = (player->dir_y + player->plane_y * ray.camera_x) * yspeed;
 	ray.map_x = (int)player->x;
 	ray.map_y = (int)player->y;
 	ray.deltadist_x = 1e30;
@@ -34,7 +34,11 @@ int	can_move(t_gen *gen, int xspeed, int yspeed)
 		ray.walldist = ray.sidedist_x - ray.deltadist_x;
 	else
 		ray.walldist = ray.sidedist_y - ray.deltadist_y;
-	if (ray.walldist < 0.5)
+	(void)xspeed;
+	(void)yspeed;
+	if(gen->map[(int)(player->y)][(int)(player->x + ray.raydir_x * 0.5)] == '1' && fabs(ray.walldist) < 0.5)
+		return (0);
+    if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x)] == '1' && fabs(ray.walldist) < 0.5)
 		return (0);
 	return (1);
 }

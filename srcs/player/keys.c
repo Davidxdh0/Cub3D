@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/08 15:25:03 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 15:58:54 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	walk_forwards(t_gen *gen)
 
 	move = gen->mlx->delta_time * 5.0;
 	player = &gen->player;
-	if (!can_move(gen, move, move))
+	if (!can_move(gen, 1, 1))// || !can_move(gen, -1, 1) || !can_move(gen, 1, -1))
 		return ;
 	player->x += (player->dir_x * move);
 	player->y += (player->dir_y * move);
@@ -40,7 +40,7 @@ void	walk_backwards(t_gen *gen)
 
 	move = gen->mlx->delta_time * 5.0;
 	player = &gen->player;
-	if (!can_move(gen, -move, -move))
+	if (!can_move(gen, -1, -1))// || !can_move(gen, -1, 1) || !can_move(gen, 1, -1))
 		return ;
 	player->x -= (player->dir_x * move);
 	player->y -= (player->dir_y * move);
@@ -60,7 +60,7 @@ void	walk_left(t_gen *gen)
 
 	move = gen->mlx->delta_time * 5.0;
 	player = &gen->player;
-	if (!can_move(gen, -move, move))
+	if (!can_move(gen, -1, 1))// || !can_move(gen, 1, 1) || !can_move(gen, -1, -1))
 		return ;
 	player->x -= (player->dir_y * move);
 	player->y += (player->dir_x * move);
@@ -80,7 +80,7 @@ void	walk_right(t_gen *gen)
 
 	move = gen->mlx->delta_time * 5.0;
 	player = &gen->player;
-	if (!can_move(gen, move, -move))
+	if (!can_move(gen, 1, -1))// || !can_move(gen, 1, 1) || !can_move(gen, -1, -1))
 		return ;
 	player->x += (player->dir_y * move);
 	player->y -= (player->dir_x * move);
