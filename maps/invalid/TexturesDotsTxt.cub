@@ -1,7 +1,7 @@
-NO textures/invalid/blue_wall.txt
-SO textures/invalid/blue_wall.txt
+NO textures/invalid/blue._wa.l.l.png
+SO textures/invalid/blu,e_wa,l,.pngl.png
 WE textures/invalid/blue_wall.txt
-EA textures/invalid/blue_wall.txt
+EA textures/blue_wall.png
 
 F 10,100,0
 C 10,30,0

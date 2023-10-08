@@ -84,6 +84,8 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 debug: fclean
 	@make DEBUG=1
 
+test: all
+	./testinvalidmaps.sh
 run: all
 	./cub3d maps/default.cub
 

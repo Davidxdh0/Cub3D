@@ -6,30 +6,34 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/08 16:47:47 by daaf          ########   odam.nl         */
+/*   Updated: 2023/10/08 18:08:39 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // printf("valid_space y:x, %d:%d\n", y, x);
-void	valid_space(char **arr, int x, int y)
+void	valid_space(t_map *c_map, char **arr, int x, int y)
 {
-	if (arr[y - 1][x] == ' ' || !arr[y - 1][x])
+	// printf("valid_space y:x, %d:%d\n", y, x);
+	// printf("xmax%d ymax%d\n", c_map->x_max, c_map->y_max);
+	if ((x == c_map->x_max - 1 || y == c_map->y_max - 1) && arr[y][x] != '1')
+		error_exit("No walls at border");
+	if ( !arr[y - 1][x] || arr[y - 1][x] == ' ')
 		error_exit("No walls at N edge");
-	if (arr[y + 1][x] == ' ' || !arr[y + 1][x])
+	if ( !arr[y + 1][x] || arr[y + 1][x] == ' ')
 		error_exit("No walls at S edge");
-	if (arr[y][x - 1] == ' ' || !arr[y][x - 1])
+	if (!arr[y][x - 1] || arr[y][x - 1] == ' ')
 		error_exit("No walls at W edge");
-	if (arr[y][x + 1] == ' ' || !arr[y][x + 1])
+	if (!arr[y][x + 1] || arr[y][x + 1] == ' ')
 		error_exit("No walls at E edge");
-	if (arr[y - 1][x - 1] == ' ' || !arr[y - 1][x - 1])
+	if ( !arr[y - 1][x - 1] || arr[y - 1][x - 1] == ' ')
 		error_exit("No walls at NW edge");
-	if (arr[y - 1][x + 1] == ' ' || !arr[y - 1][x + 1])
+	if (!arr[y - 1][x + 1] || arr[y - 1][x + 1] == ' ')
 		error_exit("No walls at NE edge");
-	if (arr[y + 1][x + 1] == ' ' || !arr[y + 1][x + 1])
+	if (!arr[y + 1][x + 1] || arr[y + 1][x + 1] == ' ')
 		error_exit("No walls at SE edge");
-	if (arr[y + 1][x - 1] == ' ' || !arr[y + 1][x - 1])
+	if (!arr[y + 1][x - 1] || arr[y + 1][x - 1] == ' ')
 		error_exit("No walls at SW edge");
 	if (arr[y][x] != 'N' && arr[y][x] != 'E' && \
 		arr[y][x] != 'S' && arr[y][x] != 'W')
@@ -39,12 +43,12 @@ void	valid_space(char **arr, int x, int y)
 void	flood_fill(t_map *c_map, char **map, int y, int x)
 {
 	if (x == 0 || x == c_map->x_max)
-		error_exit("No walls at X edge");
+		error_exit("No walls at sides border");
 	if (y == 0 || y == c_map->y_max)
-		error_exit("No walls at Y edge");
+		error_exit("No walls at north or south border");
 	if (map[y][x] == '.')
 		return ;
-	valid_space(map, x, y);
+	valid_space(c_map, map, x, y);
 	if (map[y - 1][x] != '.' && map[y - 1][x] == '0')
 		flood_fill(c_map, map, y - 1, x);
 	if (map[y + 1][x] != '.' && map[y + 1][x] == '0')
@@ -55,10 +59,10 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 		flood_fill(c_map, map, y, x + 1);
 	if (map[y - 1][x - 1] != '.' && map[y - 1][x - 1] == '0')
 		flood_fill(c_map, map, y - 1, x - 1);
+	if (map[y - 1][x + 1] != '.' && map[y - 1][x + 1] == '0')
+		flood_fill(c_map, map, y - 1, x + 1);
 	if (map[y + 1][x + 1] != '.' && map[y + 1][x + 1] == '0')
 		flood_fill(c_map, map, y + 1, x + 1);
-	if (map[y + 1][x + 1] != '.' && map[y + 1][x + 1] == '0')
-		flood_fill(c_map, map, y, x - 1);
 	if (map[y + 1][x - 1] != '.' && map[y + 1][x - 1] == '0')
 		flood_fill(c_map, map, y, x + 1);
 }

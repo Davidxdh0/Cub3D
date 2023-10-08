@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/07 20:16:35 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 18:15:48 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ char	*get_first_word(char *line);
 void	print_map(char **array, int ymax, int xmax);
 char	**allocate_map(char **map, int y, int x);
 void	get_colors(t_map *map, char **words, char **colors);
-void	check_extension(char *file);
+void	check_extension(char *file, char *ext);
 
 //validate_map.c
-void	valid_space(char **array, int x, int y);
+void	valid_space(t_map *c_map, char **arr, int x, int y);
 void	validate_map(t_map *c_map);
 void	flood_fill(t_map *c_map, char **map, int x, int y);
 void	heigth_validated_map(t_map *c_map);

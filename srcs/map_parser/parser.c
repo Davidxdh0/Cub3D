@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 21:07:36 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 18:19:00 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	parse_line(char *line, t_map *map)
 	static int	colors = 0;
 	static int	textures = 0;
 
-	if (line[0] == '\n')
+	if (line[0] == '\n' && map_bool == 0)
 		return ;
+	if (line[0] == '\n' && map_bool != 0)
+		map_bool = 0;
 	word = get_first_word(line);
 	if (word && (!ft_strncmp(word, "F", 2) \
 	|| !ft_strncmp(word, "C", 2)) && !map_bool)
@@ -36,24 +38,28 @@ void	parse_line(char *line, t_map *map)
 		error_free("Invalid Textures or Colors", map);
 	if (word)
 		free(word);
+	// if (map_bool == 0 && colors == 5 && textures == 57)
+	// 	error_free("Invalid Map", map);
 }
 
 void	parser(char *file, t_map *c_map)
 {
 	int		fd;
 	char	*line;
-
-	check_extension(file);
+	int		first;
+	
+	check_extension(file, ".cub");
 	fd = open_file(file);
 	check_width_height(c_map, 0, fd);
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
 	fd = open_file(file);
 	line = get_next_line(fd);
-	parse_line(line, c_map);
-	while (line && line != NULL)
+	first = 1;
+	while ((line && line != NULL) || first == 1)
 	{
 		parse_line(line, c_map);
 		free(line);
+		first = 0;
 		line = get_next_line(fd);
 	}
 	free(line);

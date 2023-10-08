@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 21:13:11 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/08 18:18:53 by daaf          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	parse_textures(char *line, t_map *map, char *word)
 		error_free("parse_textures went wrong", map);
 	i = open_file(words[1]);
 	close(i);
+	check_extension(words[1], ".png");
 	if (!strcmp(words[0], "NO") && map->txtrs.no == NULL)
 		map->txtrs.no = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "SO") && map->txtrs.so == NULL)
