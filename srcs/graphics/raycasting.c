@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 22:17:54 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 00:06:44 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,3 +109,53 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	draw_vert_line_textures(gen, &ray, x);
 	draw_vision(gen, player, ray);
 }
+
+// void	floor_texture(t_gen *gen, t_player *p, int x)
+// {
+// 	t_ray	ray;
+// 	int		y;
+
+// 	y = HEIGHT / 2 + 1;
+// 	while (y < HEIGHT)
+// 	{
+//       // rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
+//       float rayDirX0 = p->dir_x - p->plane_x;
+//       float rayDirY0 = p->dir_y - p->plane_y;
+//       float rayDirX1 = p->dir_x + p->plane_x;
+//       float rayDirY1 = p->dir_y + p->plane_y;
+//       int pl = y - HEIGHT / 2;
+//       float posZ = 0.5 * HEIGHT;
+//       float rowDistance = posZ / pl;
+//       float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIDTH;
+//       float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIDTH;
+//       float floorX = p->x + rowDistance * rayDirX0;
+//       float floorY = p->y + rowDistance * rayDirY0;
+//       for(int x = 0; x < WIDTH; ++x)
+//       {
+//         int cellX = (int)(floorX);
+//         int cellY = (int)(floorY);
+//         int tx = (int)(gen->txtrs.t_ea->width * (floorX - cellX)) & (gen->txtrs.t_ea->width - 1);
+//         int ty = (int)(gen->txtrs.t_ea->height * (floorY - cellY)) & (gen->txtrs.t_ea->height - 1);
+//         floorX += floorStepX;
+//         floorY += floorStepY;
+//         int checkerBoardPattern = (int)(cellX + cellY) & 1;
+//         int floorTexture;
+		
+//         if(checkerBoardPattern == 0)
+// 			floorTexture = 3;
+//         else 
+// 			floorTexture = 4;
+//         int ceilingTexture = 6;
+//         uint32_t color;
+//         // floor
+//         // color = gen->txtrs.t_ea[floorTexture][gen->txtrs.t_ea->width * ty + tx];
+//         // color = (color >> 1) & 8355711; // make a bit darker
+//         // buffer[y][x] = color;
+//         // //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
+//         // color = texture[ceilingTexture][gen->txtrs.t_ea->width * ty + tx];
+//         // color = (color >> 1) & 8355711; // make a bit darker
+//         // buffer[HEIGHT - y - 1][x] = color;
+//       }
+// 	  y++;
+//     }
+// }
