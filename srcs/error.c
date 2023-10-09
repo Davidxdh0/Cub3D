@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:08 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:17:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 13:56:43 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,5 @@ void	error_exit(char *msg)
 {
 	printf("Error\n");
 	printf("%s\n", msg);
-	exit(1);
-}
-
-void	error_free(char *msg, t_map *map)
-{
-	printf("Error\n");
-	printf("%s\n", msg);
-	free_t_map(map);
 	exit(1);
 }

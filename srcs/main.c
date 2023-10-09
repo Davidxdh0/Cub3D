@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:38:43 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 13:50:48 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	c_map = init_map();
-	if(!c_map || parser(argv[1], c_map) == 1)
+	if(!c_map || parser(argv[1], c_map))
 		return (kill_program(c_map));
-	validate_map(c_map);
-		// return (kill_program(c_map));
-	printf("maperror: %d\n", c_map->error);
+	if(validate_map(c_map))
+		return (kill_program(c_map));
 	mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	if (!mlx)
 		return (kill_program(c_map));

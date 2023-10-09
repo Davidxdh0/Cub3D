@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:42:47 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 13:55:12 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	parse_line(char *line, t_map *map)
 	if (map_bool == -1)
 		return (error_message(map, "Invalid Textures or Colors"));
 	return (EXIT_SUCCESS);
-	// if (map_bool == 0 && colors == 5 && textures == 57)
-	// 	error_free("Invalid Map", map);
 }
 
 int	parser(char *file, t_map *c_map)

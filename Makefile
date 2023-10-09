@@ -23,7 +23,8 @@ MAP_PARSER	= 	parser.c \
 				validate_map.c \
 				parse_types.c \
 				parse_util.c \
-				file_handling.c
+				file_handling.c \
+				new_map_variables.c
 
 GRAPIHCS	=	bresenham.c \
 				minimap.c \

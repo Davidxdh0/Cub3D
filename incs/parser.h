@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 13:37:32 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 13:47:40 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		open_file(t_map *map, char *file);
 
 //validate_map.c
 void	valid_space(t_map *c_map, char **arr, int x, int y);
-void	validate_map(t_map *c_map);
+int		validate_map(t_map *c_map);
 void	flood_fill(t_map *c_map, char **map, int x, int y);
 void	heigth_validated_map(t_map *c_map);
 void	width_validated_map(t_map *c_map);
