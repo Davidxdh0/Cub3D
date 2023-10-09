@@ -71,6 +71,7 @@ ${MLX}:
 	@make -C MLX42/build -j4
 
 ${NAME}: ${MLX} ${OBJS} ${DIR_I}/${NAME}.h
+#@echo "${BLUE}Compiling libft ${END}"
 	@make -s -C libft
 	@echo "${BLUE}Compiling ${NAME}${END}"
 	@${CC} ${CFLAGS} ${FW_FLAGS} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} 
@@ -81,7 +82,7 @@ ${OBJS}: ${DIR_O}/%.o: ${DIR_S}/%.c
 	@echo "${BLUE}Compiling $<${END}"
 	@${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
-debug: fclean
+debug: 
 	@make DEBUG=1
 
 test: all
@@ -93,9 +94,9 @@ run2: all
 	./cub3d maps/defaultswitched.cub
 
 clean:
-# @make clean -s -C libft 
-	@echo "${RED}Removing MLX42${END}"
-	@rm -rf MLX42/build
+	@make clean -s -C libft 
+#@echo "${RED}Removing MLX42${END}"
+#@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"

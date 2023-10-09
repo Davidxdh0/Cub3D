@@ -6,23 +6,27 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/06 19:40:15 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/09 13:02:04 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "cub3d.h"
 
-void	free_arr(char **arg, int max)
+int	kill_program(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	if (!arg)
-		return ;
-	while (i < max && arg[i])
-		free(arg[i++]);
-	free(arg);
+	if (map->map)
+		ft_free_arr(map->map);
+	if (map->txtrs.no)
+		free(map->txtrs.no);
+	if (map->txtrs.so)
+		free(map->txtrs.so);
+	if (map->txtrs.we)
+		free(map->txtrs.we);
+	if (map->txtrs.ea)
+		free(map->txtrs.ea);
+	free(map);
+	return (EXIT_FAILURE);
 }
 
 void	free_t_map(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/07 20:21:58 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/09 13:25:26 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_map	*init_map(void)
 	map->x_start = -1;
 	map->y_max = -1;
 	map->x_max = -1;
+	map->error = 0;
 	return (map);
 }
 

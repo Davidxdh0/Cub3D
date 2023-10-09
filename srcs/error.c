@@ -6,23 +6,38 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:08 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/09/22 22:55:45 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 13:17:26 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	error_message(char *msg)
+int	error_message(t_map *map, char *msg)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
+	if (map->error == 0)
+	{
+		printf("Error\n");
+		printf("%s\n", msg);
+		map->error = 1;
+	}
+	return (EXIT_FAILURE);
+}
+
+void	error_status(t_map *map, char *msg)
+{
+	if (map->error == 0)
+	{
+		printf("Error\n");
+		printf("%s\n", msg);
+		map->error = 1;
+	}
 }
 
 void	error_exit(char *msg)
 {
 	printf("Error\n");
 	printf("%s\n", msg);
-	exit(0);
+	exit(1);
 }
 
 void	error_free(char *msg, t_map *map)

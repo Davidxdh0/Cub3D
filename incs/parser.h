@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/08 18:15:48 by daaf          ########   odam.nl         */
+/*   Updated: 2023/10/09 13:37:32 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ typedef struct s_map
 	int		x_start;
 	int		y_max;
 	int		x_max;
+	int		error;
 	char	dir;
 }	t_map;
 
 //error.c
-void	error_message(char *msg);
+int		error_message(t_map *map, char *msg);
+void	error_status(t_map *map, char *msg);
 void	error_exit(char *msg);
 void	error_free(char *msg, t_map *map);
 
 //parser
-void	parse_line(char *line, t_map *map);
-int		open_file(char *map);
-void	parser(char *map, t_map *c_map);
+int		parse_line(char *line, t_map *map);
+int		parser(char *map, t_map *c_map);
 int		parse_textures(char *line, t_map *map, char *word);
 int		parse_colors(char *line, t_map *c_map, char *word);
 int		parse_map(char *line, t_map *c_map, int y);
@@ -67,8 +68,12 @@ void	check_width_height(t_map *map, int start, int fd);
 char	*get_first_word(char *line);
 void	print_map(char **array, int ymax, int xmax);
 char	**allocate_map(char **map, int y, int x);
-void	get_colors(t_map *map, char **words, char **colors);
-void	check_extension(char *file, char *ext);
+int		get_colors(t_map *map, char **words, char **colors);
+
+int		parse_file(t_map *c_map, char *file);
+int		check_texture_files(t_map *map, char *words, char *ext);
+int		check_extension(t_map *map, char *file, char *ext);
+int		open_file(t_map *map, char *file);
 
 //validate_map.c
 void	valid_space(t_map *c_map, char **arr, int x, int y);
@@ -80,7 +85,9 @@ void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax);
 void	find_new_start_pos(t_map *map);
 
 //free.c
+int		kill_program(t_map *map);
 void	free_t_map(t_map *map);
+//void	free_textures(t_gen *gen);
 
 //init.c
 t_map	*init_map(void);

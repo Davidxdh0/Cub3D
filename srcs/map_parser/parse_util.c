@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/08 12:47:53 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/09 13:42:05 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,12 @@ void	check_width_height(t_map *map, int start, int fd)
 	}
 	map->y_max -= start;
 	free(line);
-	close(fd);
 }
 
 char	**allocate_map(char **map, int y, int x)
 {
 	int	i;
 
-	if (y == -1 || x == -1)
-		error_exit("Invalid ymax or xmax");
 	map = (char **)ft_calloc(sizeof(char *), (y + 1));
 	if (!map)
 		error_exit("Malloc map");
@@ -93,7 +90,7 @@ static int	get_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	get_colors(t_map *map, char **words, char **colors)
+int	get_colors(t_map *map, char **words, char **colors)
 {
 	int		i;
 	int		number;
@@ -106,7 +103,7 @@ void	get_colors(t_map *map, char **words, char **colors)
 	{
 		number = ft_atoi(colors[i]);
 		if (number < 0 || number > 255)
-			error_free("Invalid color value", map);
+			return (error_message(map, "Invalid color value"));
 		arr[i] = number;
 		i++;
 	}
@@ -115,4 +112,5 @@ void	get_colors(t_map *map, char **words, char **colors)
 		map->txtrs.floor = rgb;
 	else if (!strcmp(words[0], "C"))
 		map->txtrs.ceil = rgb;
+	return (EXIT_SUCCESS);
 }
