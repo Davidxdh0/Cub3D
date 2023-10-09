@@ -24,7 +24,8 @@ MAP_PARSER	= 	parser.c \
 				parse_types.c \
 				parse_util.c \
 				file_handling.c \
-				new_map_variables.c
+				new_map_variables.c \
+				doors.c
 
 GRAPIHCS	=	bresenham.c \
 				minimap.c \
@@ -89,7 +90,7 @@ debug:
 test: all
 	./testinvalidmaps.sh
 run: all
-	./cub3d maps/default.cub
+	./cub3d maps/valid/onewall.cub
 
 run2: all
 	./cub3d maps/defaultswitched.cub

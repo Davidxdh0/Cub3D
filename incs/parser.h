@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 17:23:48 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 21:09:36 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ typedef struct s_txtrs
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*t_text;
+	mlx_texture_t	*t_do;
+
 	mlx_texture_t	*t_one;
 	mlx_texture_t	*t_two;
-
 	char			*no;
 	char			*so;
 	char			*we;
 	char			*ea;
+	char			*dr;
 	int32_t			ceil;
 	int32_t			floor;
 }	t_txtrs;
@@ -63,21 +65,32 @@ void	error_free(char *msg, t_map *map);
 //parser
 int		parse_line(char *line, t_map *map);
 int		parser(char *map, t_map *c_map);
+
+//parse_types.c
 int		parse_textures(char *line, t_map *map, char *word);
 int		parse_colors(char *line, t_map *c_map, char *word);
 int		parse_map(char *line, t_map *c_map, int y);
+char	start_pos(char c);
 int		type_value(char *word);
-char	start_position(char c);
-void	check_width_height(t_map *map, int start, int fd);
+
+//parse_util.c
 char	*get_first_word(char *line);
-void	print_map(char **array, int ymax, int xmax);
 char	**allocate_map(char **map, int y, int x);
+void	check_width_height(t_map *map, int start, int fd);
 int		get_colors(t_map *map, char **words, char **colors);
 
+//filehandling.c
 int		parse_file(t_map *c_map, char *file);
 int		check_texture_files(t_map *map, char *words, char *ext);
 int		check_extension(t_map *map, char *file, char *ext);
 int		open_file(t_map *map, char *file);
+
+//doors.c
+int		valid_chars(char c);
+int		is_door(char c);
+int		is_walkable(char c);
+int		is_changed(char c);
+void	door_key(char **array, int key);
 
 //validate_map.c
 void	valid_space(t_map *c_map, char **arr, int x, int y);
@@ -98,4 +111,7 @@ void	free_t_map(t_map *map);
 //init.c
 t_map	*init_map(void);
 
+
+//backup.c
+void	print_map(char **array, int ymax, int xmax);
 #endif

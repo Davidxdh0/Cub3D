@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 17:50:33 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 22:30:41 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	can_move(t_gen *gen, int xspeed, int yspeed)
 {
 	t_ray		ray;
 	t_player	*player;
+	float		move;
 
+	move = gen->mlx->delta_time * 5.0;
 	player = &gen->player;
 	ray.camera_x = 2 * (HEIGHT / 2) / (WIDTH - 1);
 	ray.raydir_x = (player->dir_x + player->plane_x * ray.camera_x) * xspeed;
@@ -43,12 +45,21 @@ int	can_move(t_gen *gen, int xspeed, int yspeed)
 		ray.walldist = ray.sidedist_y - ray.deltadist_y;
 	(void)xspeed;
 	(void)yspeed;
+	
 	if(gen->map[(int)(player->y)][(int)(player->x + ray.raydir_x * 0.5)] == '1' && fabs(ray.walldist) < 0.5)
 		return (0);
     if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x)] == '1' && fabs(ray.walldist) < 0.5)
 		return (0);
 	if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x + ray.raydir_x * 0.5)] == '1' && fabs(ray.walldist) < 0.8)
 		return (0);
+
+	if (player->dir_y > 0)
+	{
+		if(gen->map[(int)(player->y + 1)][(int)(player->x  + ray.raydir_x * move)] == '1' && fabs(ray.walldist) < 0.5)
+			return (0);
+		if(gen->map[(int)(player->y + 1 + ray.raydir_y * move)][(int)(player->x )] == '1' && fabs(ray.walldist) < 0.5)
+			return (0);
+	}
 	return (1);
 }
 
@@ -118,6 +129,7 @@ void	movement(void *param)
 		rotate_left(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
 		rotate_right(gen);
+	mlx_mouse_hook(gen->mlx, &clicking, gen);
 	if (gen->draw == 1)
 	{
 		render_screen(gen);
@@ -147,4 +159,26 @@ void	scrolling(double xdelta, double ydelta, void *param)
 	}
 	if (xdelta < 0)
 		puts("FFFFFFF");
+}
+
+void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
+{
+	t_gen	*gen;
+
+	gen = (t_gen *)par;
+
+	if (but == 0 && act == 1)
+	{
+		printf("Clicked left button, opens doors\n");
+		door_key(gen->map, 1);
+		gen->draw = 1;
+	}
+	else if (but == 1 && act == 1)
+	{
+		printf("Clicked right button, closes doors\n");
+		door_key(gen->map, 0);
+		gen->draw = 1;
+	}
+	else if (mods == 0x0002)
+		printf("You pressed control, well done!\n");
 }

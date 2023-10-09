@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 13:52:29 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 14:38:05 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 18:34:19 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	width_validated_map(t_map *c_map, int y, int x)
 		x = 0;
 		while (c_map->map[y][x])
 		{
-			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]))
+			if (is_changed(c_map->map[y][x]) || start_pos(c_map->map[y][x]))
 			{
 				if (c_map->x_start == -1 || c_map->x_start > x)
 					c_map->x_start = x;
@@ -55,7 +55,7 @@ void	heigth_validated_map(t_map *c_map)
 		x = 0;
 		while (c_map->map[y][x])
 		{
-			if (c_map->map[y][x] == '.' || start_position(c_map->map[y][x]))
+			if (is_changed(c_map->map[y][x]) || start_pos(c_map->map[y][x]))
 			{
 				if (c_map->y_start == -1)
 					c_map->y_start = y;
@@ -80,11 +80,11 @@ void	find_new_start_pos(t_map *map)
 		x = 0;
 		while (map->map[y][x] && x < map->x_max)
 		{
-			if (start_position(map->map[y][x]))
+			if (start_pos(map->map[y][x]))
 			{
 				map->x_start = x;
 				map->y_start = y;
-				map->dir = start_position(map->map[y][x]);
+				map->dir = start_pos(map->map[y][x]);
 				map->map[y][x] = '0';
 				break ;
 			}

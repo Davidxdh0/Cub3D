@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 17:31:19 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 22:17:54 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	calc_side_dist(t_player *player, t_ray *ray)
 
 void	calc_wall_dist(t_gen *gen, t_ray *ray)
 {
-	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0')
+	while (gen->map[(int)ray->map_y][(int)ray->map_x] == '0' || \
+		gen->map[(int)ray->map_y][(int)ray->map_x] == 'l')
 	{
 		if (ray->sidedist_x < ray->sidedist_y)
 		{

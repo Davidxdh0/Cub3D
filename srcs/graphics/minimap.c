@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 17:15:01 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 19:53:58 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	draw_minimap(t_gen *gen)
 		{
 			if (gen->map[y][x] == '1')
 				color = 0xFFFFFF;
+			else if (gen->map[y][x] == 'l')
+				color = 0x6dfa59;
+			else if (gen->map[y][x] == 'c')
+				color = 0xed0909;
 			else
 				color = 0x0000FF;
 			draw_square(gen, x, y, color);

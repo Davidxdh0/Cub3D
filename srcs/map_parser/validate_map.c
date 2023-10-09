@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 14:37:05 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 18:34:19 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ void	valid_space(t_map *c_map, char **arr, int x, int y)
 		return (error_status(c_map, "No walls at SE edge"));
 	if (!arr[y + 1][x - 1] || arr[y + 1][x - 1] == ' ')
 		return (error_status(c_map, "No walls at SW edge"));
-	if (arr[y][x] != 'N' && arr[y][x] != 'E' && \
-		arr[y][x] != 'S' && arr[y][x] != 'W')
+	if (!start_pos(arr[y][x]) && !is_door(arr[y][x]))
 		arr[y][x] = '.';
+	if ((arr[y][x]) == 'C')
+		arr[y][x] = 'c';
+	if ((arr[y][x]) == 'L')
+		arr[y][x] = 'l';
 }
 
 void	flood_fill(t_map *c_map, char **map, int y, int x)
@@ -87,21 +90,21 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 	valid_space(c_map, map, x, y);
 	if (c_map->error == 1)
 		return ;
-	if (map[y - 1][x] != '.' && map[y - 1][x] == '0')
+	if (!is_changed(map[y - 1][x]) && is_walkable(map[y - 1][x]))
 		flood_fill(c_map, map, y - 1, x);
-	if (map[y + 1][x] != '.' && map[y + 1][x] == '0')
+	if (!is_changed(map[y + 1][x]) && is_walkable(map[y + 1][x]))
 		flood_fill(c_map, map, y + 1, x);
-	if (map[y][x - 1] != '.' && map[y][x - 1] == '0')
+	if (!is_changed(map[y][x - 1]) && is_walkable(map[y][x - 1]))
 		flood_fill(c_map, map, y, x - 1);
-	if (map[y][x + 1] != '.' && map[y][x + 1] == '0')
+	if (!is_changed(map[y][x + 1]) && is_walkable(map[y][x + 1]))
 		flood_fill(c_map, map, y, x + 1);
-	if (map[y - 1][x - 1] != '.' && map[y - 1][x - 1] == '0')
+	if (!is_changed(map[y - 1][x - 1]) && is_walkable(map[y - 1][x - 1]))
 		flood_fill(c_map, map, y - 1, x - 1);
-	if (map[y - 1][x + 1] != '.' && map[y - 1][x + 1] == '0')
+	if (!is_changed(map[y - 1][x + 1]) && is_walkable(map[y - 1][x + 1]))
 		flood_fill(c_map, map, y - 1, x + 1);
-	if (map[y + 1][x + 1] != '.' && map[y + 1][x + 1] == '0')
+	if (!is_changed(map[y + 1][x + 1]) && is_walkable(map[y + 1][x + 1]))
 		flood_fill(c_map, map, y + 1, x + 1);
-	if (map[y + 1][x - 1] != '.' && map[y + 1][x - 1] == '0')
+	if (!is_changed(map[y + 1][x - 1]) && is_walkable(map[y + 1][x - 1]))
 		flood_fill(c_map, map, y, x + 1);
 }
 

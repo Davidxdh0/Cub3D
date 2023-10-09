@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:24:33 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 18:26:06 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	parse_textures(char *line, t_map *map, char *word)
 		map->txtrs.we = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "EA") && map->txtrs.ea == NULL)
 		map->txtrs.ea = ft_strdup(words[1]);
+	else if (!strcmp(words[0], "DO") && map->txtrs.dr == NULL)
+		map->txtrs.ea = ft_strdup(words[1]);
 	else
 		error_status(map, "Textures faulty");
 	ft_free_arr(words);
@@ -62,10 +64,9 @@ int	parse_map(char *str, t_map *c_map, int y)
 	i = 0;
 	if (y < c_map->y_max - 1)
 		str[ft_strlen(str) - 1] = '\0';
-	while (str[i] != '\0' && (str[i] == '1' || str[i] == '0' || \
-		str[i] == ' ' || start_position(str[i])))
+	while (str[i] != '\0' && (valid_chars(str[i]) || start_pos(str[i])))
 	{
-		if (start_position(str[i]))
+		if (start_pos(str[i]))
 		{
 			if (c_map->start_y == -1)
 			{
@@ -84,7 +85,7 @@ int	parse_map(char *str, t_map *c_map, int y)
 	return (1);
 }
 
-char	start_position(char c)
+char	start_pos(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (c);

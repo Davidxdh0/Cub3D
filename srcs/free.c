@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 15:04:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 18:10:13 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	destroy_map(t_map *map)
 		free(map->txtrs.we);
 	if (map->txtrs.ea)
 		free(map->txtrs.ea);
+	if (map->txtrs.dr)
+		free(map->txtrs.dr);
 	free(map);
 	return (EXIT_FAILURE);
 }
