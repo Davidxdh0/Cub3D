@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 21:11:58 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:31:49 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //muis scroll = random
 static void	get_texture(t_gen *gen, t_ray *ray)
 {
-	if (gen->random == 1) //&& ray->side == 0 && ray->raydir_x > 0)
+	if (gen->random == 1)
 	{
 		gen->txtrs.t_text = gen->txtrs.t_one;
 		return ;

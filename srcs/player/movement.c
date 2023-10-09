@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 22:30:41 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:29:02 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ void	scrolling(double xdelta, double ydelta, void *param)
 	t_gen	*gen;
 
 	gen = (t_gen *)param;
-
 	if (ydelta > 0)
 	{
 		printf("Scrolling up %d\n", gen->random);
@@ -166,7 +165,6 @@ void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 	t_gen	*gen;
 
 	gen = (t_gen *)par;
-
 	if (but == 0 && act == 1)
 	{
 		printf("Clicked left button, opens doors\n");
@@ -181,4 +179,25 @@ void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 	}
 	else if (mods == 0x0002)
 		printf("You pressed control, well done!\n");
+}
+
+void	door_key(char **array, int key)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (array[y])
+	{
+		x = 0;
+		while (array[y][x])
+		{
+			if (array[y][x] == 'l' && key == 1)
+				array[y][x] = 'c';
+			if (array[y][x] == 'c' && key == 0)
+				array[y][x] = 'l';
+			x++;
+		}
+		y++;
+	}
 }

@@ -37,7 +37,7 @@ PLAYER		=	keys.c \
 				movement.c \
 				player.c
 
-SRCS =		main.c error.c free.c init.c \
+SRCS =		main.c error.c free.c init.c backup.c\
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 			$(addprefix graphics/, $(GRAPIHCS)) \
 			$(addprefix player/, $(PLAYER))

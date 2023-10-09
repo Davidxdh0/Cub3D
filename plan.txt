@@ -1,9 +1,0 @@
-not working yet:
-    wall collision
-
-want to do:
-    mouse movement
-
-maybe:
-    doors
-    sprites

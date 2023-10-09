@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:33:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 19:49:31 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:15:23 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	walk_right(t_gen *gen);
 int		can_move(t_gen *gen, int xspeed, int yspeed);
 
 //mouse
+void	door_key(char **array, int key);
 void	scrolling(double xdelta, double ydelta, void *param);
 void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par);
 #endif

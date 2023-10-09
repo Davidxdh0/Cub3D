@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 18:09:04 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:31:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_map	*init_map(void)
 	map->txtrs.so = NULL;
 	map->txtrs.we = NULL;
 	map->txtrs.ea = NULL;
-	map->txtrs.dr= NULL;
+	map->txtrs.dr = NULL;
 	map->txtrs.ceil = 0;
 	map->txtrs.floor = 0;
 	map->map = NULL;

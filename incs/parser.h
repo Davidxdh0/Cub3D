@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 21:09:36 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:15:15 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		valid_chars(char c);
 int		is_door(char c);
 int		is_walkable(char c);
 int		is_changed(char c);
-void	door_key(char **array, int key);
+int		is_pathable(char c);
 
 //validate_map.c
 void	valid_space(t_map *c_map, char **arr, int x, int y);

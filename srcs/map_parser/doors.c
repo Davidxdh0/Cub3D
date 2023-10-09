@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 17:55:47 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 21:18:27 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:27:05 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,15 @@ int	is_changed(char c)
 	return (0);
 }
 
-void	door_key(char **array, int key)
+int	is_pathable(char c)
 {
-	int			x;
-	int			y;
-
-	y = 0;
-	while (array[y])
-	{
-		x = 0;
-		while (array[y][x])
-		{
-			if (array[y][x] == 'l' && key == 1)
-				array[y][x] = 'c';
-			if (array[y][x] == 'c' && key == 0)
-				array[y][x] = 'l';
-			x++;
-		}
-		y++;
-	}
+	if (c == '0')
+		return (1);
+	if (c == 'L')
+		return (1);
+	if (c == 'l')
+		return (1);
+	if (c == 'C')
+		return (1);
+	return (0);
 }

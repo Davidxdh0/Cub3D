@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 18:34:19 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 23:20:07 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,21 @@ void	flood_fill(t_map *c_map, char **map, int y, int x)
 	valid_space(c_map, map, x, y);
 	if (c_map->error == 1)
 		return ;
-	if (!is_changed(map[y - 1][x]) && is_walkable(map[y - 1][x]))
+	if (!is_changed(map[y - 1][x]) && is_pathable(map[y - 1][x]))
 		flood_fill(c_map, map, y - 1, x);
-	if (!is_changed(map[y + 1][x]) && is_walkable(map[y + 1][x]))
+	if (!is_changed(map[y + 1][x]) && is_pathable(map[y + 1][x]))
 		flood_fill(c_map, map, y + 1, x);
-	if (!is_changed(map[y][x - 1]) && is_walkable(map[y][x - 1]))
+	if (!is_changed(map[y][x - 1]) && is_pathable(map[y][x - 1]))
 		flood_fill(c_map, map, y, x - 1);
-	if (!is_changed(map[y][x + 1]) && is_walkable(map[y][x + 1]))
+	if (!is_changed(map[y][x + 1]) && is_pathable(map[y][x + 1]))
 		flood_fill(c_map, map, y, x + 1);
-	if (!is_changed(map[y - 1][x - 1]) && is_walkable(map[y - 1][x - 1]))
+	if (!is_changed(map[y - 1][x - 1]) && is_pathable(map[y - 1][x - 1]))
 		flood_fill(c_map, map, y - 1, x - 1);
-	if (!is_changed(map[y - 1][x + 1]) && is_walkable(map[y - 1][x + 1]))
+	if (!is_changed(map[y - 1][x + 1]) && is_pathable(map[y - 1][x + 1]))
 		flood_fill(c_map, map, y - 1, x + 1);
-	if (!is_changed(map[y + 1][x + 1]) && is_walkable(map[y + 1][x + 1]))
+	if (!is_changed(map[y + 1][x + 1]) && is_pathable(map[y + 1][x + 1]))
 		flood_fill(c_map, map, y + 1, x + 1);
-	if (!is_changed(map[y + 1][x - 1]) && is_walkable(map[y + 1][x - 1]))
+	if (!is_changed(map[y + 1][x - 1]) && is_pathable(map[y + 1][x - 1]))
 		flood_fill(c_map, map, y, x + 1);
 }
 
