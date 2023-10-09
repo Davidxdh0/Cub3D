@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:25:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 17:44:09 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	init_textures(t_gen *gen)
 	gen->txtrs.t_so = mlx_load_png(gen->txtrs.so);
 	gen->txtrs.t_we = mlx_load_png(gen->txtrs.we);
 	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.ea);
+	gen->txtrs.t_one = mlx_load_png("textures/wood.png");
+	gen->txtrs.t_two = mlx_load_png("textures/test2.png");
 	if (!gen->txtrs.t_no || !gen->txtrs.t_so \
 	|| !gen->txtrs.t_we || !gen->txtrs.t_ea)
 	{
@@ -63,6 +65,7 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 	gen->width = cmap->x_max;
 	gen->height = cmap->y_max;
 	gen->draw = 1;
+	gen->random = 0;
 	if (gen->width > gen->height)
 		gen->sq_size = SIZE / gen->width;
 	else

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/08 22:36:21 by daaf          ########   odam.nl         */
+/*   Updated: 2023/10/09 17:50:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	movement(void *param)
 	t_gen	*gen;
 
 	gen = (t_gen *)param;
+	mlx_scroll_hook(gen->mlx, &scrolling, gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_ESCAPE))
 		close_escape(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_W))
@@ -110,13 +111,13 @@ void	movement(void *param)
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_S))
 		walk_backwards(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_A))
-		walk_right(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
 		walk_left(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
+		walk_right(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_LEFT))
-		rotate_right(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
 		rotate_left(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
+		rotate_right(gen);
 	if (gen->draw == 1)
 	{
 		render_screen(gen);
@@ -124,12 +125,26 @@ void	movement(void *param)
 	}
 }
 
-// void	scrolling(void *param)
-// {
-// 	t_gen	*gen;
-// 	double x;
-// 	double y;
-// 	gen = (t_gen *)param;
-// 	if (mlx_scroll_hook(gen->mlx, MLX_KEY_ESCAPE))
-// 		close_escape(gen);
-// }
+void	scrolling(double xdelta, double ydelta, void *param)
+{
+	t_gen	*gen;
+
+	gen = (t_gen *)param;
+
+	if (ydelta > 0)
+	{
+		printf("Scrolling up %d\n", gen->random);
+		if (gen->random == 0)
+			gen->draw = 1;
+		gen->random = 1;
+	}
+	else if (ydelta < 0)
+	{
+		printf("Scrolling down\n");
+		if (gen->random == 1)
+			gen->draw = 1;
+		gen->random = 0;
+	}
+	if (xdelta < 0)
+		puts("FFFFFFF");
+}

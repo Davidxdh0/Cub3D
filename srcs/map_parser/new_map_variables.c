@@ -6,16 +6,14 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 13:52:29 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:53:08 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 14:38:05 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	width_validated_map(t_map *c_map)
+void	width_validated_map(t_map *c_map, int y, int x)
 {
-	int	y;
-	int	x;
 	int	x_start;
 	int	x_max;
 
@@ -34,16 +32,12 @@ void	width_validated_map(t_map *c_map)
 				if (x_start > x || x_start == -1)
 					x_start = x;
 				if (x_max < (x + 1 - x_start) || x_max == -1)
-				{
 					x_max = x + 1 - x_start;
-				}
 			}
 			x++;
 		}
 		y++;
 	}
-	// x_max++;
-	//printf("x_start: %d, cmap->x_start: %d\n", x_start, c_map->x_start);
 	c_map->x_max = x_max;
 }
 

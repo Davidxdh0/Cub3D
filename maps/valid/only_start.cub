@@ -1,12 +1,15 @@
 
-NO ./maps/default.cub
-SO ./maps/default.cub
-WE ./maps/default.cub
-EA ./maps/default.cub
+NO textures/blue_wall.png
+SO textures/colorstone.png
+WE textures/redbrick.png
+EA textures/wood.png
+
 
 F 220,100,0
 C 225,30,0
 
-1111
-1S11
-1111
+0000000
+0111110
+011S110
+0111110
+0000000

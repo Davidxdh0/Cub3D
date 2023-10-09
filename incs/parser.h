@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 13:47:40 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 17:23:48 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ typedef struct s_txtrs
 	mlx_texture_t	*t_so;
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
+	mlx_texture_t	*t_text;
+	mlx_texture_t	*t_one;
+	mlx_texture_t	*t_two;
+
 	char			*no;
 	char			*so;
 	char			*we;
@@ -79,13 +83,15 @@ int		open_file(t_map *map, char *file);
 void	valid_space(t_map *c_map, char **arr, int x, int y);
 int		validate_map(t_map *c_map);
 void	flood_fill(t_map *c_map, char **map, int x, int y);
-void	heigth_validated_map(t_map *c_map);
-void	width_validated_map(t_map *c_map);
 void	fill_map(t_map *c_map, char **old_map, int ymax, int xmax);
+
+//new_map_vaiables.c
+void	width_validated_map(t_map *c_map, int y, int x);
+void	heigth_validated_map(t_map *c_map);
 void	find_new_start_pos(t_map *map);
 
 //free.c
-int		kill_program(t_map *map);
+int		destroy_map(t_map *map);
 void	free_t_map(t_map *map);
 //void	free_textures(t_gen *gen);
 

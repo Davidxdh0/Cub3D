@@ -1,3 +1,14 @@
+
+111111111
+10S000001
+100000001
+100000001
+100010001
+100000001
+100000001
+100000001
+111111111
+
 NO textures/blue_wall.png
 SO textures/blue_wall.png
 WE textures/blue_wall.png
@@ -5,7 +16,3 @@ EA textures/blue_wall.png
 
 F 10,100,0
 C 10,30,0
-
-11111
-1S001
-11111

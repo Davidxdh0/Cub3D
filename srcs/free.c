@@ -6,14 +6,14 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:02:04 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 15:04:26 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "cub3d.h"
 
-int	kill_program(t_map *map)
+int	destroy_map(t_map *map)
 {
 	if (map->map)
 		ft_free_arr(map->map);
@@ -27,6 +27,20 @@ int	kill_program(t_map *map)
 		free(map->txtrs.ea);
 	free(map);
 	return (EXIT_FAILURE);
+}
+
+void	kill_cub3d(t_gen *gen)
+{
+	if (gen->map)
+		ft_free_arr(gen->map);
+	if (gen->txtrs.no)
+		free(gen->txtrs.no);
+	if (gen->txtrs.so)
+		free(gen->txtrs.so);
+	if (gen->txtrs.we)
+		free(gen->txtrs.we);
+	if (gen->txtrs.ea)
+		free(gen->txtrs.ea);
 }
 
 void	free_t_map(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 20:37:45 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:30:43 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 14:24:46 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_file(t_map *c_map, char *file)
 {
-	int fd;
+	int	fd;
 
 	if (check_extension(c_map, file, ".cub") == 1)
 		return (EXIT_FAILURE);
@@ -29,9 +29,9 @@ int	parse_file(t_map *c_map, char *file)
 }
 
 int	check_texture_files(t_map *map, char *file, char *ext)
-{	
-	int fd;
-	
+{
+	int	fd;
+
 	fd = open_file(map, file);
 	if (fd < 0)
 		return (EXIT_FAILURE);

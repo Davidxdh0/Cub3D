@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 20:17:39 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/06 20:18:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/09 14:54:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	close_escape(t_gen *gen)
 {
 	mlx_close_window(gen->mlx);
 	mlx_terminate(gen->mlx);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 void	rotate_right(t_gen *gen)

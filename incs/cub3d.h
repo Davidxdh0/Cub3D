@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/08 12:40:14 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/09 15:54:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_gen
 	int			height;
 	int			sq_size;
 	int			draw;
+	int			random;
 }				t_gen;
 
 typedef struct s_ray
@@ -81,11 +82,10 @@ typedef struct s_ray
 	int		color;
 }			t_ray;
 
-void	scrolling(void *param);
-
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 
 //free
 void	free_textures(t_gen *gen);
+void	kill_cub3d(t_gen *gen);
 
 #endif

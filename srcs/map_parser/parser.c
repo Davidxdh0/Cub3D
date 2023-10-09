@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:55:12 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/09 14:20:37 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parser(char *file, t_map *c_map)
 	int		fd;
 	char	*line;
 	int		first;
-	
+
 	if (parse_file(c_map, file))
 		return (EXIT_FAILURE);
 	c_map->map = allocate_map(c_map->map, c_map->y_max, c_map->x_max);
