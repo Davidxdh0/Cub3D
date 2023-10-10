@@ -6,10 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 11:43:45 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/10 18:06:02 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "graphics.h"
 #include "cub3d.h"
 
 //muis scroll = random

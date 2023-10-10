@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 23:33:40 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 18:01:17 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,6 @@ typedef struct s_gen
 	int			draw;
 	int			random;
 }				t_gen;
-
-typedef struct s_ray
-{
-	double	camera_x;
-	double	raydir_x;
-	double	raydir_y;
-	double	sidedist_x;
-	double	sidedist_y;
-	double	deltadist_x;
-	double	deltadist_y;
-	double	walldist;
-	double	map_x;
-	double	map_y;
-	double	wall_x;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		height;
-	int		start;
-	int		end;
-	int		color;
-}			t_ray;
 
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	free_textures(t_gen *gen);

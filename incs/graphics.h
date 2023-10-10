@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:56:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 13:01:37 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/10 18:05:40 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,51 @@
 # define GRAPHICS_H
 
 # include "cub3d.h"
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	walldist;
+	double	map_x;
+	double	map_y;
+	double	wall_x;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		height;
+	int		start;
+	int		end;
+	int		color;
+}			t_ray;
+
+typedef struct s_sprite
+{
+	int		order[1024];
+	double	zdist[1024];
+	double	x;
+	double	y;
+	double	dist;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+	int		screen_x;
+	int		height;
+	int		width;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		tex_x;
+	int		tex_y;
+	int		color;
+}			t_sprite;
 
 //minimap.c
 void	draw_minimap(t_gen *gen);
