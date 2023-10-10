@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 11:45:51 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/10 17:37:05 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,7 @@ void	movement(void *param)
 		rotate_left(gen);
 	mlx_mouse_hook(gen->mlx, &clicking, gen);
 	if (gen->draw == 1)
-	{
 		render_screen(gen);
-		gen->draw = 0;
-	}
 }
 
 void	scrolling(double xdelta, double ydelta, void *param)
@@ -159,6 +156,24 @@ void	scrolling(double xdelta, double ydelta, void *param)
 		puts("FFFFFFF");
 }
 
+//check if there is a door in front of the player / in what direction it is facing
+void	door_key(t_gen *gen, int key)
+{
+	int		x;
+	int		y;
+	char	**map;
+	
+	x = (int)round(gen->player.x + gen->player.dir_x);
+	y = (int)round(gen->player.y + gen->player.dir_y);
+	map = gen->map;
+	if (x == (int)gen->player.x && y == (int)gen->player.y)
+		return ;
+	if (map[y][x] == 'l' && key == 0)
+		map[y][x] = 'c';
+	else if (map[y][x] == 'c' && key == 1)
+		map[y][x] = 'l';
+}
+
 void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 {
 	t_gen	*gen;
@@ -167,37 +182,15 @@ void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 	if (but == 0 && act == 1)
 	{
 		// printf("Clicked left button, opens doors\n");
-		door_key(gen->map, 1);
+		door_key(gen, 1);
 		gen->draw = 1;
 	}
 	else if (but == 1 && act == 1)
 	{
 		// printf("Clicked right button, closes doors\n");
-		door_key(gen->map, 0);
+		door_key(gen, 0);
 		gen->draw = 1;
 	}
 	else if (mods == 0x0002)
 		printf("You pressed control, well done!\n");
-}
-
-//check if there is a door in front of the player / in what direction it is facing
-void	door_key(char **array, int key)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (array[y])
-	{
-		x = 0;
-		while (array[y][x])
-		{
-			if (array[y][x] == 'l' && key == 1)
-				array[y][x] = 'c';
-			if (array[y][x] == 'c' && key == 0)
-				array[y][x] = 'l';
-			x++;
-		}
-		y++;
-	}
 }
