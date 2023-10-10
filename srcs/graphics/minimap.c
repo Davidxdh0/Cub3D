@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 19:53:58 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 10:51:59 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 		line.y += gen->sq_size;
 	pos.x = player->x * gen->sq_size + gen->sq_size / 4;
 	pos.y = player->y * gen->sq_size + gen->sq_size / 4;
-	return ;
+	// return ;
 	// bresenham(gen, &pos, &line);
 	bresenham(gen, pos.x, pos.y, line.x, line.y);
 }

@@ -26,3 +26,5 @@ for file in "${files[@]}"; do
         fi
     fi
 done
+
+## No permission map not working correctly

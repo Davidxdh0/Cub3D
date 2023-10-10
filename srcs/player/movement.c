@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 23:29:02 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 11:45:51 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,9 @@ int	can_move(t_gen *gen, int xspeed, int yspeed)
 		ray.walldist = ray.sidedist_x - ray.deltadist_x;
 	else
 		ray.walldist = ray.sidedist_y - ray.deltadist_y;
-	(void)xspeed;
-	(void)yspeed;
-	
 	if(gen->map[(int)(player->y)][(int)(player->x + ray.raydir_x * 0.5)] == '1' && fabs(ray.walldist) < 0.5)
 		return (0);
-    if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x)] == '1' && fabs(ray.walldist) < 0.5)
+	if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x)] == '1' && fabs(ray.walldist) < 0.5)
 		return (0);
 	if(gen->map[(int)(player->y + ray.raydir_y * 0.5)][(int)(player->x + ray.raydir_x * 0.5)] == '1' && fabs(ray.walldist) < 0.8)
 		return (0);
@@ -122,13 +119,13 @@ void	movement(void *param)
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_S))
 		walk_backwards(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_A))
-		walk_left(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
 		walk_right(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
+		walk_left(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_LEFT))
-		rotate_left(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
 		rotate_right(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
+		rotate_left(gen);
 	mlx_mouse_hook(gen->mlx, &clicking, gen);
 	if (gen->draw == 1)
 	{
@@ -144,14 +141,16 @@ void	scrolling(double xdelta, double ydelta, void *param)
 	gen = (t_gen *)param;
 	if (ydelta > 0)
 	{
-		printf("Scrolling up %d\n", gen->random);
+		// printf("Scrolling up %d\n", gen->random);
+		rotate_left(gen);
 		if (gen->random == 0)
 			gen->draw = 1;
 		gen->random = 1;
 	}
 	else if (ydelta < 0)
 	{
-		printf("Scrolling down\n");
+		// printf("Scrolling down\n");
+		rotate_right(gen);
 		if (gen->random == 1)
 			gen->draw = 1;
 		gen->random = 0;
@@ -167,13 +166,13 @@ void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 	gen = (t_gen *)par;
 	if (but == 0 && act == 1)
 	{
-		printf("Clicked left button, opens doors\n");
+		// printf("Clicked left button, opens doors\n");
 		door_key(gen->map, 1);
 		gen->draw = 1;
 	}
 	else if (but == 1 && act == 1)
 	{
-		printf("Clicked right button, closes doors\n");
+		// printf("Clicked right button, closes doors\n");
 		door_key(gen->map, 0);
 		gen->draw = 1;
 	}
@@ -181,6 +180,7 @@ void	clicking(mouse_key_t but, action_t act, modifier_key_t mods, void *par)
 		printf("You pressed control, well done!\n");
 }
 
+//check if there is a door in front of the player / in what direction it is facing
 void	door_key(char **array, int key)
 {
 	int	x;

@@ -1,8 +1,7 @@
-
 NO textures/blue_wall.png
-SO textures/blue_wall.png
-WE textures/blue_wall.png
-EA textures/blue_wall.png
+SO textures/colorstone.png
+WE textures/redbrick.png
+EA textures/wood.png
 
 F 220,100,0
 C 225,30,0

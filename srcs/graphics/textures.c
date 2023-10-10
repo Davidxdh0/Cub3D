@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 23:31:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 11:43:45 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 //muis scroll = random
 static void	get_texture(t_gen *gen, t_ray *ray)
 {
-	if (gen->random == 1)
-	{
-		gen->txtrs.t_text = gen->txtrs.t_one;
-		return ;
-	}
+	// if (gen->random == 1)
+	// {
+	// 	gen->txtrs.t_text = gen->txtrs.t_one;
+	// 	return ;
+	// }
 	if (ray->side == 0 && ray->raydir_x > 0)
 		gen->txtrs.t_text = gen->txtrs.t_ea;
 	else if (ray->side == 0 && ray->raydir_x < 0)
@@ -60,7 +60,7 @@ void	draw_pixels(t_gen *gen, t_ray *ray, int x)
 		text_y = (int)text_pos & (gen->txtrs.t_text->height - 1);
 		text_pos += step;
 		ray->color = get_color_textures(gen, text_x, text_y);
-		mlx_put_pixel(gen->win, x, ray->start, ray->color);
+		mlx_put_pixel(gen->win, WIDTH - x, ray->start, ray->color);
 		++ray->start;
 	}
 }
