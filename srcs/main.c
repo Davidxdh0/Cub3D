@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 23:31:04 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 12:59:36 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,20 @@ void	render_screen(void *param)
 	t_gen		*gen;
 	int			x;
 	t_vector	pos;
+	double		zbuffer[WIDTH];
 
 	gen = (t_gen *)param;
 	x = 0;
 	mlx_delete_image(gen->mlx, gen->win);
 	gen->win = mlx_new_image(gen->mlx, WIDTH, HEIGHT);
 	draw_minimap(gen);
-	memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
+	// memset(gen->win->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
 	while (x < WIDTH)
 	{
-		cast_ray(gen, &gen->player, x);
+		cast_ray(gen, &gen->player, x, (double *)zbuffer);
 		++x;
 	}
+	
 	pos.x = gen->player.x * gen->sq_size;
 	pos.y = gen->player.y * gen->sq_size;
 	mlx_image_to_window(gen->mlx, gen->win, 0, 0);

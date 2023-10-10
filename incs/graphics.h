@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:56:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/08 14:53:25 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/10 13:01:37 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_vision(t_gen *gen, t_player *player, t_ray ray);
 void	draw_background(t_gen *gen);
 
 //raycasting.c
-void	cast_ray(t_gen *gen, t_player *player, int x);
+void	cast_ray(t_gen *gen, t_player *player, int x, double *zbuffer);
 void	calc_wall_dist(t_gen *gen, t_ray *ray);
 void	calc_side_dist(t_player *player, t_ray *ray);
 void	render_screen(void *param);

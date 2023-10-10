@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/26 09:26:37 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 00:06:44 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/10 12:59:46 by bfranco       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	calc_wall_dist(t_gen *gen, t_ray *ray)
 	}
 }
 
-void	cast_ray(t_gen *gen, t_player *player, int x)
+void	cast_ray(t_gen *gen, t_player *player, int x, double *zbuffer)
 {
 	t_ray		ray;
 
@@ -108,6 +108,7 @@ void	cast_ray(t_gen *gen, t_player *player, int x)
 	calc_wall_dist(gen, &ray);
 	draw_vert_line_textures(gen, &ray, x);
 	draw_vision(gen, player, ray);
+	zbuffer[x] = ray.walldist;
 }
 
 // void	floor_texture(t_gen *gen, t_player *p, int x)
