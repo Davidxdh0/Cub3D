@@ -91,7 +91,7 @@ test: all
 	./testinvalidmaps.sh
 
 run: all
-	./cub3d maps/valid/onewall.cub
+	./cub3d maps/default.cub
 
 run2: all
 	./cub3d maps/defaultswitched.cub

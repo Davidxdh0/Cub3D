@@ -1,18 +1,18 @@
 
-NO textures/blue_wall.png
-SO textures/blue_wall.png
-WE textures/test2.png
-EA textures/test2.png
+NO textures/text3.png
+SO textures/text3.png
+WE textures/text3.png
+EA textures/text3.png
 
 F 10,100,0
 C 10,30,0
 
 111111111
-11S000011
+110000011
 100000001
 100000001
 100000001
 100000001
 100000L01
-1100C0011
+1N00C0011
 111111111
