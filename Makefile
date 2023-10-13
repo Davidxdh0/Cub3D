@@ -89,15 +89,12 @@ test: all
 	./testinvalidmaps.sh
 
 run: all
-	./cub3D maps/default.cub
-
-run2: all
-	./cub3D maps/defaultswitched.cub
+	./cub3D maps/valid/runcub3drun.cub
 
 clean:
-#@make clean -s -C libft 
-#@echo "${RED}Removing MLX42${END}"
-#@rm -rf MLX42/build
+	@make clean -s -C libft 
+	@echo "${RED}Removing MLX42${END}"
+	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"

@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 20:17:39 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 17:12:10 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:25:30 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	close_escape(t_gen *gen)
 {
+	free_textures(gen);
+	ft_free_arr(gen->map);
 	mlx_close_window(gen->mlx);
 	mlx_terminate(gen->mlx);
 	exit(EXIT_SUCCESS);
@@ -49,7 +51,7 @@ void	rotate_right(t_gen *gen)
 	t_player	*player;
 
 	player = &gen->player;
-	rot = gen->mlx->delta_time * 5.0;
+	rot = gen->mlx->delta_time * 3.0;
 	old_dir = player->dir_x;
 	old_plane = player->plane_x;
 	player->dir_x = player->dir_x * cos(rot) \

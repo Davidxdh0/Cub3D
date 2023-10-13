@@ -54,4 +54,5 @@ dkms.conf
 #others
 obj
 cub3D
+cub3d
 *.vscode

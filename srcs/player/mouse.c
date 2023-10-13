@@ -6,7 +6,7 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/13 13:32:42 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 17:09:25 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 18:07:38 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void	door_key(t_gen *gen, int key)
 	map = gen->map;
 	if (x == (int)gen->player.x && y == (int)gen->player.y)
 		return ;
-	if (map[y][x] == 'l' && key == 0)
+	if (x < 0 || x >= gen->width || y < 0 || y >= gen->height)
+		return ;
+	if (map[y][x] && map[y][x] == 'l' && key == 0)
 		map[y][x] = 'c';
-	else if (map[y][x] == 'c' && key == 1)
+	else if (map[y][x] && map[y][x] == 'c' && key == 1)
 		map[y][x] = 'l';
 }
 
