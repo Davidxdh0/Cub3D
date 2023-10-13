@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 14:49:45 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:30:23 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	free_textures(t_gen *gen)
 	mlx_delete_texture(gen->txtrs.t_so);
 	mlx_delete_texture(gen->txtrs.t_we);
 	mlx_delete_texture(gen->txtrs.t_ea);
+	mlx_delete_texture(gen->txtrs.t_dr);
 }
 
 void	free_image(t_gen *gen, t_map *cmap)

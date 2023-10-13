@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 13:41:26 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:50:36 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	movement(void *param)
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_S))
 		walk_backwards(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_A))
-		walk_right(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
 		walk_left(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_D))
+		walk_right(gen);
 	if (mlx_is_key_down(gen->mlx, MLX_KEY_LEFT))
-		rotate_right(gen);
-	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
 		rotate_left(gen);
+	if (mlx_is_key_down(gen->mlx, MLX_KEY_RIGHT))
+		rotate_right(gen);
 	mlx_mouse_hook(gen->mlx, &clicking, gen);
 	if (gen->draw == 1)
 		render_screen(gen);

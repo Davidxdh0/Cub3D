@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 15:32:02 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:54:24 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	get_texture(t_gen *gen, t_ray *ray)
 		gen->txtrs.t_text = gen->txtrs.t_so;
 	else
 		gen->txtrs.t_text = gen->txtrs.t_no;
+	if (gen->map[(int)ray->map_y][(int)ray->map_x] == 'c')
+		gen->txtrs.t_text = gen->txtrs.t_dr;
 }
 
 static int	get_color_textures(t_gen *gen, int x, int y)
@@ -50,7 +52,6 @@ void	draw_pixels(t_gen *gen, t_ray *ray, int x)
 		text_x = gen->txtrs.t_text->width - text_x - 1;
 	if (text_x == (int)gen->txtrs.t_text->width)
 		text_x--;
-	// printf("wallx = %f texx %d text->width %d\n", ray->wall_x, text_x, gen->txtrs.t_text->width);
 	step = 1.0 * (int)gen->txtrs.t_text->height / ray->height;
 	text_pos = (ray->start - (int)HEIGHT / 2 + ray->height / 2) * step;
 	while (ray->start < ray->end)

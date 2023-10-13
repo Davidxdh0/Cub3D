@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 13:25:34 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:49:37 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	walk_backwards(t_gen *gen)
 	gen->draw = 1;
 }
 
-void	walk_left(t_gen *gen)
+void	walk_right(t_gen *gen)
 {
 	t_player	*p;
 	float		move;
@@ -71,7 +71,7 @@ void	walk_left(t_gen *gen)
 	gen->draw = 1;
 }
 
-void	walk_right(t_gen *gen)
+void	walk_left(t_gen *gen)
 {
 	t_player	*p;
 	float		move;

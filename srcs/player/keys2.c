@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 20:17:39 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 14:54:10 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:50:58 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	close_escape(t_gen *gen)
 	exit(EXIT_SUCCESS);
 }
 
-void	rotate_right(t_gen *gen)
+void	rotate_left(t_gen *gen)
 {
 	double		old_dir;
 	double		old_plane;
@@ -41,7 +41,7 @@ void	rotate_right(t_gen *gen)
 	gen->draw = 1;
 }
 
-void	rotate_left(t_gen *gen)
+void	rotate_right(t_gen *gen)
 {
 	double		old_dir;
 	double		old_plane;
