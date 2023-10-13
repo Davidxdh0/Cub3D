@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 20:51:10 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 14:05:02 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:12:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 #include "graphics.h"
 
 static void	bres_loop(t_gen *gen, t_bres bres, int *pos, int *line)

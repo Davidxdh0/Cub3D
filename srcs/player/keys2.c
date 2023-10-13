@@ -6,11 +6,11 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 20:17:39 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 16:50:58 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:12:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	close_escape(t_gen *gen)
 {

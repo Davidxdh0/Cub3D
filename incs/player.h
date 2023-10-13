@@ -6,14 +6,14 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:33:21 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 13:42:24 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:10:13 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include "cub3d.h"
+# include "cub3D.h"
 
 //init.c
 void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap);

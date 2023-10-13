@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:33:04 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 23:20:07 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:18:33 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	valid_space(t_map *c_map, char **arr, int x, int y)
 void	flood_fill(t_map *c_map, char **map, int y, int x)
 {
 	if (x == 0 || x == c_map->x_max || c_map->error == 1)
-		error_exit("No walls at sides border");
+		return (error_status(c_map, "No walls at sides border"));
 	if (y == 0 || y == c_map->y_max)
-		error_exit("No walls at north or south border");
+		return (error_status(c_map, "No walls at north or south border"));
 	if (map[y][x] == '.')
 		return ;
 	valid_space(c_map, map, x, y);

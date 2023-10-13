@@ -6,14 +6,14 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:56:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 14:06:34 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:10:03 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# include "cub3d.h"
+# include "cub3D.h"
 
 typedef struct s_ray
 {

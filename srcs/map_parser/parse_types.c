@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 14:52:03 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:01:21 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	parse_map(char *str, t_map *c_map, int y)
 		i++;
 	}
 	c_map->map[y][i] = '\0';
-	if (str[i])
+	if (str[i] != '\n' && str[i])
 		return (error_message(c_map, "Map contains wrong characters"));
 	return (1);
 }

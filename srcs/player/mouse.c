@@ -6,13 +6,13 @@
 /*   By: dyeboa <dyeboa@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/13 13:32:42 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 16:54:32 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:09:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 #include "graphics.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	scrolling(double xdelta, double ydelta, void *param)
 {

@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 16:30:23 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:14:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 int	destroy_map(t_map *map)
 {

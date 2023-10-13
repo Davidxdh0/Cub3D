@@ -8,8 +8,7 @@ END=\033[0m
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra 
-#CFLAGS += -g -fsanitize=address
-NAME = cub3d
+NAME = cub3D
 LIBFT = libft/libft.a
 MLX = MLX42/build/libmlx42.a
 
@@ -61,8 +60,6 @@ endif
 
 ifdef DEBUG
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
-else
-CFLAGS = -Wall -Werror -Wextra
 endif
 
 HOST := $(shell hostname)
@@ -92,10 +89,10 @@ test: all
 	./testinvalidmaps.sh
 
 run: all
-	./cub3d maps/default.cub
+	./cub3D maps/default.cub
 
 run2: all
-	./cub3d maps/defaultswitched.cub
+	./cub3D maps/defaultswitched.cub
 
 clean:
 #@make clean -s -C libft 

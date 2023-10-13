@@ -6,13 +6,13 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 16:31:24 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:12:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "player.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 t_map	*init_map(void)
 {

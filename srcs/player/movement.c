@@ -6,13 +6,13 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 13:31:30 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 16:50:36 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:09:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 #include "graphics.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	check_move(t_gen *gen, t_player *p, t_ray ray)
 {

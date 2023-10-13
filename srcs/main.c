@@ -6,17 +6,15 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 08:55:30 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 13:25:15 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:19:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "graphics.h"
 #include "player.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
-//valgrind --leak-check=full --show-leak-kinds=all -
-//-track-origins=yes ./cub3D maps/default.cub
 int	main(int argc, char *argv[])
 {
 	mlx_t	*mlx;

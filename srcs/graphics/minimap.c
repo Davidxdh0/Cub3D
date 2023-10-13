@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 13:55:29 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:12:10 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 static void	draw_square(t_gen *gen, int x, int y, int color)
 {

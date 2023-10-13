@@ -6,12 +6,12 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 16:54:24 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:09:25 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
-#include "cub3d.h"
+#include "cub3D.h"
 
 static void	get_texture(t_gen *gen, t_ray *ray)
 {
