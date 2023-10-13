@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/03 14:51:52 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/09 14:59:09 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:44:45 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ void	init_player(t_gen *gen, mlx_t *mlx, t_map *cmap)
 		size = 4;
 	gen->player.img = mlx_new_image(mlx, size, size);
 	if (!gen->player.img)
-	{
-		free(cmap);
-		ft_free_arr(gen->map);
-		error_exit("Failed to create player image");
-	}
+		free_image(gen, cmap);
 	gen->player.dir = cmap->dir;
 	gen->player.x = cmap->x_start + 0.5;
 	gen->player.y = cmap->y_start + 0.5;

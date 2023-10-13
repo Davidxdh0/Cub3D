@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/25 11:59:40 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 12:09:49 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 13:55:29 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,28 @@ void	draw_background(t_gen *gen)
 
 void	draw_vision(t_gen *gen, t_player *player, t_ray ray)
 {
-	t_vector	line;
-	t_vector	pos;
+	double		line[2];
+	double		pos[2];
+	int			brs_line[2];
+	int			bres_pos[2];
 
-	line.x = ray.map_x;
-	line.y = ray.map_y;
+	line[0] = ray.map_x;
+	line[1] = ray.map_y;
 	if (ray.side == 0)
-		line.y = player->y + ray.walldist * ray.raydir_y;
+		line[1] = player->y + ray.walldist * ray.raydir_y;
 	else
-		line.x = player->x + ray.walldist * ray.raydir_x;
-	line.x *= gen->sq_size;
-	line.y *= gen->sq_size;
+		line[0] = player->x + ray.walldist * ray.raydir_x;
+	line[0] *= gen->sq_size;
+	line[1] *= gen->sq_size;
 	if (ray.raydir_x < 0 && ray.side == 0)
-		line.x += gen->sq_size;
+		line[0] += gen->sq_size;
 	if (ray.raydir_y < 0 && ray.side == 1)
-		line.y += gen->sq_size;
-	pos.x = player->x * gen->sq_size + gen->sq_size / 4;
-	pos.y = player->y * gen->sq_size + gen->sq_size / 4;
-	// return ;
-	// bresenham(gen, &pos, &line);
-	bresenham(gen, pos.x, pos.y, line.x, line.y);
+		line[1] += gen->sq_size;
+	pos[0] = player->x * gen->sq_size + gen->sq_size / 4;
+	pos[1] = player->y * gen->sq_size + gen->sq_size / 4;
+	brs_line[0] = line[0];
+	brs_line[1] = line[1];
+	bres_pos[0] = pos[0];
+	bres_pos[1] = pos[1];
+	bresenham(gen, bres_pos, brs_line);
 }

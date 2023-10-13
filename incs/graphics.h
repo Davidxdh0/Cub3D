@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/07 19:56:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 18:05:40 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/13 14:06:34 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,24 @@ typedef struct s_ray
 	int		color;
 }			t_ray;
 
-typedef struct s_sprite
+typedef struct s_bres
 {
-	int		order[1024];
-	double	zdist[1024];
-	double	x;
-	double	y;
-	double	dist;
-	double	inv_det;
-	double	transform_x;
-	double	transform_y;
-	int		screen_x;
-	int		height;
-	int		width;
-	int		start_x;
-	int		start_y;
-	int		end_x;
-	int		end_y;
-	int		tex_x;
-	int		tex_y;
-	int		color;
-}			t_sprite;
+	double	dx;
+	double	dy;
+	double	sx;
+	double	sy;
+	double	err;
+	double	err2;
+}				t_bres;
 
 //minimap.c
 void	draw_minimap(t_gen *gen);
-// void	bresenham(t_gen *gen, t_vector *cur, t_vector *end);
-void	bresenham(t_gen *gen, int x1, int y1, int x2, int y2);
+void	bresenham(t_gen *gen, int *pos, int *line);
 void	draw_vision(t_gen *gen, t_player *player, t_ray ray);
 void	draw_background(t_gen *gen);
 
 //raycasting.c
-void	cast_ray(t_gen *gen, t_player *player, int x, double *zbuffer);
+void	cast_ray(t_gen *gen, t_player *player, int x);
 void	calc_wall_dist(t_gen *gen, t_ray *ray);
 void	calc_side_dist(t_player *player, t_ray *ray);
 void	render_screen(void *param);

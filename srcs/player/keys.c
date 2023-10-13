@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 12:31:34 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/13 13:12:58 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 13:25:34 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	walk_forwards(t_gen *gen)
 {
 	t_player	*p;
 	float		move;
-	
+
 	move = gen->mlx->delta_time * 5.0;
 	p = &gen->player;
 	if (!is_walkable(gen->map[(int)(p->y)][(int)(p->x + p->dir_x * move)]))

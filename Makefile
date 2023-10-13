@@ -35,9 +35,10 @@ GRAPIHCS	=	bresenham.c \
 PLAYER		=	keys.c \
 				keys2.c \
 				movement.c \
+				mouse.c \
 				player.c
 
-SRCS =		main.c error.c free.c init.c backup.c\
+SRCS =		main.c error.c free.c init.c \
 			$(addprefix map_parser/, $(MAP_PARSER)) \
 			$(addprefix graphics/, $(GRAPIHCS)) \
 			$(addprefix player/, $(PLAYER))
@@ -97,7 +98,7 @@ run2: all
 	./cub3d maps/defaultswitched.cub
 
 clean:
-#@make clean -s -C libft 
+	@make clean -s -C libft 
 #@echo "${RED}Removing MLX42${END}"
 #@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"

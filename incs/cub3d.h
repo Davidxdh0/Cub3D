@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/20 09:58:45 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/10 18:01:17 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/13 14:40:54 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define SIZE HEIGHT/4
+# define SIZE 270
 
 typedef struct s_vector
 {
@@ -61,6 +61,7 @@ typedef struct s_gen
 
 void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap);
 void	free_textures(t_gen *gen);
+void	free_image(t_gen *gen, t_map *cmap);
 void	kill_cub3d(t_gen *gen);
 
 #endif

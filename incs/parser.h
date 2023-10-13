@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 10:44:15 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 13:04:38 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:50:18 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,11 @@ typedef struct s_txtrs
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*t_text;
-	mlx_texture_t	*t_do;
 
-	mlx_texture_t	*t_one;
-	mlx_texture_t	*t_two;
 	char			*no;
 	char			*so;
 	char			*we;
 	char			*ea;
-	char			*dr;
 	int32_t			ceil;
 	int32_t			floor;
 }	t_txtrs;
@@ -78,6 +74,7 @@ char	*get_first_word(char *line);
 char	**allocate_map(char **map, int y, int x);
 void	check_width_height(t_map *map, int start, int fd);
 int		get_colors(t_map *map, char **words, char **colors);
+// void	print_map(char **array);
 
 //filehandling.c
 int		parse_file(t_map *c_map, char *file);
@@ -111,7 +108,4 @@ void	free_t_map(t_map *map);
 //init.c
 t_map	*init_map(void);
 
-
-//backup.c
-void	print_map(char **array, int ymax, int xmax);
 #endif

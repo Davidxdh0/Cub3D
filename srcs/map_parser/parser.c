@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:04:46 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 14:20:37 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:31:19 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parser(char *file, t_map *c_map)
 		return (EXIT_FAILURE);
 	line = get_next_line(fd);
 	first = 1;
-	while (((line && line != NULL) || first == 1) && first != 2)
+	while ((line || first == 1) && first != 2)
 	{
 		first = 0;
 		if (parse_line(line, c_map))

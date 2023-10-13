@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:00 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 13:42:05 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:56:37 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,3 +114,26 @@ int	get_colors(t_map *map, char **words, char **colors)
 		map->txtrs.ceil = rgb;
 	return (EXIT_SUCCESS);
 }
+
+// if needed for debugging
+// void	print_map(char **array)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	y = 0;
+// 	x = 0;
+// 	while (array[y])
+// 	{
+// 		x = 0;
+// 		while (array[y][x])
+// 		{
+// 			printf("%c", array[y][x]);
+// 			x++;
+// 		}
+// 		printf("\n");
+// 		y++;
+// 	}
+// 	ft_putchar_fd("-----------", 1);
+// 	printf("\n");
+// }

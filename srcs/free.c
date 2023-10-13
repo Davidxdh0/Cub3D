@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:44:17 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 18:10:13 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:49:45 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	destroy_map(t_map *map)
 		free(map->txtrs.we);
 	if (map->txtrs.ea)
 		free(map->txtrs.ea);
-	if (map->txtrs.dr)
-		free(map->txtrs.dr);
 	free(map);
 	return (EXIT_FAILURE);
 }
@@ -62,4 +60,17 @@ void	free_textures(t_gen *gen)
 	mlx_delete_texture(gen->txtrs.t_so);
 	mlx_delete_texture(gen->txtrs.t_we);
 	mlx_delete_texture(gen->txtrs.t_ea);
+}
+
+void	free_image(t_gen *gen, t_map *cmap)
+{
+	if (gen->minimap)
+		mlx_delete_image(gen->mlx, gen->minimap);
+	if (gen->win)
+		mlx_delete_image(gen->mlx, gen->win);
+	if (gen->bg)
+		mlx_delete_image(gen->mlx, gen->bg);
+	free(cmap);
+	ft_free_arr(gen->map);
+	error_exit("Failed to create image");
 }

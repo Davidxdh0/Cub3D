@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 21:22:16 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/09 18:26:06 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:52:03 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	parse_textures(char *line, t_map *map, char *word)
 	else if (!strcmp(words[0], "WE") && map->txtrs.we == NULL)
 		map->txtrs.we = ft_strdup(words[1]);
 	else if (!strcmp(words[0], "EA") && map->txtrs.ea == NULL)
-		map->txtrs.ea = ft_strdup(words[1]);
-	else if (!strcmp(words[0], "DO") && map->txtrs.dr == NULL)
 		map->txtrs.ea = ft_strdup(words[1]);
 	else
 		error_status(map, "Textures faulty");

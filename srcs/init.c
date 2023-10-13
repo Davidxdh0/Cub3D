@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/22 20:55:31 by dyeboa        #+#    #+#                 */
-/*   Updated: 2023/10/10 11:10:08 by bfranco       ########   odam.nl         */
+/*   Updated: 2023/10/13 14:50:04 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_map	*init_map(void)
 	map->txtrs.so = NULL;
 	map->txtrs.we = NULL;
 	map->txtrs.ea = NULL;
-	map->txtrs.dr = NULL;
 	map->txtrs.ceil = 0;
 	map->txtrs.floor = 0;
 	map->map = NULL;
@@ -46,13 +45,11 @@ void	init_textures(t_gen *gen)
 	gen->txtrs.t_so = mlx_load_png(gen->txtrs.so);
 	gen->txtrs.t_we = mlx_load_png(gen->txtrs.we);
 	gen->txtrs.t_ea = mlx_load_png(gen->txtrs.ea);
-	gen->txtrs.t_one = mlx_load_png("textures/wood.png");
-	gen->txtrs.t_two = mlx_load_png("textures/test2.png");
 	if (!gen->txtrs.t_no || !gen->txtrs.t_so \
 	|| !gen->txtrs.t_we || !gen->txtrs.t_ea)
 	{
 		free_textures(gen);
-		error_exit("Failed to load textures");
+		free_image(gen, NULL);
 	}
 }
 
@@ -75,6 +72,8 @@ void	init_gen(t_gen *gen, mlx_t *mlx, t_map *cmap)
 		gen->sq_size = 4;
 	if (gen->sq_size > 32)
 		gen->sq_size = 32;
+	if (!gen->win || !gen->bg || !gen->minimap)
+		free_image(gen, cmap);
 	init_player(gen, mlx, cmap);
 	init_textures(gen);
 }
