@@ -15,7 +15,6 @@ for file in "${files[@]}"; do
         # Wait for the user to press the "Escape" key to continue
         echo "Press Escape to continue, or any other key to exit..."
         read -s -n 1 key
-		
         # Check if the key is Escape (ASCII value 27)
         if [ "$key" == $'\e' ]; then
             continue
@@ -26,4 +25,3 @@ for file in "${files[@]}"; do
     fi
 done
 chmod 777 maps/invalid/NoPermission.cub
-## No permission map not working correctly

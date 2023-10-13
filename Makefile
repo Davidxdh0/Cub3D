@@ -98,7 +98,7 @@ run2: all
 	./cub3d maps/defaultswitched.cub
 
 clean:
-	@make clean -s -C libft 
+#@make clean -s -C libft 
 #@echo "${RED}Removing MLX42${END}"
 #@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"

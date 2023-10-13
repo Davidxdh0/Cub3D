@@ -6,7 +6,7 @@
 /*   By: bfranco <bfranco@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/06 15:54:26 by bfranco       #+#    #+#                 */
-/*   Updated: 2023/10/13 13:22:08 by dyeboa        ########   odam.nl         */
+/*   Updated: 2023/10/13 15:32:02 by dyeboa        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	draw_pixels(t_gen *gen, t_ray *ray, int x)
 		text_x = gen->txtrs.t_text->width - text_x - 1;
 	if (ray->side == 1 && ray->raydir_y < 0)
 		text_x = gen->txtrs.t_text->width - text_x - 1;
+	if (text_x == (int)gen->txtrs.t_text->width)
+		text_x--;
+	// printf("wallx = %f texx %d text->width %d\n", ray->wall_x, text_x, gen->txtrs.t_text->width);
 	step = 1.0 * (int)gen->txtrs.t_text->height / ray->height;
 	text_pos = (ray->start - (int)HEIGHT / 2 + ray->height / 2) * step;
 	while (ray->start < ray->end)
