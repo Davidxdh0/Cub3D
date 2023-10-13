@@ -62,8 +62,6 @@ ifdef DEBUG
 CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 endif
 
-HOST := $(shell hostname)
-
 all: ${NAME}
 
 ${MLX}:
@@ -92,14 +90,14 @@ run: all
 	./cub3D maps/valid/runcub3drun.cub
 
 clean:
-	@make clean -s -C libft 
-	@echo "${RED}Removing MLX42${END}"
-	@rm -rf MLX42/build
 	@echo "${RED}Removing objs${END}"
 	@rm -rf obj
 	@echo "${GREEN}Done!${END}"
 
 fclean: clean
+	@make clean -s -C libft 
+	@echo "${RED}Removing MLX42${END}"
+	@rm -rf MLX42/build
 	@echo "${RED}Removing ${NAME}${END}"
 	@rm -rf ${NAME}
 	@echo "${GREEN}Done!${END}"
